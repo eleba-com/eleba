@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.OrderitemMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.Orderitem">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pId" jdbcType="INTEGER" property="pid" />
+    <result column="oId" jdbcType="INTEGER" property="oid" />
+    <result column="numbers" jdbcType="INTEGER" property="numbers" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pId, oId, numbers
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orderItem
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orderItem
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Orderitem">
+    insert into orderItem (id, pId, oId, 
+      numbers)
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, 
+      #{numbers,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Orderitem">
+    insert into orderItem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pid != null">
+        pId,
+      </if>
+      <if test="oid != null">
+        oId,
+      </if>
+      <if test="numbers != null">
+        numbers,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="oid != null">
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="numbers != null">
+        #{numbers,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Orderitem">
+    update orderItem
+    <set>
+      <if test="pid != null">
+        pId = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="oid != null">
+        oId = #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="numbers != null">
+        numbers = #{numbers,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Orderitem">
+    update orderItem
+    set pId = #{pid,jdbcType=INTEGER},
+      oId = #{oid,jdbcType=INTEGER},
+      numbers = #{numbers,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

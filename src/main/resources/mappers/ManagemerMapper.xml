@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ManagemerMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.Managemer">
+    <result column="aId" jdbcType="INTEGER" property="aid" />
+    <result column="mId" jdbcType="INTEGER" property="mid" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operate_type" jdbcType="VARCHAR" property="operateType" />
+  </resultMap>
+  <insert id="insert" parameterType="com.pojo.Managemer">
+    insert into manageMer (aId, mId, operate_time, 
+      operate_type)
+    values (#{aid,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{operateTime,jdbcType=TIMESTAMP}, 
+      #{operateType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Managemer">
+    insert into manageMer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        aId,
+      </if>
+      <if test="mid != null">
+        mId,
+      </if>
+      <if test="operateTime != null">
+        operate_time,
+      </if>
+      <if test="operateType != null">
+        operate_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="mid != null">
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="operateTime != null">
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateType != null">
+        #{operateType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
