@@ -17,6 +17,8 @@ public class Customer {
 
     private Integer clock;
 
+    private String passwordsalt;
+
     public Integer getId() {
         return id;
     }
@@ -79,5 +81,13 @@ public class Customer {
 
     public void setClock(Integer clock) {
         this.clock = clock;
+    }
+
+    public String getPasswordsalt() {
+        return passwordsalt;
+    }
+
+    public void setPasswordsalt(String passwordsalt) {
+        this.passwordsalt = passwordsalt;
     }
 }
