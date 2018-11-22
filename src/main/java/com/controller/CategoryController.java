@@ -48,6 +48,7 @@ public class CategoryController {
 	@RequestMapping(value = "getJson", method = RequestMethod.GET)
 	@ResponseBody
 	public Map getJson(HttpSession httpSession){
+
 		Map<String,Object> map = new HashMap<String, Object>();
 		List<Category> cs = new LinkedList<Category>();
 		cs.add(new Category());
@@ -62,10 +63,18 @@ public class CategoryController {
 			map.put("errorCode", 1);
 			map.put("errorMessage", "未知错误");
 		}
+
 		System.out.println("已经进入controllor");
+
+
+
+		// 放入转发参数
+		//mav.addObject("cs", cs);
+		// 放入jsp路径
+		//mav.setViewName("listCategory");
 		System.out.println("已经设置返回了");
 		return map;
-
+		//return mav;
 	}
 
 	@RequestMapping(value = "listCategorytoJson", method = RequestMethod.GET)
