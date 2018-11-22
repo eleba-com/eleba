@@ -7,6 +7,8 @@ public class Manager {
 
     private String password;
 
+    private String passwordsalt;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class Manager {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordsalt() {
+        return passwordsalt;
+    }
+
+    public void setPasswordsalt(String passwordsalt) {
+        this.passwordsalt = passwordsalt;
     }
 }

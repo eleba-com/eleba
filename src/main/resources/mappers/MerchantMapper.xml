@@ -12,9 +12,11 @@
     <result column="mLock" jdbcType="VARCHAR" property="mlock" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="state_message_addr" jdbcType="VARCHAR" property="stateMessageAddr" />
+    <result column="passwordSalt" jdbcType="VARCHAR" property="passwordsalt" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, tell, mType, userName, password, addr, head_addr, mLock, state, state_message_addr
+    id, tell, mType, userName, password, addr, head_addr, mLock, state, state_message_addr, 
+    passwordSalt
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -30,11 +32,11 @@
     insert into merchant (id, tell, mType, 
       userName, password, addr, 
       head_addr, mLock, state, 
-      state_message_addr)
+      state_message_addr, passwordSalt)
     values (#{id,jdbcType=INTEGER}, #{tell,jdbcType=VARCHAR}, #{mtype,jdbcType=VARCHAR}, 
       #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, 
       #{headAddr,jdbcType=VARCHAR}, #{mlock,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
-      #{stateMessageAddr,jdbcType=VARCHAR})
+      #{stateMessageAddr,jdbcType=VARCHAR}, #{passwordsalt,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.Merchant">
     insert into merchant
@@ -69,6 +71,9 @@
       <if test="stateMessageAddr != null">
         state_message_addr,
       </if>
+      <if test="passwordsalt != null">
+        passwordSalt,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -100,6 +105,9 @@
       </if>
       <if test="stateMessageAddr != null">
         #{stateMessageAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordsalt != null">
+        #{passwordsalt,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -133,6 +141,9 @@
       <if test="stateMessageAddr != null">
         state_message_addr = #{stateMessageAddr,jdbcType=VARCHAR},
       </if>
+      <if test="passwordsalt != null">
+        passwordSalt = #{passwordsalt,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -146,7 +157,8 @@
       head_addr = #{headAddr,jdbcType=VARCHAR},
       mLock = #{mlock,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
-      state_message_addr = #{stateMessageAddr,jdbcType=VARCHAR}
+      state_message_addr = #{stateMessageAddr,jdbcType=VARCHAR},
+      passwordSalt = #{passwordsalt,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

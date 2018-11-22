@@ -21,6 +21,8 @@ public class Merchant {
 
     private String stateMessageAddr;
 
+    private String passwordsalt;
+
     public Integer getId() {
         return id;
     }
@@ -99,5 +101,13 @@ public class Merchant {
 
     public void setStateMessageAddr(String stateMessageAddr) {
         this.stateMessageAddr = stateMessageAddr;
+    }
+
+    public String getPasswordsalt() {
+        return passwordsalt;
+    }
+
+    public void setPasswordsalt(String passwordsalt) {
+        this.passwordsalt = passwordsalt;
     }
 }
