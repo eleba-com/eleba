@@ -45,6 +45,14 @@ public class CategoryController {
 		return mav;
 	}
 
+	/**
+	 * 方法实现说明
+	 * @author      jhao
+	 * @param       httpSession
+	 * @return      java.util.Map
+	 * @exception
+	 * @date        2018/11/22 16:06
+	 */
 	@RequestMapping(value = "getJson", method = RequestMethod.GET)
 	@ResponseBody
 	public Map getJson(HttpSession httpSession){
@@ -57,7 +65,7 @@ public class CategoryController {
 		cs.add(new Category());
 		try {
 			map.put("errorCode", 0);
-			map.put("message", "hello");
+			map.put("message", "出错了！");
 			map.put("cs",cs);
 		} catch (Exception e) {
 			map.put("errorCode", 1);
@@ -77,9 +85,12 @@ public class CategoryController {
 		//return mav;
 	}
 
+
 	@RequestMapping(value = "listCategorytoJson", method = RequestMethod.GET)
 	@ResponseBody
 	public Map listCategorytoJson(Page page){
+
+
 		//ModelAndView mav = new ModelAndView();
 		PageHelper.offsetPage(page.getStart(),5);
 		List<Category> cs= categoryService.list();
