@@ -161,4 +161,10 @@
       passwordSalt = #{passwordsalt,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- jhao 11-24 根据类型返回商家 -->
+  <select id="listMerchantByType" parameterType="String" resultType="com.pojo.Merchant">
+    SELECT * FROM merchant
+      WHERE mType={#mType}
+  </select>
 </mapper>

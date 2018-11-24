@@ -51,7 +51,7 @@ public class CustmerTest {
         return map;
     }
 
-    @RequestMapping(value = "value=login",method = RequestMethod.GET)
+    @RequestMapping(value = "login",method = RequestMethod.GET)
     @ResponseBody
     public Map login(Customer customer){
         Map<String,Object> map = new HashMap<String, Object>();
