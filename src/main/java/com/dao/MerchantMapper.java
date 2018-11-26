@@ -26,4 +26,14 @@ public interface MerchantMapper {
      * @date        2018/11/24 10:08
      */
     List<Merchant> listMerchantByType(String mType);
+
+    /**
+     * 返回所有商家类型
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/11/26 14:51
+     */
+    List<String> listMerType();
 }

@@ -67,6 +67,12 @@ public class CustmerTest {
             //密码错误
         }catch (IncorrectCredentialsException e){
             map.put("status","2");
+
+            char ch = 'a';
+
+
+
+
         }
         return map;
 

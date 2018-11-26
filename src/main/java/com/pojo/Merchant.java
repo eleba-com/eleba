@@ -5,7 +5,7 @@ public class Merchant {
 
     private String tell;
 
-    private String mtype;
+    private String mType;
 
     private String username;
 
@@ -13,15 +13,31 @@ public class Merchant {
 
     private String addr;
 
-    private String headAddr;
+    private String head_addr;
 
-    private String mlock;
+    private String mLock;
 
     private String state;
 
     private String stateMessageAddr;
 
     private String passwordsalt;
+
+    public String getHead_addr() {
+        return head_addr;
+    }
+
+    public void setHead_addr(String head_addr) {
+        this.head_addr = head_addr;
+    }
+
+    public String getmLock() {
+        return mLock;
+    }
+
+    public void setmLock(String mLock) {
+        this.mLock = mLock;
+    }
 
     public Integer getId() {
         return id;
@@ -40,11 +56,11 @@ public class Merchant {
     }
 
     public String getMtype() {
-        return mtype;
+        return mType;
     }
 
     public void setMtype(String mtype) {
-        this.mtype = mtype;
+        this.mType = mtype;
     }
 
     public String getUsername() {
@@ -71,21 +87,7 @@ public class Merchant {
         this.addr = addr;
     }
 
-    public String getHeadAddr() {
-        return headAddr;
-    }
 
-    public void setHeadAddr(String headAddr) {
-        this.headAddr = headAddr;
-    }
-
-    public String getMlock() {
-        return mlock;
-    }
-
-    public void setMlock(String mlock) {
-        this.mlock = mlock;
-    }
 
     public String getState() {
         return state;

@@ -165,6 +165,11 @@
   <!-- jhao 11-24 根据类型返回商家 -->
   <select id="listMerchantByType" parameterType="String" resultType="com.pojo.Merchant">
     SELECT * FROM merchant
-      WHERE mType={#mType}
+      WHERE mType=#{mType}
+  </select>
+
+  <!-- jhao 11-26 返回所有商家的类型 -->
+  <select id="listMerType" resultType="java.lang.String">
+    SELECT DISTINCT mType from merchant
   </select>
 </mapper>

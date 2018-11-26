@@ -20,4 +20,14 @@ public interface MerchantService {
      * @date        2018/11/24 9:55
      */
     public List<Merchant> listMerchantByType(String mType);
+
+    /**
+     * 直接返回所有商家类型
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/11/26 9:59
+     */
+    public List<String> listMerType();
 }

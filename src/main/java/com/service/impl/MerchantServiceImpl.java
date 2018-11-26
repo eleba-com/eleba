@@ -33,4 +33,18 @@ public class MerchantServiceImpl implements MerchantService{
     public List<Merchant> listMerchantByType(String mType){
         return merchantMapper.listMerchantByType(mType);
     }
+
+    /**
+     *  返回所有店铺类型
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/11/26 10:04
+     */
+    public List<String> listMerType(){
+        return merchantMapper.listMerType();
+    };
+
+
 }
