@@ -5,7 +5,7 @@ public class Comments {
 
     private Integer uid;
 
-    private String commentTime;
+    private String comment_time;
 
     private Integer mid;
 
@@ -27,12 +27,12 @@ public class Comments {
         this.uid = uid;
     }
 
-    public String getCommentTime() {
-        return commentTime;
+    public String getComment_time() {
+        return comment_time;
     }
 
-    public void setCommentTime(String commentTime) {
-        this.commentTime = commentTime;
+    public void setComment_time(String comment_time) {
+        this.comment_time = comment_time;
     }
 
     public Integer getMid() {

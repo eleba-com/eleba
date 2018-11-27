@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="passwordSalt" jdbcType="VARCHAR" property="passwordsalt" />
+    <result column="passwordSalt" jdbcType="VARCHAR" property="passwordSalt" />
   </resultMap>
   <sql id="Base_Column_List">
     id, userName, password, passwordSalt
@@ -24,7 +24,7 @@
     insert into manager (id, userName, password, 
       passwordSalt)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{passwordsalt,jdbcType=VARCHAR})
+      #{passwordSalt,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.Manager">
     insert into manager
@@ -38,7 +38,7 @@
       <if test="password != null">
         password,
       </if>
-      <if test="passwordsalt != null">
+      <if test="passwordSalt != null">
         passwordSalt,
       </if>
     </trim>
@@ -52,8 +52,8 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="passwordsalt != null">
-        #{passwordsalt,jdbcType=VARCHAR},
+      <if test="passwordSalt != null">
+        #{passwordSalt,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -66,8 +66,8 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="passwordsalt != null">
-        passwordSalt = #{passwordsalt,jdbcType=VARCHAR},
+      <if test="passwordSalt != null">
+        passwordSalt = #{passwordSalt,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -76,7 +76,7 @@
     update manager
     set userName = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      passwordSalt = #{passwordsalt,jdbcType=VARCHAR}
+      passwordSalt = #{passwordSalt,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

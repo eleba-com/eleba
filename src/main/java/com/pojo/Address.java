@@ -5,7 +5,7 @@ public class Address {
 
     private String addr;
 
-    private Integer adefault;
+    private Integer aDefault;
 
     public Integer getUid() {
         return uid;
@@ -23,11 +23,11 @@ public class Address {
         this.addr = addr;
     }
 
-    public Integer getAdefault() {
-        return adefault;
+    public Integer getaDefault() {
+        return aDefault;
     }
 
-    public void setAdefault(Integer adefault) {
-        this.adefault = adefault;
+    public void setaDefault(Integer aDefault) {
+        this.aDefault = aDefault;
     }
 }

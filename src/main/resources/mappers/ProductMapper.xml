@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="price" jdbcType="DECIMAL" property="price" />
-    <result column="photo_addr" jdbcType="VARCHAR" property="photoAddr" />
+    <result column="photo_addr" jdbcType="VARCHAR" property="photo_addr" />
     <result column="mId" jdbcType="INTEGER" property="mid" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -25,7 +25,7 @@
     insert into product (id, name, price, 
       photo_addr, mId)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-      #{photoAddr,jdbcType=VARCHAR}, #{mid,jdbcType=INTEGER})
+      #{photo_addr,jdbcType=VARCHAR}, #{mid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.Product">
     insert into product
@@ -39,7 +39,7 @@
       <if test="price != null">
         price,
       </if>
-      <if test="photoAddr != null">
+      <if test="photo_addr != null">
         photo_addr,
       </if>
       <if test="mid != null">
@@ -56,8 +56,8 @@
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
       </if>
-      <if test="photoAddr != null">
-        #{photoAddr,jdbcType=VARCHAR},
+      <if test="photo_addr!= null">
+        #{photo_addr,jdbcType=VARCHAR},
       </if>
       <if test="mid != null">
         #{mid,jdbcType=INTEGER},
@@ -73,8 +73,8 @@
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
       </if>
-      <if test="photoAddr != null">
-        photo_addr = #{photoAddr,jdbcType=VARCHAR},
+      <if test="photo_addr != null">
+        photo_addr = #{photo_addr,jdbcType=VARCHAR},
       </if>
       <if test="mid != null">
         mId = #{mid,jdbcType=INTEGER},
@@ -86,7 +86,7 @@
     update product
     set name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
-      photo_addr = #{photoAddr,jdbcType=VARCHAR},
+      photo_addr = #{photo_addr,jdbcType=VARCHAR},
       mId = #{mid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

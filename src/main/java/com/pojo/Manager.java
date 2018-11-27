@@ -7,7 +7,7 @@ public class Manager {
 
     private String password;
 
-    private String passwordsalt;
+    private String passwordSalt;
 
     public Integer getId() {
         return id;
@@ -33,11 +33,11 @@ public class Manager {
         this.password = password;
     }
 
-    public String getPasswordsalt() {
-        return passwordsalt;
+    public String getPasswordSalt() {
+        return passwordSalt;
     }
 
-    public void setPasswordsalt(String passwordsalt) {
-        this.passwordsalt = passwordsalt;
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
     }
 }

@@ -7,9 +7,9 @@ public class Managemer {
 
     private Integer mid;
 
-    private Date operateTime;
+    private Date operate_time;
 
-    private String operateType;
+    private String operate_type;
 
     public Integer getAid() {
         return aid;
@@ -27,19 +27,19 @@ public class Managemer {
         this.mid = mid;
     }
 
-    public Date getOperateTime() {
-        return operateTime;
+    public Date getOperate_time() {
+        return operate_time;
     }
 
-    public void setOperateTime(Date operateTime) {
-        this.operateTime = operateTime;
+    public void setOperate_time(Date operate_time) {
+        this.operate_time = operate_time;
     }
 
-    public String getOperateType() {
-        return operateType;
+    public String getOperate_type() {
+        return operate_type;
     }
 
-    public void setOperateType(String operateType) {
-        this.operateType = operateType;
+    public void setOperate_type(String operate_type) {
+        this.operate_type = operate_type;
     }
 }

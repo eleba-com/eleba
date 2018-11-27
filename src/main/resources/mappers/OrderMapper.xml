@@ -4,10 +4,10 @@
   <resultMap id="BaseResultMap" type="com.pojo.Order">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="oi_id" jdbcType="INTEGER" property="oiId" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
     <result column="uId" jdbcType="INTEGER" property="uid" />
     <result column="addr" jdbcType="VARCHAR" property="addr" />
-    <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+    <result column="total_price" jdbcType="DECIMAL" property="total_price" />
   </resultMap>
   <sql id="Base_Column_List">
     id, oi_id, create_time, uId, addr, total_price
@@ -26,8 +26,8 @@
     insert into order (id, oi_id, create_time, 
       uId, addr, total_price
       )
-    values (#{id,jdbcType=INTEGER}, #{oiId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{uid,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, #{totalPrice,jdbcType=DECIMAL}
+    values (#{id,jdbcType=INTEGER}, #{oiId,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP},
+      #{uid,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, #{total_price,jdbcType=DECIMAL}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.Order">
@@ -39,7 +39,7 @@
       <if test="oiId != null">
         oi_id,
       </if>
-      <if test="createTime != null">
+      <if test="create_time != null">
         create_time,
       </if>
       <if test="uid != null">
@@ -48,7 +48,7 @@
       <if test="addr != null">
         addr,
       </if>
-      <if test="totalPrice != null">
+      <if test="total_price != null">
         total_price,
       </if>
     </trim>
@@ -59,8 +59,8 @@
       <if test="oiId != null">
         #{oiId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
       </if>
       <if test="uid != null">
         #{uid,jdbcType=INTEGER},
@@ -68,8 +68,8 @@
       <if test="addr != null">
         #{addr,jdbcType=VARCHAR},
       </if>
-      <if test="totalPrice != null">
-        #{totalPrice,jdbcType=DECIMAL},
+      <if test="total_price != null">
+        #{total_price,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -79,8 +79,8 @@
       <if test="oiId != null">
         oi_id = #{oiId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
       </if>
       <if test="uid != null">
         uId = #{uid,jdbcType=INTEGER},
@@ -88,8 +88,8 @@
       <if test="addr != null">
         addr = #{addr,jdbcType=VARCHAR},
       </if>
-      <if test="totalPrice != null">
-        total_price = #{totalPrice,jdbcType=DECIMAL},
+      <if test="total_price != null">
+        total_price = #{total_price,jdbcType=DECIMAL},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -97,10 +97,10 @@
   <update id="updateByPrimaryKey" parameterType="com.pojo.Order">
     update order
     set oi_id = #{oiId,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
       uId = #{uid,jdbcType=INTEGER},
       addr = #{addr,jdbcType=VARCHAR},
-      total_price = #{totalPrice,jdbcType=DECIMAL}
+      total_price = #{total_price,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

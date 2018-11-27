@@ -4,12 +4,12 @@
   <resultMap id="BaseResultMap" type="com.pojo.Address">
     <result column="uId" jdbcType="INTEGER" property="uid" />
     <result column="addr" jdbcType="VARCHAR" property="addr" />
-    <result column="aDefault" jdbcType="INTEGER" property="adefault" />
+    <result column="aDefault" jdbcType="INTEGER" property="aDefault" />
   </resultMap>
   <insert id="insert" parameterType="com.pojo.Address">
     insert into address (uId, addr, aDefault
       )
-    values (#{uid,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, #{adefault,jdbcType=INTEGER}
+    values (#{uid,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, #{aDefault,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.Address">
@@ -21,7 +21,7 @@
       <if test="addr != null">
         addr,
       </if>
-      <if test="adefault != null">
+      <if test="aDefault != null">
         aDefault,
       </if>
     </trim>
@@ -32,8 +32,8 @@
       <if test="addr != null">
         #{addr,jdbcType=VARCHAR},
       </if>
-      <if test="adefault != null">
-        #{adefault,jdbcType=INTEGER},
+      <if test="aDefault != null">
+        #{aDefault,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

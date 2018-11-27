@@ -7,13 +7,13 @@ public class Order {
 
     private Integer oiId;
 
-    private Date createTime;
+    private Date create_time;
 
     private Integer uid;
 
     private String addr;
 
-    private Long totalPrice;
+    private Long total_price;
 
     public Integer getId() {
         return id;
@@ -31,12 +31,12 @@ public class Order {
         this.oiId = oiId;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreate_time() {
+        return create_time;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
     }
 
     public Integer getUid() {
@@ -55,11 +55,11 @@ public class Order {
         this.addr = addr;
     }
 
-    public Long getTotalPrice() {
-        return totalPrice;
+    public Long getTotal_price() {
+        return total_price;
     }
 
-    public void setTotalPrice(Long totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTotal_price(Long total_price) {
+        this.total_price = total_price;
     }
 }

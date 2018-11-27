@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.pojo.Comments">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uId" jdbcType="INTEGER" property="uid" />
-    <result column="comment_time" jdbcType="VARCHAR" property="commentTime" />
+    <result column="comment_time" jdbcType="VARCHAR" property="comment_time" />
     <result column="mId" jdbcType="INTEGER" property="mid" />
     <result column="oId" jdbcType="INTEGER" property="oid" />
   </resultMap>
@@ -24,7 +24,7 @@
   <insert id="insert" parameterType="com.pojo.Comments">
     insert into comments (id, uId, comment_time, 
       mId, oId)
-    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{commentTime,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{comment_time,jdbcType=VARCHAR},
       #{mid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.Comments">
@@ -36,7 +36,7 @@
       <if test="uid != null">
         uId,
       </if>
-      <if test="commentTime != null">
+      <if test="comment_time != null">
         comment_time,
       </if>
       <if test="mid != null">
@@ -53,7 +53,7 @@
       <if test="uid != null">
         #{uid,jdbcType=INTEGER},
       </if>
-      <if test="commentTime != null">
+      <if test="comment_time != null">
         #{commentTime,jdbcType=VARCHAR},
       </if>
       <if test="mid != null">
@@ -70,7 +70,7 @@
       <if test="uid != null">
         uId = #{uid,jdbcType=INTEGER},
       </if>
-      <if test="commentTime != null">
+      <if test="comment_time != null">
         comment_time = #{commentTime,jdbcType=VARCHAR},
       </if>
       <if test="mid != null">
@@ -85,7 +85,7 @@
   <update id="updateByPrimaryKey" parameterType="com.pojo.Comments">
     update comments
     set uId = #{uid,jdbcType=INTEGER},
-      comment_time = #{commentTime,jdbcType=VARCHAR},
+      comment_time = #{comment_time,jdbcType=VARCHAR},
       mId = #{mid,jdbcType=INTEGER},
       oId = #{oid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

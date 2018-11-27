@@ -7,7 +7,7 @@ public class Product {
 
     private Long price;
 
-    private String photoAddr;
+    private String photo_addr;
 
     private Integer mid;
 
@@ -35,12 +35,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getPhotoAddr() {
-        return photoAddr;
+    public String getPhoto_addr() {
+        return photo_addr;
     }
 
-    public void setPhotoAddr(String photoAddr) {
-        this.photoAddr = photoAddr;
+    public void setPhoto_addr(String photo_addr) {
+        this.photo_addr = photo_addr;
     }
 
     public Integer getMid() {

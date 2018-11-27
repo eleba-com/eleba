@@ -19,25 +19,9 @@ public class Merchant {
 
     private String state;
 
-    private String stateMessageAddr;
+    private String state_message_addr;
 
-    private String passwordsalt;
-
-    public String getHead_addr() {
-        return head_addr;
-    }
-
-    public void setHead_addr(String head_addr) {
-        this.head_addr = head_addr;
-    }
-
-    public String getmLock() {
-        return mLock;
-    }
-
-    public void setmLock(String mLock) {
-        this.mLock = mLock;
-    }
+    private String passwordSalt;
 
     public Integer getId() {
         return id;
@@ -55,12 +39,12 @@ public class Merchant {
         this.tell = tell;
     }
 
-    public String getMtype() {
+    public String getmType() {
         return mType;
     }
 
-    public void setMtype(String mtype) {
-        this.mType = mtype;
+    public void setmType(String mType) {
+        this.mType = mType;
     }
 
     public String getUsername() {
@@ -87,7 +71,21 @@ public class Merchant {
         this.addr = addr;
     }
 
+    public String getHead_addr() {
+        return head_addr;
+    }
 
+    public void setHead_addr(String head_addr) {
+        this.head_addr = head_addr;
+    }
+
+    public String getmLock() {
+        return mLock;
+    }
+
+    public void setmLock(String mLock) {
+        this.mLock = mLock;
+    }
 
     public String getState() {
         return state;
@@ -97,19 +95,19 @@ public class Merchant {
         this.state = state;
     }
 
-    public String getStateMessageAddr() {
-        return stateMessageAddr;
+    public String getState_message_addr() {
+        return state_message_addr;
     }
 
-    public void setStateMessageAddr(String stateMessageAddr) {
-        this.stateMessageAddr = stateMessageAddr;
+    public void setState_message_addr(String state_message_addr) {
+        this.state_message_addr = state_message_addr;
     }
 
-    public String getPasswordsalt() {
-        return passwordsalt;
+    public String getPasswordSalt() {
+        return passwordSalt;
     }
 
-    public void setPasswordsalt(String passwordsalt) {
-        this.passwordsalt = passwordsalt;
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
     }
 }

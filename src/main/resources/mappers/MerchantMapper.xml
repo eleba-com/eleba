@@ -12,7 +12,7 @@
     <result column="mLock" jdbcType="VARCHAR" property="mLock" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="state_message_addr" jdbcType="VARCHAR" property="state_message_addr" />
-    <result column="passwordSalt" jdbcType="VARCHAR" property="passwordsalt" />
+    <result column="passwordSalt" jdbcType="VARCHAR" property="passwordSalt" />
   </resultMap>
   <sql id="Base_Column_List">
     id, tell, mType, userName, password, addr, head_addr, mLock, state, state_message_addr, 
@@ -47,7 +47,7 @@
       <if test="tell != null">
         tell,
       </if>
-      <if test="mtype != null">
+      <if test="mType != null">
         mType,
       </if>
       <if test="username != null">
@@ -59,19 +59,19 @@
       <if test="addr != null">
         addr,
       </if>
-      <if test="headAddr != null">
+      <if test=" head_addr != null">
         head_addr,
       </if>
-      <if test="mlock != null">
+      <if test="mLock != null">
         mLock,
       </if>
       <if test="state != null">
         state,
       </if>
-      <if test="stateMessageAddr != null">
+      <if test="state_message_addr != null">
         state_message_addr,
       </if>
-      <if test="passwordsalt != null">
+      <if test="passwordSalt != null">
         passwordSalt,
       </if>
     </trim>
@@ -82,8 +82,8 @@
       <if test="tell != null">
         #{tell,jdbcType=VARCHAR},
       </if>
-      <if test="mtype != null">
-        #{mtype,jdbcType=VARCHAR},
+      <if test="mType != null">
+        #{mType,jdbcType=VARCHAR},
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
@@ -94,20 +94,20 @@
       <if test="addr != null">
         #{addr,jdbcType=VARCHAR},
       </if>
-      <if test="headAddr != null">
-        #{headAddr,jdbcType=VARCHAR},
+      <if test="head_addr != null">
+        #{head_addr,jdbcType=VARCHAR},
       </if>
-      <if test="mlock != null">
-        #{mlock,jdbcType=VARCHAR},
+      <if test="mLock != null">
+        #{mLock,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         #{state,jdbcType=VARCHAR},
       </if>
-      <if test="stateMessageAddr != null">
-        #{stateMessageAddr,jdbcType=VARCHAR},
+      <if test="state_message_addr != null">
+        #{state_message_addr,jdbcType=VARCHAR},
       </if>
-      <if test="passwordsalt != null">
-        #{passwordsalt,jdbcType=VARCHAR},
+      <if test="passwordSalt != null">
+        #{passwordSalt,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -117,8 +117,8 @@
       <if test="tell != null">
         tell = #{tell,jdbcType=VARCHAR},
       </if>
-      <if test="mtype != null">
-        mType = #{mtype,jdbcType=VARCHAR},
+      <if test="mType != null">
+        mType = #{mType,jdbcType=VARCHAR},
       </if>
       <if test="username != null">
         userName = #{username,jdbcType=VARCHAR},
@@ -129,20 +129,20 @@
       <if test="addr != null">
         addr = #{addr,jdbcType=VARCHAR},
       </if>
-      <if test="headAddr != null">
-        head_addr = #{headAddr,jdbcType=VARCHAR},
+      <if test="head_addr != null">
+        head_addr = #{head_addr,jdbcType=VARCHAR},
       </if>
-      <if test="mlock != null">
-        mLock = #{mlock,jdbcType=VARCHAR},
+      <if test="mLock != null">
+        mLock = #{mLock,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=VARCHAR},
       </if>
-      <if test="stateMessageAddr != null">
-        state_message_addr = #{stateMessageAddr,jdbcType=VARCHAR},
+      <if test="state_message_addr != null">
+        state_message_addr = #{state_message_addr,jdbcType=VARCHAR},
       </if>
-      <if test="passwordsalt != null">
-        passwordSalt = #{passwordsalt,jdbcType=VARCHAR},
+      <if test="passwordSalt != null">
+        passwordSalt = #{passwordSalt,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -150,15 +150,15 @@
   <update id="updateByPrimaryKey" parameterType="com.pojo.Merchant">
     update merchant
     set tell = #{tell,jdbcType=VARCHAR},
-      mType = #{mtype,jdbcType=VARCHAR},
+      mType = #{mType,jdbcType=VARCHAR},
       userName = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       addr = #{addr,jdbcType=VARCHAR},
-      head_addr = #{headAddr,jdbcType=VARCHAR},
-      mLock = #{mlock,jdbcType=VARCHAR},
+      head_addr = #{head_addr,jdbcType=VARCHAR},
+      mLock = #{mLock,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
-      state_message_addr = #{stateMessageAddr,jdbcType=VARCHAR},
-      passwordSalt = #{passwordsalt,jdbcType=VARCHAR}
+      state_message_addr = #{state_message_addr,jdbcType=VARCHAR},
+      passwordSalt = #{passwordSalt,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
