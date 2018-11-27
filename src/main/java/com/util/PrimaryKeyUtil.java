@@ -2,6 +2,15 @@ package com.util;
 
 import java.util.Random;
 
+/**
+* @Description:    生成X位随机数
+* @Author:         jiehao
+* @CreateDate:     2018/11/27 8:30
+* @UpdateUser:     jiehao
+* @UpdateDate:     2018/11/27 8:30
+* @UpdateRemark:   修改内容
+* @Version:        1.0
+*/
 public class PrimaryKeyUtil {
 
     private static Random ran=new Random();

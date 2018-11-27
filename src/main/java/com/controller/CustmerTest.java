@@ -64,6 +64,7 @@ public class CustmerTest {
             //账号不存在
         }catch (UnknownAccountException e){
             map.put("status","1");
+
             //密码错误
         }catch (IncorrectCredentialsException e){
             map.put("status","2");

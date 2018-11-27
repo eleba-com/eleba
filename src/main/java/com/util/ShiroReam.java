@@ -28,7 +28,7 @@ public class ShiroReam extends AuthorizingRealm {
 
    /**
    * 方法实现说明
-   * @author      jieho
+   * @author      jiehao
    * @param
    * @return
    * @exception  ：分配权限

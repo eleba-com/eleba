@@ -4,14 +4,14 @@
   <resultMap id="BaseResultMap" type="com.pojo.Merchant">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="tell" jdbcType="VARCHAR" property="tell" />
-    <result column="mType" jdbcType="VARCHAR" property="mtype" />
+    <result column="mType" jdbcType="VARCHAR" property="mType" />
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="addr" jdbcType="VARCHAR" property="addr" />
-    <result column="head_addr" jdbcType="VARCHAR" property="headAddr" />
-    <result column="mLock" jdbcType="VARCHAR" property="mlock" />
+    <result column="head_addr" jdbcType="VARCHAR" property="head_Addr" />
+    <result column="mLock" jdbcType="VARCHAR" property="mLock" />
     <result column="state" jdbcType="VARCHAR" property="state" />
-    <result column="state_message_addr" jdbcType="VARCHAR" property="stateMessageAddr" />
+    <result column="state_message_addr" jdbcType="VARCHAR" property="state_message_addr" />
     <result column="passwordSalt" jdbcType="VARCHAR" property="passwordsalt" />
   </resultMap>
   <sql id="Base_Column_List">
