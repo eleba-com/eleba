@@ -11,7 +11,7 @@ public class Customer {
 
     private Integer addrId;
 
-    private String headAddr;
+    private String head_addr;
 
     private Integer vip;
 
@@ -60,11 +60,11 @@ public class Customer {
     }
 
     public String getHeadAddr() {
-        return headAddr;
+        return head_addr;
     }
 
     public void setHeadAddr(String headAddr) {
-        this.headAddr = headAddr;
+        this.head_addr = headAddr;
     }
 
     public Integer getVip() {
