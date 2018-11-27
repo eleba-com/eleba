@@ -68,15 +68,15 @@ public class MerchantController {
 
         return map;
     }
+
     /**
-     *  通过类型寻找商家
-     *
-     * @author      jhao
-     * @param
-     * @return
-     * @exception
-     * @date        2018/11/26 15:45
-     */
+    * 通过食物类型查找商家用户名和销量
+    * @author：      jiehao
+    * @param
+    * @return：
+    * @exception：
+    * @date：       2018/11/27 10:26
+    */
     @RequestMapping(value = "listMerchantByType",method = RequestMethod.GET)
     @ResponseBody
     public Map listMerchantByType(String mType){

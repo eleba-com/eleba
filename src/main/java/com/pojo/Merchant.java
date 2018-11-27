@@ -23,6 +23,10 @@ public class Merchant {
 
     private String passwordSalt;
 
+    private String shopName;
+
+    private String sale;
+
     public Integer getId() {
         return id;
     }
@@ -109,5 +113,21 @@ public class Merchant {
 
     public void setPasswordSalt(String passwordSalt) {
         this.passwordSalt = passwordSalt;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getSale() {
+        return sale;
+    }
+
+    public void setSale(String sale) {
+        this.sale = sale;
     }
 }
