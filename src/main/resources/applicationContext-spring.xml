@@ -95,12 +95,19 @@
     <!--shiro配置-->
 
     <!--  shiro安全管理器-->
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <!--刚配置时，先把这条注释掉，等后面写了MyRealm.java时，再把它的注释去掉，因为如果没有去掉就会在
+        <!--刚配置时，先把这条注释掉，等后面写了ShiroReam.java时，再把它的注释去掉，因为如果没有去掉就会在
         tomcat开启时报一个错误 -->
         <property name="realm" ref="ShiroReam"/>
         <!--<property name="cacheManager" ref="shiroCacheManager" />-->
     </bean>
+
+
 
     <bean id="ShiroReam" class="com.util.ShiroReam">
         <property name="credentialsMatcher" ref="credentialsMatcher"></property>
@@ -143,9 +150,7 @@
         <property name="proxyTargetClass" value="true"></property>
     </bean>
 
-    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-        <property name="securityManager" ref="securityManager"/>
-    </bean>
+
 
 
 

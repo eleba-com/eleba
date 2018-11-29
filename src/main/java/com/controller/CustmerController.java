@@ -60,14 +60,16 @@ public class CustmerController {
         System.out.println("进入了方法");
         Map<String,Object> map = new HashMap<String, Object>();
         UsernamePasswordCaptchaToken token=new UsernamePasswordCaptchaToken(customer.getUsername(),customer.getPassword(),role);
+        System.out.println("11111111");
         Subject subject=SecurityUtils.getSubject();
         //Session session=null;
+        System.out.println("222222");
         try {
             subject.login(token);
             map.put("status","0");
             //账号不存在
         }catch (UnknownAccountException e){
-            map.put("status","密码错误");
+            map.put("status","1");
             //密码错误
         }catch (IncorrectCredentialsException e){
             map.put("status","2");

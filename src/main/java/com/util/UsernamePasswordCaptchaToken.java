@@ -29,6 +29,8 @@ public class UsernamePasswordCaptchaToken extends UsernamePasswordToken {
     }
     public UsernamePasswordCaptchaToken(String username, String password,int role) {
      super(username ,password);
-     this.role=role;
+     System.out.println("========");
+      this.role=role;
+     System.out.println("========");
 }
 }

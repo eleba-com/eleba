@@ -51,6 +51,8 @@ public class ShiroReam extends AuthorizingRealm {
         UsernamePasswordCaptchaToken token= (UsernamePasswordCaptchaToken) authenticationToken;
         String username=token.getUsername();
         int role=token.getRole();
+        System.out.println(role);
+        System.out.println("============");
         if(role==0){
             Customer customer=custmerService.findbyUserName(username);
             if (customer == null) {
