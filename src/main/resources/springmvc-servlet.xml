@@ -14,6 +14,7 @@
 
     <mvc:annotation-driven />
 
+    <!-- 实现对静态数据访问的配置 -->
     <mvc:default-servlet-handler />
 
 

@@ -24,31 +24,30 @@ import java.util.*;
 @RequestMapping("")
 public class UserController {
 
-//    @Autowired
-//    MerchantService merchantService;
-//
-//     /**
-//     *  通过类型寻找商家
-//      *
-//     * @author      jhao
-//     * @param
-//     * @return
-//     * @exception
-//     * @date        2018/11/26 15:45
-//     */
-//    @RequestMapping(value = "listMerchantByType",method = RequestMethod.GET)
-//    @ResponseBody
-//    public Map listMerchantByType(String mType){
-//        Map<String,Object> map = new HashMap<>();
-//        System.out.println(mType);
-//        List<Merchant> merchants = merchantService.listMerchantByType(mType);
-//        if(merchants!=null){
-//            map.put("merchants",merchants);
-//
-//            System.out.println("能获取merchant "+ merchants.toString());
-//        }else {
-//            System.out.println("无此类型商家");
-//        }
-//        return map;
-//    }
+    @Autowired
+    MerchantService merchantService;
+
+     /**
+     *  通过类型寻找商家
+      *  有问题，待改
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/11/26 15:45
+     */
+    @RequestMapping(value = "listMerchantByType",method = RequestMethod.GET)
+    @ResponseBody
+    public Map listMerchantByType(String mType){
+        Map<String,Object> map = new HashMap<>();
+
+        List<Merchant> merchants = merchantService.listMerchantByType(mType);
+        if(merchants!=null){
+            map.put("merchants",merchants);
+            System.out.println("能获取merchant "+ merchants.toString());
+        }else {
+            System.out.println("无此类型商家");
+        }
+        return map;
+    }
 }
