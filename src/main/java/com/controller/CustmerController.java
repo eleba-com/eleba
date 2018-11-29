@@ -14,6 +14,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +37,7 @@ public class CustmerController {
     @ResponseBody
     public Map registerCustmer(Customer customer){
         //Customer record=new Customer();
+        System.out.println("进入了方法");
         Map<String,Object> map = new HashMap<String, Object>();
 //        customer.setUsername("jie");
 //        customer.setPassword("1234");
@@ -54,7 +56,8 @@ public class CustmerController {
 
     @RequestMapping(value = "login",method = RequestMethod.GET)
     @ResponseBody
-    public Map login(Customer customer,int role){
+    public Map login(Customer customer, Integer role){
+        System.out.println("进入了方法");
         Map<String,Object> map = new HashMap<String, Object>();
         UsernamePasswordCaptchaToken token=new UsernamePasswordCaptchaToken(customer.getUsername(),customer.getPassword(),role);
         Subject subject=SecurityUtils.getSubject();
