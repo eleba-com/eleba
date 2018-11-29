@@ -22,7 +22,8 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("")
-public class CustmerTest {
+public class CustmerController {
+
 
     @Autowired
     private RetryLimitHashedCredentialsMatcher matcher;
@@ -53,30 +54,21 @@ public class CustmerTest {
 
     @RequestMapping(value = "login",method = RequestMethod.GET)
     @ResponseBody
-    public Map login(Customer customer){
+    public Map login(Customer customer,int role){
         Map<String,Object> map = new HashMap<String, Object>();
-        UsernamePasswordCaptchaToken token=new UsernamePasswordCaptchaToken(customer.getUsername(),customer.getPassword());
+        UsernamePasswordCaptchaToken token=new UsernamePasswordCaptchaToken(customer.getUsername(),customer.getPassword(),role);
         Subject subject=SecurityUtils.getSubject();
-        Session session=null;
+        //Session session=null;
         try {
             subject.login(token);
             map.put("status","0");
             //账号不存在
         }catch (UnknownAccountException e){
-            map.put("status","1");
-
+            map.put("status","密码错误");
             //密码错误
         }catch (IncorrectCredentialsException e){
             map.put("status","2");
-
-            char ch = 'a';
-
-
-
-
         }
         return map;
-
     }
-
 }

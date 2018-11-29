@@ -1,5 +1,7 @@
 package com.pojo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Merchant {
     private Integer id;
 
@@ -26,6 +28,8 @@ public class Merchant {
     private String shopName;
 
     private String sale;
+
+    private MultipartFile imageFile;
 
     public Integer getId() {
         return id;
@@ -129,5 +133,12 @@ public class Merchant {
 
     public void setSale(String sale) {
         this.sale = sale;
+    }
+
+    public MultipartFile getImageFile() {
+        return imageFile;
+    }
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
     }
 }

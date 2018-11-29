@@ -4,8 +4,10 @@ package com.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pojo.Category;
+import com.pojo.Merchant;
 import com.service.CategoryService;
 import com.util.Page;
+import com.util.Upload.UoloadImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,6 +31,8 @@ public class CategoryController {
 
 	@Autowired
 	CategoryService categoryService;
+
+	private UoloadImage uploadImage;
 
 	@RequestMapping("listCategory")
 	public ModelAndView listCategory(Page page){
@@ -84,8 +90,6 @@ public class CategoryController {
 		return map;
 		//return mav;
 	}
-
-
 	@RequestMapping(value = "listCategorytoJson", method = RequestMethod.GET)
 	@ResponseBody
 	public Map listCategorytoJson(Page page){
@@ -107,6 +111,33 @@ public class CategoryController {
 		System.out.println("已经设置返回了");
 		return map;
 		//return mav;
+	}
+
+	/**
+	* 上传图片测试
+	* @author：      jiehao
+	* @param
+	* @return：
+	* @exception：
+	* @date：       2018/11/27 10:45
+	*/
+	@RequestMapping(value = "uploadImage" ,method = RequestMethod.GET)
+	@ResponseBody
+	public Map uploadImageTest(Merchant merchant, HttpServletRequest request)throws Exception{
+
+		String dir = request.getSession().getServletContext().getRealPath("")+"/upload/images/";
+		File file=new File(dir);
+		//如果文件夹不存在
+		if(!file.exists()){
+			//创建文件夹
+			file.mkdir();
+		}
+		uploadImage=new UoloadImage();
+		String  filename=uploadImage.uploadImage(merchant.getImageFile(),dir);
+		Map<String,Object> map = new HashMap<String, Object>();
+		String sqlPath="/upload/images/"+filename;
+		map.put("sqlPath",sqlPath);
+		return map;
 	}
 
 }

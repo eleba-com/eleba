@@ -39,16 +39,7 @@ public class ShiroReam extends AuthorizingRealm {
 
         SimpleAuthorizationInfo simpleAuthorizationInfo=new SimpleAuthorizationInfo();
         String username=principalCollection.getPrimaryPrincipal().toString();
-       // String roleName=SecurityUtils.getSubject().getSession().getAttribute("roleName").toString();
-//        if(username.equals("杰")){
-//            simpleAuthorizationInfo.addRole("管理员");
-//            System.out.println(simpleAuthorizationInfo.getRoles());
-//            simpleAuthorizationInfo.addStringPermission("admin:*");
-//        }
-//        else{
-//            simpleAuthorizationInfo.addRole("普通用户");
-//            simpleAuthorizationInfo.addStringPermission("admin:user:view");
-//        }
+
 
         return simpleAuthorizationInfo;
     }
@@ -57,20 +48,26 @@ public class ShiroReam extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authenticationToken) throws AuthenticationException {
-
         UsernamePasswordCaptchaToken token= (UsernamePasswordCaptchaToken) authenticationToken;
         String username=token.getUsername();
-        Customer customer=custmerService.findbyUserName(username);
-        if (customer == null) {
-            throw new UnknownAccountException();
+        int role=token.getRole();
+        if(role==0){
+            Customer customer=custmerService.findbyUserName(username);
+            if (customer == null) {
+                throw new UnknownAccountException();
+            }
+            ByteSource salt = ByteSource.Util.bytes(customer.getPasswordsalt());
+            System.out.println(token.getPassword());
+            System.out.println(customer.getPassword());
+            System.out.println(customer.getPasswordsalt());
+            System.out.println(salt);
+            //验证密码，需要在applicationContent.xml（shiro.xml）说明加密算法
+            return new SimpleAuthenticationInfo(customer.getUsername(), customer.getPassword(), salt, getName());
+        }else if(role==1){
+            System.out.println("==================");
+        }else {
+            System.out.println("==================");
         }
-        ByteSource salt = ByteSource.Util.bytes(customer.getPasswordsalt());
-
-        System.out.println(token.getPassword());
-        System.out.println(customer.getPassword());
-        System.out.println(customer.getPasswordsalt());
-        System.out.println(salt);
-        //验证密码，需要在applicationContent.xml（shiro.xml）说明加密算法
-        return new SimpleAuthenticationInfo(customer.getUsername(), customer.getPassword(), salt, getName());
+       return new SimpleAuthenticationInfo();
     }
 }
