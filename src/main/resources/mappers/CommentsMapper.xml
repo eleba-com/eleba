@@ -7,6 +7,7 @@
     <result column="comment_time" jdbcType="VARCHAR" property="comment_time" />
     <result column="mId" jdbcType="INTEGER" property="mid" />
     <result column="oId" jdbcType="INTEGER" property="oid" />
+    <result column="detail" jdbcType="INTEGER" property="detail" />
   </resultMap>
   <sql id="Base_Column_List">
     id, uId, comment_time, mId, oId
@@ -23,9 +24,9 @@
   </delete>
   <insert id="insert" parameterType="com.pojo.Comments">
     insert into comments (id, uId, comment_time, 
-      mId, oId)
+      mId, oId,detail)
     values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{comment_time,jdbcType=VARCHAR},
-      #{mid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER})
+      #{mid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.Comments">
     insert into comments

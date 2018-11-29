@@ -67,6 +67,11 @@ public class MerchantController {
                 System.out.println("出错了");
             }
         }
+//        for(int j=0;j<list.size();j++){
+//            map3.put("id",j);
+//            map3.put("mtype",)
+//        }
+//        map3.put("types",types);
 
         return map;
     }
@@ -98,11 +103,11 @@ public class MerchantController {
     /**
     * 方法实现说明  商家注册
     * @author：      jiehao
-    * @return：      
+    * @return：
     * @exception：
     * @date：       2018/11/29 10:46
     */
-    
+
     @RequestMapping(value = "MerchantRegister",method = RequestMethod.GET)
     @ResponseBody
     public Map MerchantRegister(Merchant merchant){

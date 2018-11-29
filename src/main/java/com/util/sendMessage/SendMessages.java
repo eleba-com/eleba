@@ -56,6 +56,7 @@ public class SendMessages {
         if(jsonObject.get("respCode").getAsInt()==00000) {
             System.out.println("发送成功！！！");
             map.put("VerificationCode",verificationCode);
+            map.put("tel",tel);
 
         }
         return map;
