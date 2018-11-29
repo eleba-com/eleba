@@ -90,4 +90,9 @@
       mId = #{mid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- 列出该商家所有的产品 -->
+  <select id="listAllProduct" parameterType="java.lang.Integer" resultType="com.pojo.Product">
+    select * FROM  product WHERE MID=#{mid}
+  </select>
 </mapper>

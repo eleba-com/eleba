@@ -60,11 +60,7 @@ public class MerchantController {
                 System.out.println("出错了");
             }
         }
-//        for(int j=0;j<list.size();j++){
-//            map3.put("id",j);
-//            map3.put("mtype",)
-//        }
-//        map3.put("types",types);
+
 
         return map;
     }

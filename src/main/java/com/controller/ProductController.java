@@ -1,0 +1,121 @@
+package com.controller;
+
+import com.pojo.Product;
+import com.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+* @Description:    商家产品控制类
+* @Author:         jhao
+* @CreateDate:     2018/11/29 8:41
+* @UpdateUser:     jhao
+* @UpdateDate:     2018/11/29 8:41
+* @UpdateRemark:   修改内容
+* @Version:        1.0
+*/
+@Controller
+@RequestMapping("")
+public class ProductController {
+
+    @Autowired
+    ProductService productService;
+
+    /**
+     * 将商家的商品属性记录到数据库中
+     * @author      jhao
+     * @param       product
+     * @return
+     * @exception
+     * @date        2018/11/29 8:55
+     */
+    @ResponseBody
+    @RequestMapping("addProduct")
+    public Map addProduct(Product product){
+
+        Map<String,Object> map = new HashMap<>();
+        if (productService.addProduct(product)){
+            map.put("message","添加成功");
+        }else{
+            map.put("message","添加失败");
+        }
+
+        return map;
+    }
+
+    /**
+     * 通过商家id列出他的所有产品
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/11/29 9:48
+     */
+    @RequestMapping("listAllProduct")
+    @ResponseBody
+    public Map listAllProduct(Product product){
+        Map<String,Object> map = new HashMap<>();
+        List<Product> list = new ArrayList<>();
+        System.out.println("product是 "+ product.toString()+" mid = "+product.getMid());
+        list = productService.listAllProduct(product);
+        if(list!=null){
+            map.put("商家产品",list);
+        }else{
+            map.put("message","no record");
+        }
+
+        return map;
+    }
+
+    /**
+     * 通过商品id删除该商品
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/11/29 14:43
+     */
+    @RequestMapping("deleteProduct")
+    @ResponseBody
+    public Map deleteProduct(Product product){
+
+        Map<String,Object> map = new HashMap<>();
+        if(productService.deleteProduct(product)){
+         map.put("message","删除成功");
+        }else {
+            map.put("message","删除失败");
+        }
+        return map;
+    }
+
+    /**
+     * 通过id确认商品，修改商品信息
+     * v1.0 需要每个值都有传入不为null
+     * 否则其他column会改为null
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/11/29 15:12
+     */
+    @RequestMapping("updateProduct")
+    @ResponseBody
+    public Map updateProduct(Product product){
+        Map<String,Object> map = new HashMap<>();
+        if(productService.updateProduct(product)){
+            map.put("message","修改成功");
+
+        }else {
+            map.put("message","修改失败");
+        }
+
+        return map;
+    }
+}
