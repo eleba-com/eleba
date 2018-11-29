@@ -22,15 +22,6 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="findByUserName" resultMap="BaseResultMap" >
-    select
-    <include refid="Base_Column_List" />
-    from customer
-    where userName = #{userName}
-  </select>
-
-
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from customer
     where id = #{id,jdbcType=INTEGER}
@@ -148,4 +139,20 @@
       passwordSalt = #{passwordsalt,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- jiehao 11-29 通过姓名查找信息-->
+  <select id="findByUserName" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from customer
+    where userName = #{userName}
+  </select>
+  <!-- jiehao 11-29 通过id查找信息-->
+  <select id="findCustmerMessager" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from customer
+    where id = #{id}
+  </select>
+
 </mapper>

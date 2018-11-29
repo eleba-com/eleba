@@ -1,6 +1,8 @@
 package com.controller;
 
 
+import com.alibaba.druid.sql.ast.statement.SQLIfStatement;
+import com.pojo.Address;
 import com.pojo.Customer;
 import com.service.CustmerService;
 import com.util.PrimaryKeyUtil;
@@ -14,17 +16,27 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.nio.file.AccessDeniedException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+* @Description:    用户控制类
+* @Author:         jiehao
+* @CreateDate:     2018/11/29 10:29
+* @UpdateUser:     jiehao
+* @UpdateDate:     2018/11/29 10:29
+* @UpdateRemark:   修改内容
+* @Version:        1.0
+*/
 @Controller
 @RequestMapping("")
 public class CustmerController {
-
 
     @Autowired
     private RetryLimitHashedCredentialsMatcher matcher;
@@ -33,47 +45,209 @@ public class CustmerController {
     private CustmerService custmerService;
 
 
+    /**
+    * 方法实现说明  用户注册
+    * @author：      jiehao
+    * @param
+    * @return：
+    * @exception：
+    * @date：       2018/11/29 10:22
+    */
     @RequestMapping(value = "register",method = RequestMethod.GET)
     @ResponseBody
     public Map registerCustmer(Customer customer){
         //Customer record=new Customer();
         System.out.println("进入了方法");
         Map<String,Object> map = new HashMap<String, Object>();
-//        customer.setUsername("jie");
-//        customer.setPassword("1234");
-        customer.setPasswordsalt(PrimaryKeyUtil.getAllRandomString(4));
-        System.out.println(customer.getPasswordsalt());
-        customer.setPassword(new SimpleHash(matcher.getHashAlgorithmName(),customer.getPassword(),customer.getPasswordsalt(),
-                matcher.getHashIterations()).toString());//二次加密;
-        System.out.println(customer.getPassword());
-        if (custmerService.insert(customer)==1){
-            map.put("status","0");
-        }else {
-            map.put("status","1");
+        Customer user=custmerService.findbyUserName(customer.getUsername());
+        if(user==null) {
+            customer.setPasswordsalt(PrimaryKeyUtil.getAllRandomString(4));
+            System.out.println(customer.getPasswordsalt());
+            //二次加密;
+            customer.setPassword(new SimpleHash(matcher.getHashAlgorithmName(), customer.getPassword(), customer.getPasswordsalt(),
+                    matcher.getHashIterations()).toString());
+            System.out.println(customer.getPassword());
+            if (custmerService.insert(customer) == 1) {
+                //注册成功
+                map.put("status", "0");
+                map.put("message","注册成功");
+            } else {
+                //注册失败
+                map.put("status", "1");
+                map.put("message","注册失败");
+            }
+        }
+        else {
+            //用户名重复
+            map.put("status","2");
+            map.put("message","用户名重复");
         }
         return map;
     }
 
+    /**
+    * 方法实现说明    用户登录
+    * @author：      jiehao
+    * @param
+    * @return：
+    * @exception：
+    * @date：       2018/11/29 10:23
+    */
     @RequestMapping(value = "login",method = RequestMethod.GET)
     @ResponseBody
-    public Map login(Customer customer, Integer role){
-        System.out.println("进入了方法");
+    public Map login(Customer customer, Integer role, HttpServletRequest request){
         Map<String,Object> map = new HashMap<String, Object>();
-        UsernamePasswordCaptchaToken token=new UsernamePasswordCaptchaToken(customer.getUsername(),customer.getPassword(),role);
-        System.out.println("11111111");
+        UsernamePasswordCaptchaToken token=new UsernamePasswordCaptchaToken(customer.getUsername(),
+                customer.getPassword(),role);
         Subject subject=SecurityUtils.getSubject();
-        //Session session=null;
-        System.out.println("222222");
+        Session session= (Session) request.getSession();
         try {
             subject.login(token);
+            session.setAttribute("username",customer.getUsername());
+            session.setAttribute("id",customer.getId());
             map.put("status","0");
+            map.put("message","登录成功");
+            map.put("session",session);
             //账号不存在
         }catch (UnknownAccountException e){
             map.put("status","1");
+            map.put("message","账号不存在");
             //密码错误
         }catch (IncorrectCredentialsException e){
             map.put("status","2");
+            map.put("message","密码错误");
         }
         return map;
     }
+ /**
+ * 方法实现说明   增加用户外卖地址
+ * @author：      jiehao
+ * @return：
+ * @exception：
+ * @date：       2018/11/29 16:27
+ */
+ @RequestMapping(value = "addCustmerAddr",method = RequestMethod.GET)
+ @ResponseBody
+ public Map addCustmerAddr(Address address){
+     Map<String,Object>map =new HashMap<>();
+     int number=custmerService.addCustmerAddr(address);
+     if (number ==1){
+         map.put("status","0");
+         map.put("message","新增成功");
+     }else {
+         map.put("status","1");
+         map.put("message","增加失败");
+     }
+     return map;
+ }
+
+ /**
+ * 方法实现说明   删除用户地址
+ * @author：      jiehao
+ * @return：
+ * @exception：
+ * @date：       2018/11/29 19:29
+ */
+ @RequestMapping(value = "delCustmerAddr",method = RequestMethod.GET)
+ @ResponseBody
+ public Map delCustmerAddr(Address address){
+     Map<String,Object> map=new HashMap<>();
+     int number=custmerService.delCustmerAddr(address.getId());
+     if(number>0){
+         map.put("status","0");
+         map.put("message","删除成功");
+     }else {
+         map.put("status","1");
+         map.put("message","删除失败");
+     }
+     return map;
+ }
+
+/**
+* 方法实现说明   查找用户地址
+* @author：      jiehao
+* @return：
+* @exception：
+* @date：       2018/11/29 20:15
+*/
+ @RequestMapping(value = "findCustmerAddr",method = RequestMethod.GET)
+ @ResponseBody
+ public Map findCustmerAddr(Address address){
+     Map<String,Object> map=new HashMap<>();
+     Address addr=custmerService.findCustmerAddr(address.getuId());
+     map.put("adsress",addr);
+     return map;
+ }
+
+ /**
+ * 方法实现说明   用户修改地址
+ * @author：      jiehao
+ * @return：
+ * @exception：
+ * @date：       2018/11/29 20:45
+ */
+ @RequestMapping(value = "updateCustmerAddr",method = RequestMethod.GET)
+ @ResponseBody
+ public Map updateCustmerAddr(Address address){
+     Map<String,Object> map=new HashMap<>();
+     int number = custmerService.updateCustmerAddr(address);
+     if(number>0){
+         map.put("status","0");
+         map.put("message","修改用户地址成功");
+     }else {
+         map.put("status","1");
+         map.put("message","修改用户地址失败");
+     }
+     return map;
+ }
+
+ /**
+ * 方法实现说明  用户修改信息
+ * @author：      jiehao
+ * @return：
+ * @exception：
+ * @date：       2018/11/29 21:05
+ */
+ @RequestMapping(value = "updateCustmerMessage",method = RequestMethod.GET)
+ @ResponseBody
+ public Map updateCustmerMessage(Customer customer){
+     Map<String,Object> map=new HashMap<>();
+     if (customer.getPassword()!=null){
+         customer.setPasswordsalt(PrimaryKeyUtil.getAllRandomString(4));
+         customer.setPassword(new SimpleHash(matcher.getHashAlgorithmName(), customer.getPassword(), customer.getPasswordsalt(),
+                 matcher.getHashIterations()).toString());
+     }
+     int number=custmerService.updateCustmerMessage(customer);
+     if(number > 0){
+         map.put("status","0");
+         map.put("message","修改用户信息成功");
+     }else {
+         map.put("status","1");
+         map.put("message","修改用户信息失败");
+     }
+     return map;
+ }
+
+ /**
+ * 方法实现说明  查找用户信息
+ * @author：      jiehao
+ * @return：
+ * @exception：
+ * @date：       2018/11/29 21:45
+ */
+ @RequestMapping(value = "findCustmerMessager",method = RequestMethod.GET)
+ @ResponseBody
+ public Map findCustmerMessager(Customer record){
+     Map<String,Object> map=new HashMap<>();
+     Customer customer=null;
+     if(record.getUsername()!=null){
+         customer=custmerService.findbyUserName(record.getUsername());
+     }else if(record.getId()!=null){
+         customer=custmerService.findCustmerMessager(record.getId());
+     }
+     map.put("customer",customer);
+     return map;
+ }
+
+
 }

@@ -14,4 +14,9 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+
+    Product findProductMessage(Integer mid);
+
+
 }

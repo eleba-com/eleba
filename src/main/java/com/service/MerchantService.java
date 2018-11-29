@@ -1,13 +1,19 @@
 package com.service;
 
 import com.pojo.Merchant;
+import com.pojo.Product;
 
 import java.util.List;
 
 /**
- * Created by jhao on 2018/11/24.
+ *
  *  商家service类
- *  @author jhao
+ *  @author          jhao、jiehao
+ *  @CreateDate:    2018/11/24
+ *  @UpdateUser:    jiehao
+ * * @UpdateDate:     2018/11/29 11:14
+ * * @UpdateRemark:   增加查找用户名接口
+ * * @Version:        2.0
  */
 public interface MerchantService {
 
@@ -29,5 +35,44 @@ public interface MerchantService {
      * @exception
      * @date        2018/11/26 9:59
      */
+
     public List<String> listMerType();
+
+    /**
+     *    通过登录名查找商家信息
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/11/29 11:17
+     */
+    public Merchant findByMerchantName(String userName);
+
+
+    /**
+    * 通过店铺名查找id
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/11/29 15:29
+    */
+    public int merchantFindId(String shopName);
+
+    /**
+    *   通过店铺id查找菜式
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/11/29 15:46
+    */
+    public Product merchantFindProduct(Integer id);
+
+    /**
+     * 方法实现说明   查找用户信息
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/11/29 22:03
+     */
+    public Merchant findMerchantMessage(Integer id);
+
 }

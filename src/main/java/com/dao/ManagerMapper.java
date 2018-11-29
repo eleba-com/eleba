@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.pojo.Manager;
+import com.pojo.Merchant;
 
 public interface ManagerMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +15,6 @@ public interface ManagerMapper {
     int updateByPrimaryKeySelective(Manager record);
 
     int updateByPrimaryKey(Manager record);
+
+
 }

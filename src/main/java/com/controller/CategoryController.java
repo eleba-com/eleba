@@ -121,7 +121,7 @@ public class CategoryController {
 	* @exception：
 	* @date：       2018/11/27 10:45
 	*/
-	@RequestMapping(value = "uploadImage" ,method = RequestMethod.GET)
+	@RequestMapping(value = "uploadImage" ,method = RequestMethod.POST)
 	@ResponseBody
 	public Map uploadImageTest(Merchant merchant, HttpServletRequest request)throws Exception{
 
