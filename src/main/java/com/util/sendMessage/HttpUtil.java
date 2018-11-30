@@ -8,8 +8,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.apache.commons.codec.digest.DigestUtils;
+
 
 /**
  * http请求工具
