@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.math.BigInteger;
 import java.util.Map;
 
 /**
@@ -32,7 +33,12 @@ public class SendMessageController {
      */
     @RequestMapping(value = "registerByTel",method = RequestMethod.GET)
     @ResponseBody
-    public Map registerByTel(int tel){
-            return SendMessages.sendMessage(tel);
+    public Map registerByTel(String tel){
+            BigInteger b = new BigInteger(tel);
+
+            System.out.println(b);
+            System.out.println(b.intValue());
+            //int tels = Integer.valueOf(tel);
+            return SendMessages.sendMessage(b);
     }
 }

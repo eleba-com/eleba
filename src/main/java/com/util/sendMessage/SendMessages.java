@@ -7,6 +7,7 @@ package com.util.sendMessage;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.math.BigInteger;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class SendMessages {
      * @exception
      * @date        2018/11/23 16:07
      */
-    public static Map sendMessage(int tel){
+    public static Map sendMessage(BigInteger tel){
         Map<String,Object> map = new HashMap<>();
         String tmpSmsContent = null;
         int verificationCode = makeRandom();
@@ -42,7 +43,7 @@ public class SendMessages {
         try{
             tmpSmsContent = URLEncoder.encode(smsContent, "UTF-8");
         }catch(Exception e){
-
+             e.printStackTrace();
         }
         String url = Config.BASE_URL + operation;
         String body = "accountSid=" + accountSid + "&to=" + tel + "&smsContent=" + tmpSmsContent
