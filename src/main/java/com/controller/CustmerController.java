@@ -12,7 +12,9 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.apache.shiro.session.Session;
+
+
+import javax.servlet.http.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -100,7 +102,7 @@ public class CustmerController {
         UsernamePasswordCaptchaToken token=new UsernamePasswordCaptchaToken(customer.getUsername(),
                 customer.getPassword(),role);
         Subject subject=SecurityUtils.getSubject();
-        Session session= (Session) request.getSession();
+        HttpSession session=  (HttpSession)request.getSession();
         try {
             subject.login(token);
             session.setAttribute("username",customer.getUsername());
