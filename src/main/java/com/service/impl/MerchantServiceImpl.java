@@ -105,5 +105,17 @@ public class MerchantServiceImpl implements MerchantService{
         return merchantMapper.findMerchantMessage(id);
     }
 
+    /**
+    * 方法实现说明   商家注册
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/11/30 10:12
+    */
+    @Override
+    public int insertMerchant(Merchant merchant) {
+        return merchantMapper.insertSelective(merchant);
+    }
+
 
 }

@@ -3,10 +3,14 @@ package com.controller;
 import com.pojo.Merchant;
 import com.pojo.Product;
 import com.service.MerchantService;
+import com.util.PrimaryKeyUtil;
+import com.util.RetryLimitHashedCredentialsMatcher;
+import com.util.Upload.UoloadImage;
 import com.util.UsernamePasswordCaptchaToken;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.apache.shiro.subject.Subject;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.iterator;
@@ -32,6 +38,12 @@ import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResol
 @RequestMapping("")
 public class MerchantController {
 
+    @Autowired
+    private RetryLimitHashedCredentialsMatcher matcher;
+    @Autowired
+    MerchantService merchantService;
+
+    private UoloadImage uploadImage;
     /**
      * 直接返回所有商家类型
      * @author      jhao
@@ -40,8 +52,6 @@ public class MerchantController {
      * @exception
      * @date        2018/11/26 10:05
      */
-    @Autowired
-    MerchantService merchantService;
     @RequestMapping("listMerType")
     @ResponseBody
     public Map listMerType(){
@@ -110,8 +120,43 @@ public class MerchantController {
 
     @RequestMapping(value = "MerchantRegister",method = RequestMethod.GET)
     @ResponseBody
-    public Map MerchantRegister(Merchant merchant){
+    public Map MerchantRegister(Merchant merchant,HttpServletRequest request){
         Map<String,Object> map=new HashMap<>();
+        Merchant record=merchantService.findByMerchantName(merchant.getUsername());
+        if (record==null){
+            if (merchant.getImageFile()!=null){
+                String dir = request.getSession().getServletContext().getRealPath("")+"/upload/images/";
+                File file=new File(dir);
+                //如果文件夹不存在
+                if(!file.exists()){
+                    //创建文件夹
+                    file.mkdir();
+                }
+                uploadImage=new UoloadImage();
+                String  filename= null;
+                try {
+                    filename = uploadImage.uploadImage(merchant.getImageFile(),dir);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                String sqlPath="/upload/images/"+filename;
+                merchant.setState_message_addr(sqlPath);
+            }
+            merchant.setPasswordSalt(PrimaryKeyUtil.getAllRandomString(4));
+            merchant.setPassword(new SimpleHash(matcher.getHashAlgorithmName(),merchant.getPassword(),
+                    merchant.getPasswordSalt(),matcher.getHashIterations()).toString());
+            int number=merchantService.insertMerchant(merchant);
+            if (number>0){
+                map.put("status","0");
+                map.put("message","用户注册成功");
+            }else {
+                map.put("status","1");
+                map.put("message","用户注册失败");
+            }
+        }else{
+            map.put("status","2");
+            map.put("message","用户名重复");
+        }
         return map;
     }
 
