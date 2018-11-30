@@ -2,7 +2,9 @@ package com.util;
 
 
 import com.pojo.Customer;
+import com.pojo.Merchant;
 import com.service.CustmerService;
+import com.service.MerchantService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -25,6 +27,9 @@ public class ShiroReam extends AuthorizingRealm {
    @Autowired
     private CustmerService custmerService;
 
+   @Autowired
+   private MerchantService merchantService;
+
 
    /**
    * 方法实现说明
@@ -44,7 +49,14 @@ public class ShiroReam extends AuthorizingRealm {
         return simpleAuthorizationInfo;
     }
 
-    //登陆验证
+    /**
+    * 方法实现说明    登录验证
+    * @author：      jiehao
+    * @param
+    * @return：
+    * @exception：
+    * @date：       2018/11/29 10:24
+    */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authenticationToken) throws AuthenticationException {
@@ -52,22 +64,24 @@ public class ShiroReam extends AuthorizingRealm {
         String username=token.getUsername();
         int role=token.getRole();
         System.out.println(role);
-        System.out.println("============");
         if(role==0){
             Customer customer=custmerService.findbyUserName(username);
             if (customer == null) {
                 throw new UnknownAccountException();
             }
             ByteSource salt = ByteSource.Util.bytes(customer.getPasswordsalt());
-            System.out.println(token.getPassword());
-            System.out.println(customer.getPassword());
-            System.out.println(customer.getPasswordsalt());
-            System.out.println(salt);
             //验证密码，需要在applicationContent.xml（shiro.xml）说明加密算法
             return new SimpleAuthenticationInfo(customer.getUsername(), customer.getPassword(), salt, getName());
         }else if(role==1){
             System.out.println("==================");
-        }else {
+            Merchant merchant =merchantService.findByMerchantName(username);
+            if(merchant ==null){
+                throw new UnknownAccountException();
+            }
+            ByteSource salt =ByteSource.Util.bytes(merchant.getPasswordSalt());
+            //验证密码
+            return new SimpleAuthenticationInfo(merchant.getUsername(),merchant.getPassword(),salt,getName());
+        }else if(role== 2){
             System.out.println("==================");
         }
        return new SimpleAuthenticationInfo();

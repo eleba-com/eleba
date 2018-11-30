@@ -33,6 +33,11 @@ public interface ProductMapper {
 
     int updateByPrimaryKey(Product record);
 
+
+    Product findProductMessage(Integer mid);
+
+
+
     /**
      * 获取商家所有的商品
      * @author      jhao

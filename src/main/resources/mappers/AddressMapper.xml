@@ -2,20 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.AddressMapper">
   <resultMap id="BaseResultMap" type="com.pojo.Address">
-    <result column="uId" jdbcType="INTEGER" property="uid" />
+    <result column="id" jdbcType="INTEGER" property="id"/>
+    <result column="uId" jdbcType="INTEGER" property="uId" />
     <result column="addr" jdbcType="VARCHAR" property="addr" />
     <result column="aDefault" jdbcType="INTEGER" property="aDefault" />
+    <result column="contract_man" jdbcType="VARCHAR" property="contract_man" />
+    <result column="contract_tel" jdbcType="VARCHAR" property="contract_tel" />
   </resultMap>
   <insert id="insert" parameterType="com.pojo.Address">
-    insert into address (uId, addr, aDefault
+    insert into address (id,uId, addr, aDefault,contract_man,contract_tel
       )
-    values (#{uid,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, #{aDefault,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER},#{uId,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, #{aDefault,jdbcType=INTEGER},#{contract_man,jdbcType=VARCHAR},#{contract_tel,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.Address">
     insert into address
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uId != null">
         uId,
       </if>
       <if test="addr != null">
@@ -24,10 +30,19 @@
       <if test="aDefault != null">
         aDefault,
       </if>
+      <if test="contract_man != null">
+        contract_man,
+      </if>
+      <if test="contract_tel != null">
+        contract_tel,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        #{uid,jdbcType=INTEGER},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
       </if>
       <if test="addr != null">
         #{addr,jdbcType=VARCHAR},
@@ -35,6 +50,44 @@
       <if test="aDefault != null">
         #{aDefault,jdbcType=INTEGER},
       </if>
+      <if test="contract_man != null">
+        #{contract_man,jdbcType=VARCHAR},
+      </if>
+      <if test="contract_tel != null">
+        #{contract_tel,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
+  <!--jiehao 11-29 删除地址-->
+  <delete id="delCustmerAddr" parameterType="java.lang.Integer">
+    delete from address where id=#{id}
+  </delete>
+  <!--jiehao  11-29  查找用户地址-->
+  <select id="findCustmerAddr" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from address where uId=#{uId}
+  </select>
+   <!--jiehao 11-29 修改地址-->
+  <update id="updateCustmerAddr" parameterType="com.pojo.Address">
+    update address
+    <set>
+      <if test="uId !=null">
+        uId=#{uId},
+      </if>
+      <if test="addr !=null">
+        addr=#{addr},
+      </if>
+      <if test="aDefault !=null">
+        aDefault=#{aDefault},
+      </if>
+      <if test="contract_man !=null">
+        contract_man=#{contract_man},
+      </if>
+      <if test="contract_tel !=null">
+        contract_tel=#{contract_tel},
+      </if>
+    </set>
+    where id=#{id}
+  </update>
+
+
 </mapper>

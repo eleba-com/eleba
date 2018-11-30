@@ -195,4 +195,21 @@
   <select id="listMerType" resultType="java.lang.String">
     SELECT DISTINCT mType from merchant
   </select>
+
+  <!-- jiehao 11-29 返回商家信息-->
+<select id="findByMerchantName" resultMap="BaseResultMap">
+  select  * from merchant where userName=#{userName}
+</select>
+
+  <!--jiehao 11-29 返回单个商家id-->
+  <select id="merchantFindId" resultType="java.lang.Integer">
+    select id from merchant where shopName=#{shopName}
+  </select>
+
+  <!-- jiehao 11-29 通过id查找商家信息-->
+  <select id="findMerchantMessage" resultMap="BaseResultMap">
+    select * from merchant where id=#{id}
+  </select>
+
+
 </mapper>

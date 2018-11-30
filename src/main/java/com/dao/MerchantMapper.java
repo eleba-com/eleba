@@ -36,4 +36,33 @@ public interface MerchantMapper {
      * @date        2018/11/26 14:51
      */
     List<String> listMerType();
+
+    /**
+    * 方法实现说明   通过登录名查找商家信息
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/11/29 11:22
+    */
+    Merchant findByMerchantName(String userName);
+
+
+    /**
+    * 方法实现说明   通过店铺名查找商家id
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/11/29 15:30
+    */
+    int merchantFindId(String shopName);
+
+    /**
+     * 方法实现说明   查找用户信息
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/11/29 22:03
+     */
+    Merchant findMerchantMessage(Integer id);
+
 }

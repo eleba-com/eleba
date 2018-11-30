@@ -11,6 +11,8 @@ public class Product {
 
     private Integer mid;
 
+    private Integer acount;
+
     public Integer getId() {
         return id;
     }
@@ -49,5 +51,12 @@ public class Product {
 
     public void setMid(Integer mid) {
         this.mid = mid;
+    }
+
+    public Integer getAcount() {
+        return acount;
+    }
+    public void setAcount(Integer acount) {
+        this.acount = acount;
     }
 }
