@@ -3,7 +3,7 @@
 <mapper namespace="com.dao.OrderMapper">
   <resultMap id="BaseResultMap" type="com.pojo.Order">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="oi_id" jdbcType="INTEGER" property="oiId" />
+    <result column="oi_id" jdbcType="String" property="oiId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
     <result column="uId" jdbcType="INTEGER" property="uid" />
     <result column="addr" jdbcType="VARCHAR" property="addr" />
