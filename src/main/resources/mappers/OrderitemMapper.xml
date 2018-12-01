@@ -79,4 +79,8 @@
       numbers = #{numbers,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+<select id="listAll" resultType="com.pojo.Orderitem">
+  SELECT * from orderitem where oid=#{oid}
+</select>
 </mapper>
