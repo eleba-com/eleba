@@ -1,7 +1,5 @@
 package com.controller;
 
-
-import com.alibaba.druid.sql.ast.statement.SQLIfStatement;
 import com.pojo.Address;
 import com.pojo.Customer;
 import com.service.CustmerService;
@@ -12,8 +10,6 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.crypto.hash.SimpleHash;
-
-
 import javax.servlet.http.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.nio.file.AccessDeniedException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -105,11 +100,12 @@ public class CustmerController {
         HttpSession session=  (HttpSession)request.getSession();
         try {
             subject.login(token);
-            session.setAttribute("username",customer.getUsername());
-            session.setAttribute("id",customer.getId());
+            Customer record=custmerService.findbyUserName(customer.getUsername());
+            session.setAttribute("username",record.getUsername());
+            session.setAttribute("id",record.getId());
             map.put("status","0");
             map.put("message","登录成功");
-            map.put("session",session);
+            map.put("record",record);
             //账号不存在
         }catch (UnknownAccountException e){
             map.put("status","1");

@@ -67,7 +67,7 @@ public interface MerchantService {
     public Product merchantFindProduct(Integer id);
 
     /**
-     * 方法实现说明   查找用户信息
+     * 方法实现说明   查找商家用户信息
      * @author：      jiehao
      * @return：
      * @exception：
@@ -75,4 +75,12 @@ public interface MerchantService {
      */
     public Merchant findMerchantMessage(Integer id);
 
+    /**
+    * 方法实现说明    新增商家用户
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/11/30 10:06
+    */
+   public int insertMerchant(Merchant merchant);
 }
