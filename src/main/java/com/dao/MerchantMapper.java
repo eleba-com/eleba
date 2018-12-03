@@ -66,6 +66,13 @@ public interface MerchantMapper {
      */
     Merchant findMerchantMessage(Integer id);
 
+    /**
+     * 方法实现说明   管理员封号(商家)
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/3 9:46
+     */
     int updateMerLock(@Param("mId")Integer mId,@Param("mLock")String mLock);
 
 }

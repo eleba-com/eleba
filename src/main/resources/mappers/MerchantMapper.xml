@@ -212,10 +212,10 @@
   </select>
 
   <!--jiehao 12-3 管理员封号-->
-  <update id="updateMerLock">
+  <update id="updateMerLock" >
     update merchant
-    set mLock=#{mLock}
-    where id=#{mId}
+    set mLock = #{mLock}
+    where id = #{mId}
   </update>
 
 

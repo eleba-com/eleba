@@ -136,11 +136,13 @@ public class ManagerController {
     * @exception：
     * @date：       2018/12/3 8:27
     */
-    public Map managerManageMer(Managemer managemer,String mLock){
+    @RequestMapping(value = "managerManageMer",method = RequestMethod.GET)
+    @ResponseBody
+    public Map managerManageMer(Managemer managemer,String mlock){
         Map<String,Object>map=new HashMap<>();
         int number =managerService.insertManagerMer(managemer);
         if (number>0){
-            int num=managerService.updateMerLock(managemer.getMid(),mLock);
+            int num=managerService.updateMerLock(managemer.getMid(),mlock);
             if (num>0){
                 map.put("status","0");
                 map.put("message","修改成功");

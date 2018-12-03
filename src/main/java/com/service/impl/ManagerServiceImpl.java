@@ -96,6 +96,13 @@ public class ManagerServiceImpl implements ManagerService {
         return managemerMapper.insertSelective(managemer);
     }
 
+    /**
+     * 方法实现说明   管理员封号(商家)
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/3 9:46
+     */
     @Override
     public int updateMerLock(Integer mId, String mLock) {
         return merchantMapper.updateMerLock(mId,mLock);
