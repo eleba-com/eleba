@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.pojo.Merchant;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -64,5 +65,7 @@ public interface MerchantMapper {
      * @date：       2018/11/29 22:03
      */
     Merchant findMerchantMessage(Integer id);
+
+    int updateMerLock(@Param("mId")Integer mId,@Param("mLock")String mLock);
 
 }

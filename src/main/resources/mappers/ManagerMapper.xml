@@ -79,4 +79,12 @@
       passwordSalt = #{passwordSalt,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- jiehao 11-30 通过名字找商家-->
+  <select id="findManagerByName" resultMap="BaseResultMap">
+    select *
+    from manager
+    where userName = #{userName}
+  </select>
+
 </mapper>

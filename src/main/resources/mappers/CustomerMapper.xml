@@ -155,4 +155,10 @@
     where id = #{id}
   </select>
 
+  <update id="updateCusLock" >
+     update customer
+    set cLock = #{clock}
+    where id = #{uId}
+  </update>
+
 </mapper>

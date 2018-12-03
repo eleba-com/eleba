@@ -2,8 +2,10 @@ package com.util;
 
 
 import com.pojo.Customer;
+import com.pojo.Manager;
 import com.pojo.Merchant;
 import com.service.CustmerService;
+import com.service.ManagerService;
 import com.service.MerchantService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -29,6 +31,8 @@ public class ShiroReam extends AuthorizingRealm {
 
    @Autowired
    private MerchantService merchantService;
+   @Autowired
+   private ManagerService managerService;
 
 
    /**
@@ -64,6 +68,7 @@ public class ShiroReam extends AuthorizingRealm {
         String username=token.getUsername();
         int role=token.getRole();
         System.out.println(role);
+        //用户登录
         if(role==0){
             Customer customer=custmerService.findbyUserName(username);
             if (customer == null) {
@@ -72,7 +77,9 @@ public class ShiroReam extends AuthorizingRealm {
             ByteSource salt = ByteSource.Util.bytes(customer.getPasswordsalt());
             //验证密码，需要在applicationContent.xml（shiro.xml）说明加密算法
             return new SimpleAuthenticationInfo(customer.getUsername(), customer.getPassword(), salt, getName());
-        }else if(role==1){
+        }
+        //商家登录
+        else if(role==1){
             System.out.println("==================");
             Merchant merchant =merchantService.findByMerchantName(username);
             if(merchant ==null){
@@ -81,8 +88,16 @@ public class ShiroReam extends AuthorizingRealm {
             ByteSource salt =ByteSource.Util.bytes(merchant.getPasswordSalt());
             //验证密码
             return new SimpleAuthenticationInfo(merchant.getUsername(),merchant.getPassword(),salt,getName());
-        }else if(role== 2){
+        }
+        //管理员登录
+        else if(role== 2){
             System.out.println("==================");
+            Manager manager=managerService.findManagerByName(username);
+            if(manager==null){
+                throw new UnknownAccountException();
+            }
+            ByteSource salt=ByteSource.Util.bytes(manager.getPasswordSalt());
+            return new SimpleAuthenticationInfo(manager.getUsername(),manager.getPassword(),salt,getName());
         }
        return new SimpleAuthenticationInfo();
     }

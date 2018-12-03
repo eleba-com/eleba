@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.apache.shiro.subject.Subject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -174,17 +175,21 @@ public class MerchantController {
         UsernamePasswordCaptchaToken token=new UsernamePasswordCaptchaToken(merchant.getUsername(),
                 merchant.getPassword(),role);
         Subject subject=SecurityUtils.getSubject();
-        Session session= (Session) request.getSession();
+        HttpSession session=request.getSession();
         try {
             subject.login(token);
-            session.setAttribute("userName",merchant.getUsername());
-            map.put("userName",session);
-            map.put("status",0);
+            Merchant record = merchantService.findByMerchantName(merchant.getUsername());
+            session.setAttribute("id",record.getId());
+            session.setAttribute("userName",record.getUsername());
+            map.put("status","0");
+            map.put("message","登录成功");
 
         }catch (UnknownAccountException e){
-            map.put("status",1);
+            map.put("status","1");
+            map.put("message","用户名不存在");
         }catch (IncorrectCredentialsException e){
-            map.put("status",2);
+            map.put("status","2");
+            map.put("message","密码错误");
         }
         return map;
     }
