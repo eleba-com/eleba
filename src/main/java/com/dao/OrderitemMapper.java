@@ -2,6 +2,8 @@ package com.dao;
 
 import com.pojo.Orderitem;
 
+import java.util.List;
+
 public interface OrderitemMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface OrderitemMapper {
     int updateByPrimaryKeySelective(Orderitem record);
 
     int updateByPrimaryKey(Orderitem record);
+
+    List<Orderitem> listAll(int oid);
 }
