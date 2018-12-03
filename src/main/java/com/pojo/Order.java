@@ -5,7 +5,7 @@ import java.util.Date;
 public class Order {
     private Integer id;
 
-    private Integer oiId;
+    private String oiId;
 
     private Date create_time;
 
@@ -23,11 +23,11 @@ public class Order {
         this.id = id;
     }
 
-    public Integer getOiId() {
+    public String getOiId() {
         return oiId;
     }
 
-    public void setOiId(Integer oiId) {
+    public void setOiId(String oiId) {
         this.oiId = oiId;
     }
 
