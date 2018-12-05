@@ -3,7 +3,7 @@
 <mapper namespace="com.dao.OrderMapper">
   <resultMap id="BaseResultMap" type="com.pojo.Order">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="oi_id" jdbcType="String" property="oiId" />
+    <result column="oi_id" jdbcType="VARCHAR" property="oiId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
     <result column="uId" jdbcType="INTEGER" property="uid" />
     <result column="addr" jdbcType="VARCHAR" property="addr" />
@@ -57,7 +57,7 @@
         #{id,jdbcType=INTEGER},
       </if>
       <if test="oiId != null">
-        #{oiId,jdbcType=INTEGER},
+        #{oiId,jdbcType=VARCHAR},
       </if>
       <if test="create_time != null">
         #{create_time,jdbcType=TIMESTAMP},
@@ -77,7 +77,7 @@
     update order
     <set>
       <if test="oiId != null">
-        oi_id = #{oiId,jdbcType=INTEGER},
+        oi_id = #{oiId,jdbcType=VARCHAR},
       </if>
       <if test="create_time != null">
         create_time = #{create_time,jdbcType=TIMESTAMP},
@@ -96,7 +96,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pojo.Order">
     update order
-    set oi_id = #{oiId,jdbcType=INTEGER},
+    set oi_id = #{oiId,jdbcType=VARCHAR},
       create_time = #{create_time,jdbcType=TIMESTAMP},
       uId = #{uid,jdbcType=INTEGER},
       addr = #{addr,jdbcType=VARCHAR},

@@ -16,7 +16,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
-* @Description:    java类作用描述
+* @Description:    shiro登录验证、权限分配
 * @Author:         jiehao
 * @CreateDate:     2018/11/22 16:11
 * @UpdateUser:     jiehao
