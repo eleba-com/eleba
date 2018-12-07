@@ -1,9 +1,12 @@
 package com.service.impl;
 
+import com.dao.OrderMapper;
 import com.pojo.Order;
 import com.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
 * @Description:    OrderServiceImpl
@@ -18,19 +21,23 @@ import org.springframework.stereotype.Service;
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
-    OrderService orderService;
+    OrderMapper orderMapper;
     /**
      * 添加一个订单
      * @author      jhao
      * @param
      * @return
      * @exception
+     * @UpdateRemark:   12-7
+     *                   1. 系统自动生成时间戳填入订单表中
      * @date        2018/11/30 15:45
      */
     @Override
     public boolean insert(Order order) {
+        //12-7 使用util下date与pojo整合
+        order.setCreate_time(new Date());
         try{
-            orderService.insert(order);
+            orderMapper.inserted(order);
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -49,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean deleteOrderById(Order order) {
         try{
-            orderService.deleteOrderById(order);
+            //orderMapper.deleteOrderById(order);
             return  true;
 
         }catch (Exception e){
