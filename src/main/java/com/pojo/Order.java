@@ -15,6 +15,16 @@ public class Order {
 
     private Long total_price;
 
+    private String stated;
+
+    public String getStated() {
+        return stated;
+    }
+
+    public void setStated(String stated) {
+        this.stated = stated;
+    }
+
     public Integer getId() {
         return id;
     }

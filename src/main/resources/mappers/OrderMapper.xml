@@ -9,6 +9,7 @@
     <result column="uId" jdbcType="INTEGER" property="uid" />
     <result column="addr" jdbcType="VARCHAR" property="addr" />
     <result column="total_price" jdbcType="DECIMAL" property="total_price" />
+    <result column="stated" jdbcType="VARCHAR" property="stated" />
   </resultMap>
   <!--<sql id="Base_Column_List">-->
     <!--id, oi_id, create_time, uId, addr, total_price-->
@@ -109,4 +110,8 @@
       #{uid,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, #{total_price,jdbcType=DECIMAL})
 
   </insert>
+
+  <select id="checkOrder" resultType="com.pojo.Order">
+    select * from orderr WHERE uid=#{uid}
+  </select>
 </mapper>

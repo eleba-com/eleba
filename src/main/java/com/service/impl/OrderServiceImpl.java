@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
 * @Description:    OrderServiceImpl
@@ -63,5 +64,18 @@ public class OrderServiceImpl implements OrderService {
             return false;
         }
 
+    }
+
+    /**
+     * 查看订单
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/7 10:53
+     */
+    @Override
+    public List<Order> checkOrder(int uid) {
+        return orderMapper.checkOrder(uid);
     }
 }
