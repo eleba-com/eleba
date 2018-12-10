@@ -3,6 +3,8 @@ package com.dao;
 import com.pojo.Customer;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface CustomerMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -42,4 +44,23 @@ public interface CustomerMapper {
     * @date：       2018/11/30 21:36
     */
     int updateCusLock(@Param("uId") Integer uId,@Param("clock") Integer clock);
+
+    /**
+    * 方法实现说明    查找顾客注册总人数
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/7 15:32
+    */
+    int findCustmerTotal();
+
+
+    /**
+    * 方法实现说明   分页查找顾客信息
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/7 16:06
+    */
+    List<Customer> managerFindCustmer(@Param("startPos") Integer startPos,@Param("pageSize") Integer pageSize);
 }

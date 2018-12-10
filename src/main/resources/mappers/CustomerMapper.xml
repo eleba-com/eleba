@@ -154,11 +154,20 @@
     from customer
     where id = #{id}
   </select>
-
+<!-- jiehao 11-30 顾客封号-->
   <update id="updateCusLock" >
      update customer
     set cLock = #{clock}
     where id = #{uId}
   </update>
 
+  <!-- jiehao 12-7 查找顾客数量-->
+  <select id="findCustmerTotal" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM customer
+  </select>
+
+  <!--jiehao 12-7 分页查找部分顾客信息-->
+  <select id="managerFindCustmer" resultType="com.pojo.Customer">
+    select * from customer limit #{startPos},#{pageSize};
+  </select>
 </mapper>

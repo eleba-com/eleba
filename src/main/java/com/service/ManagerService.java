@@ -1,8 +1,8 @@
 package com.service;
 
-import com.pojo.Managecus;
-import com.pojo.Managemer;
-import com.pojo.Manager;
+import com.pojo.*;
+
+import java.util.List;
 
 /**
 * @Description:    管理员service接口
@@ -72,4 +72,42 @@ public interface ManagerService {
     * @date：       2018/12/3 9:46
     */
     public int updateMerLock(Integer mId,String mLock);
+
+    /**
+    * 方法实现说明  查找顾客注册总人数
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/7 15:28
+    */
+    public int findCustmerTotal();
+
+
+    /**
+    * 方法实现说明   分页查找顾客信息
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/7 16:06
+    */
+    public List<Customer> managerFindCustmer(Integer startPos,Integer pageSize);
+
+
+    /**
+    * 方法实现说明  查找注册商家总数量
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/10 8:56
+    */
+    public int findMerchantTotal();
+
+    /**
+    * 方法实现说明  分页查找商家信息
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/10 8:56
+    */
+    public List<Merchant> managerFindMerchant(Integer startPos,Integer pageSize);
 }

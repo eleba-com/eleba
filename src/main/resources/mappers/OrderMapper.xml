@@ -26,7 +26,7 @@
     insert into order (id, oi_id, create_time, 
       uId, addr, total_price
       )
-    values (#{id,jdbcType=INTEGER}, #{oiId,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP},
+    values (#{id,jdbcType=INTEGER}, #{oiId,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP},
       #{uid,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, #{total_price,jdbcType=DECIMAL}
       )
   </insert>

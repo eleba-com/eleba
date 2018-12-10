@@ -1,12 +1,13 @@
 package com.service.impl;
 import com.dao.*;
-import com.pojo.Managecus;
-import com.pojo.Managemer;
-import com.pojo.Manager;
+import com.pojo.*;
 import com.service.ManagerService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sun.management.counter.perf.PerfInstrumentation;
+
+import java.util.List;
 
 
 /**
@@ -106,5 +107,53 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public int updateMerLock(Integer mId, String mLock) {
         return merchantMapper.updateMerLock(mId,mLock);
+    }
+
+    /**
+    * 方法实现说明  查找顾客注册总人数
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/7 15:31
+    */
+    @Override
+    public int findCustmerTotal() {
+        return customerMapper.findCustmerTotal();
+    }
+
+    /**
+    * 方法实现说明   分页查找部分顾客信息
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/7 15:55
+    */
+    @Override
+    public List<Customer> managerFindCustmer(Integer startPos,Integer pageSize) {
+        return customerMapper.managerFindCustmer(startPos,pageSize);
+    }
+
+    /**
+    * 方法实现说明   查找注册商家总人数
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/10 8:58
+    */
+    @Override
+    public int findMerchantTotal() {
+        return merchantMapper.findMerchantTotal();
+    }
+
+    /**
+    * 方法实现说明  分页查找商家信息
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/10 8:59
+    */
+    @Override
+    public List<Merchant> managerFindMerchant(Integer startPos, Integer pageSize) {
+        return merchantMapper.managerFindMerchant(startPos,pageSize);
     }
 }

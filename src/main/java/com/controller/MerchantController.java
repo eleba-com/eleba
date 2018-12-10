@@ -8,6 +8,7 @@ import com.util.RetryLimitHashedCredentialsMatcher;
 import com.util.Upload.UoloadImage;
 import com.util.UsernamePasswordCaptchaToken;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -186,10 +187,13 @@ public class MerchantController {
 
         }catch (UnknownAccountException e){
             map.put("status","1");
-            map.put("message","用户名不存在");
+            map.put("message","账号或密码错误");
         }catch (IncorrectCredentialsException e){
             map.put("status","2");
-            map.put("message","密码错误");
+            map.put("message","账号或密码错误");
+        }catch (DisabledAccountException e){
+            map.put("status","3");
+            map.put("message","管理员被封号");
         }
         return map;
     }
@@ -214,7 +218,7 @@ public class MerchantController {
      return map;
  }
 /**
-* 方法实现说明   查找用户信息
+* 方法实现说明   查找商家用户信息
 * @author：      jiehao
 * @return：
 * @exception：

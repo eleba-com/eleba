@@ -75,4 +75,25 @@ public interface MerchantMapper {
      */
     int updateMerLock(@Param("mId")Integer mId,@Param("mLock")String mLock);
 
+
+
+    /**
+    * 方法实现说明  查找商家总人数
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/10 9:00
+    */
+    public int findMerchantTotal();
+
+
+    /**
+    * 方法实现说明  分页查找商家信息
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/10 9:00
+    */
+    public List<Merchant> managerFindMerchant(@Param("startPos") Integer startPos, @Param("pageSize") Integer pageSize);
+
 }

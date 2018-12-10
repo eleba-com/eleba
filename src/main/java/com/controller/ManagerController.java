@@ -1,8 +1,6 @@
 package com.controller;
 
-import com.pojo.Managecus;
-import com.pojo.Managemer;
-import com.pojo.Manager;
+import com.pojo.*;
 import com.service.ManagerService;
 import com.util.PrimaryKeyUtil;
 import com.util.RetryLimitHashedCredentialsMatcher;
@@ -18,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -91,10 +91,10 @@ public class ManagerController {
             map.put("manager",record);
         }catch (UnknownAccountException e){
             map.put("status","1");
-            map.put("message","用户不存在");
+            map.put("message","用户或密码错误");
         }catch (IncorrectCredentialsException e){
             map.put("status","2");
-            map.put("message","密码错误");
+            map.put("message","账号或密码错误");
         }
         return map;
     }
@@ -156,7 +156,66 @@ public class ManagerController {
             map.put("nmessage","修改失败");
         }
         return map;
-
     }
+    /**
+    * 方法实现说明  分页查找顾客信息(需要优化，加查找功能)
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/7 16:04
+    */
+    @RequestMapping(value = "findAllUserMessage",method = RequestMethod.GET)
+    @ResponseBody
+    public Map findAllUserMessage(Page record){
+        Map<String,Object>map=new HashMap<>();
+        List<Customer>customers=new ArrayList<Customer>();
+        int total=managerService.findCustmerTotal();
+        Page page=null;
+        if( record.getPageNow()!=null){
+            page= new Page(total,record.getPageNow());
+            page.setPageSize(record.getPageSize());
+            customers=managerService.managerFindCustmer(page.getStartPos(),page.getPageSize());
+        }else {
+            page=new Page(total,1);
+            page.setPageSize(record.getPageSize());
+            customers=managerService.managerFindCustmer(page.getStartPos(),page.getPageSize());
+        }
+        map.put("customer",customers);
+        //map.put("page",page);
+        return map;
+    }
+
+    /**
+    * 方法实现说明  分页查找商家信息
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/10 8:55
+    */
+    @RequestMapping(value = "findAllMerchantMessage",method = RequestMethod.GET)
+    @ResponseBody
+    public Map findAllMerchantMessage(Page record){
+        Map<String,Object>map=new HashMap<>();
+        List<Merchant>merchants=new ArrayList<Merchant>();
+        int total=managerService.findMerchantTotal();
+        Page page=null;
+        if(record.getPageNow()!=null){
+            System.out.println(String.valueOf(record.getPageNow()));
+            page=new Page(total,record.getPageNow());
+            page.setPageSize(record.getPageSize());
+            merchants=managerService.managerFindMerchant(page.getStartPos(),page.getPageSize());
+
+        }else {
+            page=new Page(total,1);
+            page.setPageSize(record.getPageSize());
+            merchants=managerService.managerFindMerchant(page.getStartPos(),page.getPageSize());
+        }
+        map.put("merchant",merchants);
+        return map;
+    }
+
+
+
+
 
 }

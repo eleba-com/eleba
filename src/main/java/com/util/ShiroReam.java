@@ -1,6 +1,7 @@
 package com.util;
 
 
+import com.alibaba.druid.sql.ast.statement.SQLIfStatement;
 import com.pojo.Customer;
 import com.pojo.Manager;
 import com.pojo.Merchant;
@@ -74,6 +75,9 @@ public class ShiroReam extends AuthorizingRealm {
             if (customer == null) {
                 throw new UnknownAccountException();
             }
+            if(customer.getClock()==1){
+                throw new DisabledAccountException();
+            }
             ByteSource salt = ByteSource.Util.bytes(customer.getPasswordsalt());
             //验证密码，需要在applicationContent.xml（shiro.xml）说明加密算法
             return new SimpleAuthenticationInfo(customer.getUsername(), customer.getPassword(), salt, getName());
@@ -84,6 +88,8 @@ public class ShiroReam extends AuthorizingRealm {
             Merchant merchant =merchantService.findByMerchantName(username);
             if(merchant ==null){
                 throw new UnknownAccountException();
+            }if(Integer.parseInt(merchant.getmLock())==1){
+                throw new DisabledAccountException();
             }
             ByteSource salt =ByteSource.Util.bytes(merchant.getPasswordSalt());
             //验证密码

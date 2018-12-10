@@ -218,5 +218,12 @@
     where id = #{mId}
   </update>
 
-
+  <!--jiehao 12-10 查找商家总人数-->
+  <select id="findMerchantTotal" resultType="java.lang.Integer">
+    select COUNT(*) from merchant
+  </select>
+<!-- jiehao 112-10 分页查找商家信息-->
+<select id="managerFindMerchant" resultType="com.pojo.Merchant">
+  select * from merchant limit #{startPos},#{pageSize};
+</select>
 </mapper>

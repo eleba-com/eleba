@@ -7,6 +7,8 @@ import com.util.PrimaryKeyUtil;
 import com.util.RetryLimitHashedCredentialsMatcher;
 import com.util.UsernamePasswordCaptchaToken;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.DisabledAccountException;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -109,11 +111,14 @@ public class CustmerController {
             //账号不存在
         }catch (UnknownAccountException e){
             map.put("status","1");
-            map.put("message","账号不存在");
+            map.put("message","账号或密码错误");
             //密码错误
         }catch (IncorrectCredentialsException e){
             map.put("status","2");
-            map.put("message","密码错误");
+            map.put("message","账号或密码错误");
+        } catch (DisabledAccountException e){
+            map.put("status","3");
+            map.put("message","用户已被封号");
         }
         return map;
     }
