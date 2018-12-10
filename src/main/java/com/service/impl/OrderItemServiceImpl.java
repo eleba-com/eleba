@@ -127,4 +127,17 @@ public class OrderItemServiceImpl implements OrderItemService{
     public int updateStatus1(int uid) {
         return orderitemMapper.updateStatus1(uid);
     }
+
+    /**
+     * 查看订单详细信息
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 11:49
+     */
+    @Override
+    public Orderitem checkDetails(int id) {
+        return orderitemMapper.checkDetails(id);
+    }
 }

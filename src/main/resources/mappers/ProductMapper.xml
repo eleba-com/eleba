@@ -112,4 +112,10 @@
   <select id="listAllProduct" parameterType="java.lang.Integer" resultType="com.pojo.Product">
     select * FROM  product WHERE MID=#{mid}
   </select>
+
+  <!-- jhao 根据产品id找出这个商品的图片地址-->
+  <select id="getAddress" resultType="java.lang.String">
+    SELECT photo_addr FROM product
+    WHERE id=#{pid}
+  </select>
 </mapper>

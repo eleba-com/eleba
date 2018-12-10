@@ -92,4 +92,18 @@ public class ProductServiceImpl implements ProductService{
         System.out.println(productMapper.listAllProduct(product.getMid()).toString());
         return productMapper.listAllProduct(product.getMid());
     }
+
+
+    /**
+     * 通过商品的id获取该商品的图片url
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 15:21
+     */
+    @Override
+    public String getAddress(int pid) {
+        return productMapper.getAddress(Integer.valueOf(pid));
+    }
 }

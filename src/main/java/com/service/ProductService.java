@@ -56,4 +56,13 @@ public interface ProductService {
      */
     public List<Product> listAllProduct(Product product);
 
+    /**
+     * 通过商品的id获取该商品的图片url
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 15:19
+     */
+    public String getAddress(int pid);
 }

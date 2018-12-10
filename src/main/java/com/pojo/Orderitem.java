@@ -20,6 +20,17 @@ public class Orderitem {
 
     private Long price;
 
+    //仅在pojo中添加一个存储地址的变量
+    private String photo_addr;
+
+    public String getPhoto_addr() {
+        return photo_addr;
+    }
+
+    public void setPhoto_addr(String photo_addr) {
+        this.photo_addr = photo_addr;
+    }
+
     public String getStatus1() {
         return status1;
     }

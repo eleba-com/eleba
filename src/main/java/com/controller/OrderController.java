@@ -4,15 +4,13 @@ import com.pojo.Order;
 import com.pojo.Orderitem;
 import com.service.OrderItemService;
 import com.service.OrderService;
+import com.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
 * @Description:    订单控制类
@@ -32,6 +30,9 @@ public class OrderController {
 
     @Autowired
     OrderItemService orderItemService;
+
+    @Autowired
+    ProductService productService;
 
     /**
     * @Description:    下单
@@ -97,14 +98,30 @@ public class OrderController {
         Map<String,Object> map = new HashMap<>();
        List<Order> orderList = orderService.checkOrder(order.getUid());
         if (orderList!=null){
-            //debug
-//            Iterator<Order> iter = orderList.iterator();
-//            while(iter.hasNext()){
-//                System.out.println(iter.next().toString());
-//                System.out.println(iter.next().getOiId());
-//                System.out.println();
-//            }
-            map.put("order",orderList);
+            //在这里将所有的orderItem查出来一并返回给前端
+            //这边是可以整合到OrderItemService中的！
+            Iterator<Order> iter = orderList.iterator();
+
+            List<Map> orderitems = new ArrayList<>();
+            while(iter.hasNext()){
+                String s = iter.next().getOiId();
+                String[] strs = s.split(",");
+                Map<Integer,Object> mapOrderItem = new HashMap<>();
+                for(int i=0;i<strs.length;i++){
+                    //这里逐个做查询
+                    Orderitem orderitem = orderItemService.checkDetails(Integer.parseInt(strs[i]));
+
+                    //去数据库找图
+                    String addr = productService.getAddress(orderitem.getPid());
+                    System.out.println("addr = "+ addr);
+                    orderitem.setPhoto_addr(addr);
+                    mapOrderItem.put(i,orderitem);
+                }
+                orderitems.add(mapOrderItem);
+            }
+            System.out.println("到这里了啊");
+            map.put("orders",orderList);
+            map.put("orderItemList",orderitems);
         }else {
             map.put("message","error");
         }

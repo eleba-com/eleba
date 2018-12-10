@@ -78,4 +78,17 @@ public interface OrderItemService {
      * @date        2018/12/10 9:27
      */
     public int updateStatus1(int uid);
+
+    /**
+     * 查看订单详细信息
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 11:49
+     */
+    public Orderitem checkDetails(int id);
+
+
+
 }

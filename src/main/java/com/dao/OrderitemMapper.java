@@ -49,4 +49,14 @@ public interface OrderitemMapper {
      * @date        2018/12/10 9:29
      */
     int updateStatus1(int uid);
+
+    /**
+     * 查看订单详细信息
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 11:49
+     */
+    Orderitem checkDetails(int id);
 }

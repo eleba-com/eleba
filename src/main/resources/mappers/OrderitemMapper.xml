@@ -102,4 +102,10 @@
     SET status1 = "1"
     WHERE uid=#{uid} and status1="0";
   </update>
+  
+  <!-- jhao 查看订单详情，根据id逐个寻找orderItem的所有信息 -->
+  <select id="checkDetails" resultMap="BaseResultMap">
+    select * from orderItem
+    WHERE id=#{id}
+  </select>
 </mapper>

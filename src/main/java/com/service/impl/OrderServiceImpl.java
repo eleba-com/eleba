@@ -123,11 +123,12 @@ public class OrderServiceImpl implements OrderService {
         List<Order> lists = null;
         lists = orderMapper.checkOrder(uid);
         if (lists!=null){
-            Iterator<Order> iter = lists.iterator();
-            while(iter.hasNext()){
-                System.out.println(iter.next());
-                System.out.println();
-            }
+            //debug
+//            Iterator<Order> iter = lists.iterator();
+//            while(iter.hasNext()){
+//                System.out.println(iter.next());
+//                System.out.println();
+//            }
         }
         return lists;
     }
