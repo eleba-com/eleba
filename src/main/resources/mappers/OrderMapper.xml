@@ -104,6 +104,7 @@
     <!--where id = #{id,jdbcType=INTEGER}-->
   <!--</update>-->
 
+  <!-- jhao 添加订单-->
   <insert id="inserted" parameterType="com.pojo.Order">
     INSERT INTO orderr(oi_id, create_time, uId, addr, total_price)
     VALUES ( #{oiId,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP},
@@ -111,7 +112,9 @@
 
   </insert>
 
-  <select id="checkOrder" resultType="com.pojo.Order">
-    select * from orderr WHERE uid=#{uid}
+  <!-- jhao 查看最新的三条已完成的订单-->
+  <select id="checkOrder" resultMap="BaseResultMap">
+    select * from orderr WHERE uid=#{uid} and stated="5"
+    ORDER BY create_time DESC LIMIT 3
   </select>
 </mapper>

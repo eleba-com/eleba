@@ -43,7 +43,7 @@ public class OrderItemController {
     public Map addOrderItem(Orderitem orderitem){
 
         Map<String,Object> map = new HashMap<>();
-        if(orderItemService.insert(orderitem)){
+        if(orderItemService.addOrderItem(orderitem)==1){
             map.put("message","成功添加到购物车内！");
 
         }else{
@@ -74,6 +74,14 @@ public class OrderItemController {
 
     }
 
+    /**
+     * 取消订单，待测试
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 8:42
+     */
     @ResponseBody
     @RequestMapping("cancelOrderItem")
     public Map cancelOrderItem(Orderitem orderitem){
@@ -86,4 +94,6 @@ public class OrderItemController {
 
         return map;
     }
+
+
 }

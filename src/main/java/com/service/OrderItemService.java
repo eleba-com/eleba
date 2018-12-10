@@ -16,15 +16,7 @@ import java.util.List;
 */
 public interface OrderItemService {
 
-    /**
-     * 添加一个订单项
-     * @author      jhao
-     * @param
-     * @return
-     * @exception
-     * @date        2018/11/30 11:30
-     */
-    public boolean insert(Orderitem orderitem);
+
 
     /**
      * 减少一个订单项
@@ -55,4 +47,48 @@ public interface OrderItemService {
      * @date        2018/11/30 15:37
      */
     public List<Orderitem> listAll(Order order);
+
+    /**
+     * 添加一条订单项
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/7 15:37
+     */
+    public int addOrderItem(Orderitem orderitem);
+
+
+    /**
+     * 根据用户id获取订单项id
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 8:40
+     */
+    public List<Orderitem> getOrderItemId(int uid);
+
+    /**
+     * 更改订单项的status状态，o->1
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 9:27
+     */
+    public int updateStatus1(int uid);
+
+    /**
+     * 查看订单详细信息
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 11:49
+     */
+    public Orderitem checkDetails(int id);
+
+
+
 }

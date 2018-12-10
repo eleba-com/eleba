@@ -90,11 +90,12 @@ public class MerchantController {
 
     /**
     * 通过食物类型查找商家用户名和销量
-    * @author：      jiehao
+    * @author：      jiehao、jhao
     * @param
     * @return：
     * @exception：
     * @date：       2018/11/27 10:26
+     * @Update    V2 添加生成评价的方法
     */
     @RequestMapping(value = "listMerchantByType",method = RequestMethod.GET)
     @ResponseBody
@@ -102,10 +103,19 @@ public class MerchantController {
         Map<String,Object> map = new HashMap<>();
         List<Merchant> merchants = merchantService.listMerchantByType(mType);
         if(merchants!=null){
+            //v2
+            Iterator<Merchant> iter = merchants.iterator();
+            while(iter.hasNext()){
+                double rate = Math.random()+4.0;
+                rate=Math.floor(rate*10)/10;
+                iter.next().setRate(rate);
+            }
             map.put("merchants",merchants);
         }else {
             System.out.println("无此类型商家");
         }
+        //key是rate value是自动生成的评分加入到map中4.0-5.0
+
         return map;
     }
 

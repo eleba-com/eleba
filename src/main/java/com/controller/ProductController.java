@@ -118,4 +118,29 @@ public class ProductController {
 
         return map;
     }
+
+
+    /**
+     * 根据产品id获取产品图片地址url串
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 16:05
+     */
+    @RequestMapping("getAddress")
+    @ResponseBody
+    public Map getAddress(Product product){
+        Map<String,Object> map = new HashMap<>();
+        String res = productService.getAddress(product.getId());
+        if(res!=null){
+            map.put("message",res);
+
+        }else {
+            map.put("message","修改失败");
+        }
+
+        return map;
+    }
+
 }

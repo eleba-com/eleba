@@ -47,4 +47,14 @@ public interface ProductMapper {
      * @date        2018/11/29 9:26
      */
     List<Product> listAllProduct(Integer mid);
+
+    /**
+     * 根据产品id找出这个商品的图片地址
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 15:36
+     */
+    String getAddress(Integer pid);
 }
