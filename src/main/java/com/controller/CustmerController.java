@@ -178,7 +178,7 @@ public class CustmerController {
  public Map findCustmerAddr(Address address){
      Map<String,Object> map=new HashMap<>();
      Address addr=custmerService.findCustmerAddr(address.getuId());
-     map.put("adsress",addr);
+     map.put("address",addr);
      return map;
  }
 
@@ -232,7 +232,7 @@ public class CustmerController {
  }
 
  /**
- * 方法实现说明  查找用户信息
+ * 方法实现说明  查找用户信息（可以带条件查询）
  * @author：      jiehao
  * @return：
  * @exception：

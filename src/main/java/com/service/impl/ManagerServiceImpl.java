@@ -156,4 +156,16 @@ public class ManagerServiceImpl implements ManagerService {
     public List<Merchant> managerFindMerchant(Integer startPos, Integer pageSize) {
         return merchantMapper.managerFindMerchant(startPos,pageSize);
     }
+
+    /**
+    * 方法实现说明   查看所有用户信息（可以带条件查询）
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/10 17:06
+    */
+    @Override
+    public List<Customer> managerFindAllCustmer(Customer customer) {
+        return customerMapper.managerFindAllCustmer(customer);
+    }
 }

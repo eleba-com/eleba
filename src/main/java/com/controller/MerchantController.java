@@ -103,8 +103,6 @@ public class MerchantController {
         List<Merchant> merchants = merchantService.listMerchantByType(mType);
         if(merchants!=null){
             map.put("merchants",merchants);
-
-            System.out.println("能获取merchant "+ merchants.toString());
         }else {
             System.out.println("无此类型商家");
         }
@@ -132,7 +130,7 @@ public class MerchantController {
                 //如果文件夹不存在
                 if(!file.exists()){
                     //创建文件夹
-                    file.mkdir();
+                    file.mkdirs();
                 }
                 uploadImage=new UoloadImage();
                 String  filename= null;

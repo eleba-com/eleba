@@ -112,6 +112,13 @@ public class ManagerController {
     public Map managerManageCus(Managecus managecus,Integer clock ){
         Map<String,Object>map=new HashMap<>();
         System.out.println(clock);
+        if(clock==0){
+            managecus.setOperate_type("封号");
+            clock=1;
+        }else {
+            managecus.setOperate_type("解封");
+            clock=0;
+        }
         int number=managerService.insertMangerCus(managecus);
         if (number>0){
             int num=managerService.updateCusLock(managecus.getUid(),clock);
@@ -140,6 +147,13 @@ public class ManagerController {
     @ResponseBody
     public Map managerManageMer(Managemer managemer,String mlock){
         Map<String,Object>map=new HashMap<>();
+        if(Integer.parseInt(mlock)==0){
+           managemer.setOperate_type("封号");
+           mlock=String.valueOf(1);
+        }else {
+           managemer.setOperate_type("解封");
+           mlock=String.valueOf(0);
+        }
         int number =managerService.insertManagerMer(managemer);
         if (number>0){
             int num=managerService.updateMerLock(managemer.getMid(),mlock);
@@ -213,6 +227,24 @@ public class ManagerController {
         map.put("merchant",merchants);
         return map;
     }
+
+/**
+* 方法实现说明  查看所有用户信息（可以带条件查询）
+* @author：      jiehao
+* @return：
+* @exception：
+* @date：       2018/12/10 17:05
+*/
+    @RequestMapping(value = "managerFindAllCustmer",method = RequestMethod.GET)
+    @ResponseBody
+    public Map managerFindAllCustmer(Customer customer){
+        Map<String,Object>map=new HashMap<>();
+        List<Customer>customers=new ArrayList<>();
+        customers=managerService.managerFindAllCustmer(customer);
+        map.put("customer",customers);
+        return map;
+    }
+
 
 
 

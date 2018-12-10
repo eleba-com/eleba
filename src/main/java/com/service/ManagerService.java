@@ -110,4 +110,13 @@ public interface ManagerService {
     * @date：       2018/12/10 8:56
     */
     public List<Merchant> managerFindMerchant(Integer startPos,Integer pageSize);
+
+    /**
+    * 方法实现说明  查看所有用户信息（可以带条件查询）
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/10 17:06
+    */
+    public List<Customer> managerFindAllCustmer( Customer customer);
 }

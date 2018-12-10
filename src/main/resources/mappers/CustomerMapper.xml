@@ -170,4 +170,23 @@
   <select id="managerFindCustmer" resultType="com.pojo.Customer">
     select * from customer limit #{startPos},#{pageSize};
   </select>
+<!-- jiehao 12-10 查找所有用户信息-->
+  <select id="managerFindAllCustmer" resultType="com.pojo.Customer">
+    select id,userName,tell,vip,cLock
+    from customer
+    <where> 1=1
+    <if test="id!=null">
+      and id=#{id}
+    </if>
+    <if test="username!=null">
+     and userName=#{username}
+    </if>
+    <if test="vip!=null">
+     and vip=#{vip}
+    </if>
+    <if test="tell!=null">
+      and tell=#{tell}
+    </if>
+    </where>
+  </select>
 </mapper>
