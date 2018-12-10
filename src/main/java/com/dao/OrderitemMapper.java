@@ -18,4 +18,35 @@ public interface OrderitemMapper {
     int updateByPrimaryKey(Orderitem record);
 
     List<Orderitem> listAll(int oid);
+
+    /**
+     * 添加一个订单项
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 8:37
+     */
+    int addOrderItem(Orderitem orderitem);
+
+    /**
+     * 根据订单状态和订单的用户id获取订单项id
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 8:39
+     */
+    List<Orderitem> getOrderItemId(int uid);
+
+
+    /**
+     * 更改订单项的status状态，o->1
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 9:29
+     */
+    int updateStatus1(int uid);
 }

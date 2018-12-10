@@ -2,6 +2,7 @@ package com.controller;
 
 import com.pojo.Order;
 import com.pojo.Orderitem;
+import com.service.OrderItemService;
 import com.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,20 +29,25 @@ public class OrderController {
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    OrderItemService orderItemService;
+
     /**
     * @Description:    下单
     * @Author:         jhao
     * @CreateDate:     2018/11/30 16:54
     * @UpdateUser:     jhao
-    * @UpdateDate:     12-7
-    * @UpdateRemark:   更改下单逻辑，优化下单过程
-    * @Version:        1.0
+    * @UpdateDate:     12-10
+    * @UpdateRemark:   更改下单逻辑，包含了订单项的改变
+    * @Version:        2.0
     */
     //old paramOrderitem[] orderitems,double total_price,int uid,String addr
     @ResponseBody
     @RequestMapping("insertOrder")
     public Map insertOrder(Order order){
         Map<String,Object> map = new HashMap<>();
+
         if(orderService.insert(order)){
             map.put("message","successful");
         }else {
@@ -51,7 +58,8 @@ public class OrderController {
     }
 
     /**
-     * 取消订单
+     * 取消订单 逻辑待改
+     * 这里取消了的订单在订单项的状态里算是已经结算了的，需要加一个操作去修改这个订单项的状态
      * @author      jhao
      * @param
      * @return
@@ -75,10 +83,12 @@ public class OrderController {
     /**
      * 查看订单
      * @author      jhao
-     * @param
+     * @param   order
      * @return
      * @exception
      * @date        2018/12/7 10:46
+     * @Update  V2 查看的是最新三条已经完成的订单
+     *
      */
     @ResponseBody
     @RequestMapping("checkOrder")
@@ -87,6 +97,13 @@ public class OrderController {
         Map<String,Object> map = new HashMap<>();
        List<Order> orderList = orderService.checkOrder(order.getUid());
         if (orderList!=null){
+            //debug
+//            Iterator<Order> iter = orderList.iterator();
+//            while(iter.hasNext()){
+//                System.out.println(iter.next().toString());
+//                System.out.println(iter.next().getOiId());
+//                System.out.println();
+//            }
             map.put("order",orderList);
         }else {
             map.put("message","error");

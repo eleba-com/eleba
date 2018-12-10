@@ -6,6 +6,9 @@
     <result column="pId" jdbcType="INTEGER" property="pid" />
     <result column="oId" jdbcType="INTEGER" property="oid" />
     <result column="numbers" jdbcType="INTEGER" property="numbers" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="status1" jdbcType="VARCHAR" property="status1" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
   </resultMap>
   <sql id="Base_Column_List">
     id, pId, oId, numbers
@@ -80,4 +83,23 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+
+  <!-- jhao 添加一个订单项 -->
+  <insert id="addOrderItem">
+    INSERT INTO orderItem(pId, numbers, price, uid)
+    VALUES (#{pid,jdbcType=INTEGER}, #{numbers,jdbcType=INTEGER},
+      #{price,jdbcType=DECIMAL}, #{uid,jdbcType=INTEGER})
+  </insert>
+  
+  <!-- jhao 获取新增订单项的id -->
+  <select id="getOrderItemId" resultType="com.pojo.Orderitem">
+    select id from orderItem WHERE uid=#{uid} and status1="0";
+  </select>
+
+  <!-- jhao更改订单项状态 这个还可以优化！！-->
+  <update id="updateStatus1">
+    UPDATE orderItem
+    SET status1 = "1"
+    WHERE uid=#{uid} and status1="0";
+  </update>
 </mapper>

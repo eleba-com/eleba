@@ -24,25 +24,7 @@ public class OrderItemServiceImpl implements OrderItemService{
 
     @Autowired
     OrderitemMapper orderitemMapper;
-    /**
-     * 添加一个订单项
-     * @author      jhao
-     * @param
-     * @return
-     * @exception
-     * @date        2018/11/30 11:33
-     */
-    @Override
-    public boolean insert(Orderitem orderitem) {
-        try{
-            orderitemMapper.insertSelective(orderitem);
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
 
-    }
 
 
     /**
@@ -103,5 +85,46 @@ public class OrderItemServiceImpl implements OrderItemService{
     @Override
     public List<Orderitem> listAll(Order order) {
         return orderitemMapper.listAll(order.getId());
+    }
+
+    /**
+     * 添加一条订单项
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/7 15:48
+     */
+    @Override
+    public int addOrderItem(Orderitem orderitem) {
+
+
+        return orderitemMapper.addOrderItem(orderitem);
+    }
+
+    /**
+     * 根据用户id获取订单项id
+     * @author      jhao
+     * @param       uid
+     * @return
+     * @exception
+     * @date        2018/12/10 8:41
+     */
+    @Override
+    public List<Orderitem> getOrderItemId(int uid) {
+        return orderitemMapper.getOrderItemId(uid);
+    }
+
+    /**
+     * 更改订单项的status状态，o->1
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/10 9:30
+     */
+    @Override
+    public int updateStatus1(int uid) {
+        return orderitemMapper.updateStatus1(uid);
     }
 }
