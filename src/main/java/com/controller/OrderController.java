@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,8 +32,8 @@ public class OrderController {
     * @Author:         jhao
     * @CreateDate:     2018/11/30 16:54
     * @UpdateUser:     jhao
-    * @UpdateDate:     2018/11/30 16:54
-    * @UpdateRemark:   修改内容
+    * @UpdateDate:     12-7
+    * @UpdateRemark:   更改下单逻辑，优化下单过程
     * @Version:        1.0
     */
     //old paramOrderitem[] orderitems,double total_price,int uid,String addr
@@ -45,14 +46,6 @@ public class OrderController {
         }else {
             map.put("message","error");
         }
-        /*
-        StringBuffer sb = new StringBuffer();
-        for(Orderitem orderitem:orderitems){
-            sb.append(orderitem.getId());
-            sb.append("|");
-        }
-
-        */
 
         return map;
     }
@@ -72,6 +65,29 @@ public class OrderController {
         Map<String,Object> map = new HashMap<>();
         if(orderService.deleteOrderById(order)){
             map.put("message","sucessful");
+        }else {
+            map.put("message","error");
+        }
+
+        return map;
+    }
+
+    /**
+     * 查看订单
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/7 10:46
+     */
+    @ResponseBody
+    @RequestMapping("checkOrder")
+    public Map checkOrder(Order order){
+
+        Map<String,Object> map = new HashMap<>();
+       List<Order> orderList = orderService.checkOrder(order.getUid());
+        if (orderList!=null){
+            map.put("order",orderList);
         }else {
             map.put("message","error");
         }

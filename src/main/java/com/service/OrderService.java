@@ -1,6 +1,9 @@
 package com.service;
 
 import com.pojo.Order;
+import org.aspectj.weaver.ast.Or;
+
+import java.util.List;
 
 /**
 * @Description:    OrderService
@@ -33,6 +36,14 @@ public interface OrderService {
      */
     public boolean deleteOrderById(Order order);
 
-
+    /**
+     *  查看订单
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/7 10:52
+     */
+    public List<Order> checkOrder(int uid);
 
 }
