@@ -222,8 +222,39 @@
   <select id="findMerchantTotal" resultType="java.lang.Integer">
     select COUNT(*) from merchant
   </select>
-<!-- jiehao 112-10 分页查找商家信息-->
+<!-- jiehao 12-10 分页查找商家信息-->
 <select id="managerFindMerchant" resultType="com.pojo.Merchant">
   select * from merchant limit #{startPos},#{pageSize};
 </select>
+<!--jiehao 12-10 查看所有商家信息-->
+  <select id="managerFindAllMerchant" resultType="com.pojo.Merchant">
+    select id,userName,tell,mType,mLock,state,shopName
+    from merchant
+    <where>
+      1=1
+      <if test="id!=null">
+       and id=#{id}
+      </if>
+      <if test="username">
+       and userName=#{username}
+      </if>
+      <if test="tell!=null">
+        and tell=#{tell}
+      </if>
+      <if test="mType!=null">
+        and mType=#{mType}
+      </if>
+      <if test="mLock">
+        and mLock=#{mLock}
+      </if>
+      <if test="state!=null">
+        and state=#{state}
+      </if>
+      <if test="shopName!=null">
+        and shopName=#{shopName}
+      </if>
+    </where>
+
+  </select>
+
 </mapper>

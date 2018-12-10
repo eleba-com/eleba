@@ -168,4 +168,15 @@ public class ManagerServiceImpl implements ManagerService {
     public List<Customer> managerFindAllCustmer(Customer customer) {
         return customerMapper.managerFindAllCustmer(customer);
     }
+    /**
+     * 方法实现说明  查看所有商家信息（可以带条件查询）
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/10 17:21
+     */
+    @Override
+    public List<Merchant> managerFindAllMerchant(Merchant merchant) {
+        return merchantMapper.managerFindAllMerchant(merchant);
+    }
 }

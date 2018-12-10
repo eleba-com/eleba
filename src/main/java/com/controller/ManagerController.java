@@ -245,6 +245,23 @@ public class ManagerController {
         return map;
     }
 
+    /**
+    * 方法实现说明  查看所有商家信息（可以带条件查询）
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/10 17:21
+    */
+    @RequestMapping(value = "managerFindAllMerchant",method = RequestMethod.GET)
+    @ResponseBody
+    public Map  managerFindAllMerchant(Merchant merchant){
+        Map<String,Object>map=new HashMap<>();
+        List<Merchant>merchants=new ArrayList<>();
+        merchants=managerService.managerFindAllMerchant(merchant);
+        map.put("merchant",merchants);
+        return map;
+    }
+
 
 
 

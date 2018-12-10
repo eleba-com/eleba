@@ -96,4 +96,13 @@ public interface MerchantMapper {
     */
     public List<Merchant> managerFindMerchant(@Param("startPos") Integer startPos, @Param("pageSize") Integer pageSize);
 
+    /**
+     * 方法实现说明  查看所有商家信息（可以带条件查询）
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/10 17:21
+     */
+    List<Merchant> managerFindAllMerchant(Merchant merchant);
+
 }

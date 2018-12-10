@@ -119,4 +119,13 @@ public interface ManagerService {
     * @date：       2018/12/10 17:06
     */
     public List<Customer> managerFindAllCustmer( Customer customer);
+
+    /**
+     * 方法实现说明  查看所有商家信息（可以带条件查询）
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/10 17:21
+     */
+    public List<Merchant> managerFindAllMerchant(Merchant merchant);
 }
