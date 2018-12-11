@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="com.pojo.Managemer">
     <result column="aId" jdbcType="INTEGER" property="aid" />
     <result column="mId" jdbcType="INTEGER" property="mid" />
-    <result column="operate_time" jdbcType="TIMESTAMP" property="operate_time" />
+    <result column="operate_time" jdbcType="VARCHAR" property="operate_time" />
     <result column="operate_type" jdbcType="VARCHAR" property="operate_type" />
   </resultMap>
   <insert id="insert" parameterType="com.pojo.Managemer">
     insert into manageMer (aId, mId, operate_time, 
       operate_type)
-    values (#{aid,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{operate_time,jdbcType=TIMESTAMP},
+    values (#{aid,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{operate_time,jdbcType=VARCHAR},
       #{operate_type,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.Managemer">
@@ -37,7 +37,7 @@
         #{mid,jdbcType=INTEGER},
       </if>
       <if test="operate_time != null">
-        #{operate_time,jdbcType=TIMESTAMP},
+        #{operate_time,jdbcType=VARCHAR},
       </if>
       <if test="operate_type != null">
         #{operate_type,jdbcType=VARCHAR},

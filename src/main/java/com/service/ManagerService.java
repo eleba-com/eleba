@@ -128,4 +128,25 @@ public interface ManagerService {
      * @date：       2018/12/10 17:21
      */
     public List<Merchant> managerFindAllMerchant(Merchant merchant);
+
+
+    /**
+     * 方法实现说明    查找未审核注册商家
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/11 14:52
+     */
+    public List<Merchant> findUnreviewedMessage(Merchant merchant);
+
+    /**
+    * 方法实现说明  插入审核商家信息
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/11 16:53
+    */
+    public int insertReviewMerchantMessage(Managemer managemer);
+
+    public int updateReviewMerchantMessage(Integer mId,String state);
 }

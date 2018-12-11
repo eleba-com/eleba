@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
 * @Description:    管理员控制类
@@ -119,6 +118,10 @@ public class ManagerController {
             managecus.setOperate_type("解封");
             clock=0;
         }
+        //设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // new Date()为获取当前系统时间
+        managecus.setOperate_time(df.format(new Date()));
         int number=managerService.insertMangerCus(managecus);
         if (number>0){
             int num=managerService.updateCusLock(managecus.getUid(),clock);
@@ -154,6 +157,10 @@ public class ManagerController {
            managemer.setOperate_type("解封");
            mlock=String.valueOf(0);
         }
+        //设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // new Date()为获取当前系统时间
+        managemer.setOperate_time(df.format(new Date()));
         int number =managerService.insertManagerMer(managemer);
         if (number>0){
             int num=managerService.updateMerLock(managemer.getMid(),mlock);
@@ -261,6 +268,58 @@ public class ManagerController {
         map.put("merchant",merchants);
         return map;
     }
+
+    /**
+    * 方法实现说明    查找未审核注册商家
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/11 14:52
+    */
+    @RequestMapping(value = "findUnreviewedMessage",method = RequestMethod.GET)
+    @ResponseBody
+    public Map findUnreviewedMessage(Merchant merchant){
+        Map<String,Object>map=new HashMap<>();
+        List<Merchant>merchants=new ArrayList<>();
+        merchants=managerService.findUnreviewedMessage(merchant);
+        map.put("merchant",merchants);
+        return map;
+    }
+
+    /**
+    * 方法实现说明  管理员审核商家
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/11 16:08
+    */
+    @RequestMapping(value = "managerReviewMerchant",method = RequestMethod.GET)
+    @ResponseBody
+    public Map managerReviewMerchant(Managemer managemer){
+        Map<String,Object>map=new HashMap<>();
+        String state=String.valueOf(1);
+        managemer.setOperate_type("审核商家");
+        //设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // new Date()为获取当前系统时间
+        managemer.setOperate_time(df.format(new Date()));
+        int num=managerService.insertReviewMerchantMessage(managemer);
+        if (num>0){
+            int number=managerService.updateReviewMerchantMessage(managemer.getMid(),state);
+            if (number>0){
+                map.put("status","0");
+                map.put("message","审核商家成功");
+            }else {
+                map.put("status","1");
+                map.put("message","审核商家失败");
+            }
+        }else {
+            map.put("status","1");
+            map.put("message","审核商家失败");
+        }
+        return map;
+    }
+
 
 
 
