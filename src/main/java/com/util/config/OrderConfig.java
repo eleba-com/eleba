@@ -14,7 +14,7 @@ public interface OrderConfig {
     /**
      * 下单且未接单
      */
-    public static String madeOrder = "0";
+    public static String MADE_ORDER = "0";
 
     /**
      * 已读

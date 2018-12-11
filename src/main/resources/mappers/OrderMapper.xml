@@ -10,6 +10,7 @@
     <result column="addr" jdbcType="VARCHAR" property="addr" />
     <result column="total_price" jdbcType="DECIMAL" property="total_price" />
     <result column="stated" jdbcType="VARCHAR" property="stated" />
+    <result column="mid" jdbcType="INTEGER" property="mid" />
   </resultMap>
   <!--<sql id="Base_Column_List">-->
     <!--id, oi_id, create_time, uId, addr, total_price-->
@@ -123,4 +124,9 @@
     update orderr set stated="2" where id=#{id}
   </update>
 
+  <!-- jhao商家获取某些状态的订单-->
+  <select id="getOrders" resultMap="BaseResultMap">
+    SELECT * FROM orderr
+    WHERE mid=#{mid} and stated=#{stated}
+  </select>
 </mapper>

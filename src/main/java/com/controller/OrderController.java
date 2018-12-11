@@ -1,10 +1,12 @@
 package com.controller;
 
+import com.pojo.Merchant;
 import com.pojo.Order;
 import com.pojo.Orderitem;
 import com.service.OrderItemService;
 import com.service.OrderService;
 import com.service.ProductService;
+import com.util.config.OrderConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,7 @@ import java.util.*;
 */
 @Controller
 @RequestMapping("")
-public class OrderController {
+public class OrderController implements OrderConfig{
 
     @Autowired
     OrderService orderService;
@@ -138,7 +140,6 @@ public class OrderController {
      * @exception
      * @date        2018/12/11 10:10
      */
-
     @ResponseBody
     @RequestMapping("receiveOrdered")
     public Map receiveOrdered(String id){
@@ -148,6 +149,21 @@ public class OrderController {
             map.put("message","已接单");
         }else {
             map.put("message","接单失败");
+        }
+
+        return map;
+    }
+
+
+    @RequestMapping("getOrders")
+    @ResponseBody
+    public Map getOrders(Merchant merchant){
+        Map<String,Object> map = new HashMap<>();
+        List<Order> lists = orderService.getOrders(merchant.getId(),MADE_ORDER);
+        if(lists!=null){
+            map.put("message",lists);
+        }else {
+            map.put("message","无法获取订单");
         }
 
         return map;

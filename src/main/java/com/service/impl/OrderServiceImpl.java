@@ -154,4 +154,17 @@ public class OrderServiceImpl implements OrderService {
         }
 
     }
+
+    /**
+     * 商家获取某些条件的订单
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/11 11:39
+     */
+    @Override
+    public List<Order> getOrders(Integer mid, String stated) {
+        return orderMapper.getOrders(Integer.valueOf(mid),stated);
+    }
 }

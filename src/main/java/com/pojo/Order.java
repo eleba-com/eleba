@@ -17,6 +17,17 @@ public class Order {
 
     private String stated;
 
+    //12-11添加mid属性
+    private Integer mid;
+
+    public Integer getMid() {
+        return mid;
+    }
+
+    public void setMid(Integer mid) {
+        this.mid = mid;
+    }
+
     public String getStated() {
         return stated;
     }

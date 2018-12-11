@@ -56,4 +56,14 @@ public interface OrderService {
      */
     public boolean receiveOrder(int id);
 
+
+    /**
+     * 商家获取某些条件的订单
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/11 11:39
+     */
+    public List<Order> getOrders(Integer mid,String stated);
 }

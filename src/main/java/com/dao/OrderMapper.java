@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.pojo.Order;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -46,4 +47,14 @@ public interface OrderMapper {
      * @date        2018/12/11 10:17
      */
     int receiveOrder(Integer id);
+
+    /**
+     * 商家获取某些条件的订单
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/11 11:39
+     */
+    List<Order> getOrders(@Param("mid") Integer mid, @Param("stated") String stated);
 }
