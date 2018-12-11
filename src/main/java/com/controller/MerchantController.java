@@ -246,6 +246,22 @@ public class MerchantController {
      return map;
  }
 
+     /**
+      * 商家接单
+      * @author      jhao
+      * @param
+      * @return
+      * @exception
+      * @date        2018/12/11 10:10
+      */
+     @ResponseBody
+     @RequestMapping("receiveOrder")
+     public Map receiveOrder(Merchant merchant){
 
+         Map<String,Object> map = new HashMap<>();
+
+
+         return map;
+     }
 
 }
