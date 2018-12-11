@@ -45,7 +45,7 @@ public class OrderController implements OrderConfig{
     * @UpdateRemark:   更改下单逻辑，包含了订单项的改变
     * @Version:        2.0
     */
-    //old paramOrderitem[] orderitems,double total_price,int uid,String addr
+
     @ResponseBody
     @RequestMapping("insertOrder")
     public Map insertOrder(Order order){

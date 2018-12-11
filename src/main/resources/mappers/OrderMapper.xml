@@ -107,9 +107,9 @@
 
   <!-- jhao 添加订单-->
   <insert id="inserted" parameterType="com.pojo.Order">
-    INSERT INTO orderr(oi_id, create_time, uId, addr, total_price)
+    INSERT INTO orderr(oi_id, create_time, uId, addr, total_price, mid)
     VALUES ( #{oiId,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP},
-      #{uid,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, #{total_price,jdbcType=DECIMAL})
+      #{uid,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, #{total_price,jdbcType=DECIMAL}, #{mid,jdbcType=INTEGER})
 
   </insert>
 

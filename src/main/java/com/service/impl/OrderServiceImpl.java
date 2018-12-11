@@ -37,11 +37,8 @@ public class OrderServiceImpl implements OrderService {
      * @param
      * @return
      * @exception
-     * @UpdateRemark:   12-7
-     *                   1. 系统自动生成时间戳填入订单表中
-     *                   12-10
-     *                   1.添加订单之前整合订单项id到oi-id字段中
-     * @date        2018/11/30 15:45
+     * @UpdateRemark:   V3 优化下单逻辑，补充字段
+     * @date    更新时间    2018/12/11 14点52分
      */
     @Override
     public boolean insert(Order order) {
@@ -61,16 +58,6 @@ public class OrderServiceImpl implements OrderService {
         if (oi_id.equals("")){
             System.out.println("订单项id无法获取");
         }
-
-//        if(ids!=null&&ids.length!=0){
-//            for(int i=0;i<ids.length;i++){
-//                oi_id.append(ids[i]);
-//                oi_id.append(",");
-//
-//            }
-//        }else{
-//            System.out.println("订单项id无法获取");
-//        }
         System.out.println("sb.toString = " + oi_id.toString());
         order.setOiId(oi_id.toString());
         try{
