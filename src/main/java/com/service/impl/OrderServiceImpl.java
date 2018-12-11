@@ -132,4 +132,26 @@ public class OrderServiceImpl implements OrderService {
         }
         return lists;
     }
+
+    /**
+     * 通过订单id修改订单状态
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/11 10:17
+     */
+    @Override
+    public boolean receiveOrder(int id) {
+        try{
+            orderMapper.receiveOrder(Integer.valueOf(id));
+
+            return true;
+        }catch (Exception e){
+
+            e.printStackTrace();
+            return false;
+        }
+
+    }
 }

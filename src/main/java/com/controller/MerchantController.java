@@ -3,6 +3,7 @@ package com.controller;
 import com.pojo.Merchant;
 import com.pojo.Product;
 import com.service.MerchantService;
+import com.service.OrderService;
 import com.util.PrimaryKeyUtil;
 import com.util.RetryLimitHashedCredentialsMatcher;
 import com.util.Upload.UoloadImage;
@@ -44,6 +45,9 @@ public class MerchantController {
     private RetryLimitHashedCredentialsMatcher matcher;
     @Autowired
     MerchantService merchantService;
+
+    @Autowired
+    OrderService orderService;
 
     private UoloadImage uploadImage;
     /**
@@ -246,22 +250,6 @@ public class MerchantController {
      return map;
  }
 
-     /**
-      * 商家接单
-      * @author      jhao
-      * @param
-      * @return
-      * @exception
-      * @date        2018/12/11 10:10
-      */
-     @ResponseBody
-     @RequestMapping("receiveOrder")
-     public Map receiveOrder(Merchant merchant){
 
-         Map<String,Object> map = new HashMap<>();
-
-
-         return map;
-     }
 
 }

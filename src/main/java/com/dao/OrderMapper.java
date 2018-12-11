@@ -36,4 +36,14 @@ public interface OrderMapper {
      * @date        2018/12/7 10:50
      */
     List<Order> checkOrder(int uid);
+
+    /**
+     * 通过订单id修改订单状态
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/11 10:17
+     */
+    int receiveOrder(Integer id);
 }

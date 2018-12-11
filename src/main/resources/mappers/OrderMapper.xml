@@ -117,4 +117,10 @@
     select * from orderr WHERE uid=#{uid} and stated="5"
     ORDER BY create_time DESC LIMIT 3
   </select>
+
+  <!-- jhao商家接单之后的修改数据库状态 -->
+  <update id="receiveOrder" parameterType="java.lang.Integer">
+    update orderr set stated="2" where id=#{id}
+  </update>
+
 </mapper>

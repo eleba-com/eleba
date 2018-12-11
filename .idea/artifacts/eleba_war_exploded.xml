@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="eleba:war exploded">
+  <artifact type="exploded-war" build-on-make="true" name="eleba:war exploded">
     <output-path>$PROJECT_DIR$/target/eleba</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">

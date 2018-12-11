@@ -128,4 +128,28 @@ public class OrderController {
 
         return map;
     }
+
+
+    /**
+     * 商家接单
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/11 10:10
+     */
+
+    @ResponseBody
+    @RequestMapping("receiveOrdered")
+    public Map receiveOrdered(String id){
+
+        Map<String,Object> map = new HashMap<>();
+        if(orderService.receiveOrder(Integer.parseInt(id))){
+            map.put("message","已接单");
+        }else {
+            map.put("message","接单失败");
+        }
+
+        return map;
+    }
 }
