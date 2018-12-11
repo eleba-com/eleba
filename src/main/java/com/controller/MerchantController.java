@@ -10,7 +10,9 @@ import com.util.UsernamePasswordCaptchaToken;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.pam.UnsupportedTokenException;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,6 +144,7 @@ public class MerchantController {
                 String sqlPath="/upload/images/"+filename;
                 merchant.setState_message_addr(sqlPath);
             }
+           // merchant.setmLock(String.valueOf(0));
             merchant.setPasswordSalt(PrimaryKeyUtil.getAllRandomString(4));
             merchant.setPassword(new SimpleHash(matcher.getHashAlgorithmName(),merchant.getPassword(),
                     merchant.getPasswordSalt(),matcher.getHashIterations()).toString());
@@ -192,6 +195,9 @@ public class MerchantController {
         }catch (DisabledAccountException e){
             map.put("status","3");
             map.put("message","管理员被封号");
+        }catch (UnsupportedTokenException e){
+            map.put("status","4");
+            map.put("message","商家还没通过审核");
         }
         return map;
     }

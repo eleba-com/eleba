@@ -188,7 +188,7 @@
   <!-- jhao 11-24 根据类型返回商家 -->
   <select id="listMerchantByType" parameterType="String" resultType="com.pojo.Merchant">
     SELECT * FROM merchant
-      WHERE mType=#{mType}
+      WHERE mType=#{mType} and state=1 and mLock=0
   </select>
 
   <!-- jhao 11-26 返回所有商家的类型 -->
@@ -220,18 +220,18 @@
 
   <!--jiehao 12-10 查找商家总人数-->
   <select id="findMerchantTotal" resultType="java.lang.Integer">
-    select COUNT(*) from merchant
+    select COUNT(*) from merchant where state=1 and mLock=0
   </select>
 <!-- jiehao 12-10 分页查找商家信息-->
 <select id="managerFindMerchant" resultType="com.pojo.Merchant">
-  select * from merchant limit #{startPos},#{pageSize};
+  select * from merchant where state=1 and mLock=0 limit #{startPos},#{pageSize};
 </select>
 <!--jiehao 12-10 查看所有商家信息-->
   <select id="managerFindAllMerchant" resultType="com.pojo.Merchant">
     select id,userName,tell,mType,mLock,state,shopName
     from merchant
     <where>
-      1=1
+      state=1
       <if test="id!=null">
        and id=#{id}
       </if>
@@ -247,14 +247,41 @@
       <if test="mLock">
         and mLock=#{mLock}
       </if>
-      <if test="state!=null">
-        and state=#{state}
+      <if test="shopName!=null">
+        and shopName=#{shopName}
+      </if>
+    </where>
+  </select>
+<!--jiehao 12-11 查找未审核商家-->
+  <select id="findUnreviewedMessage" resultType="com.pojo.Merchant">
+    select id,userName,tell,mType,mLock,state,shopName
+    from merchant
+    <where>
+      state=0 and mLock=0
+      <if test="id!=null">
+        and id=#{id}
+      </if>
+      <if test="username">
+        and userName=#{username}
+      </if>
+      <if test="tell!=null">
+        and tell=#{tell}
+      </if>
+      <if test="mType!=null">
+        and mType=#{mType}
       </if>
       <if test="shopName!=null">
         and shopName=#{shopName}
       </if>
     </where>
-
   </select>
+
+  <!--jiehao 12-11 管理员审核商家-->
+  <update id="updateReviewMerchantMessage">
+    update merchant
+    set state = #{state}
+    where id = #{mId}
+  </update>
+
 
 </mapper>

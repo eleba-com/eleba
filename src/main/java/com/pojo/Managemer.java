@@ -7,7 +7,7 @@ public class Managemer {
 
     private Integer mid;
 
-    private Date operate_time;
+    private String operate_time;
 
     private String operate_type;
 
@@ -27,11 +27,11 @@ public class Managemer {
         this.mid = mid;
     }
 
-    public Date getOperate_time() {
+    public String getOperate_time() {
         return operate_time;
     }
 
-    public void setOperate_time(Date operate_time) {
+    public void setOperate_time(String operate_time) {
         this.operate_time = operate_time;
     }
 

@@ -68,14 +68,14 @@
             <value>com.mysql.jdbc.Driver</value>
         </property>
         <property name="url">
-            <value>jdbc:mysql://gz-cdb-jl1r7y6j.sql.tencentcdb.com:62410/eleba?characterEncoding=UTF-8</value>
+            <value>jdbc:mysql://119.29.108.156:3306/eleba?characterEncoding=UTF-8</value>
 
         </property>
         <property name="username">
-            <value>root</value>
+            <value>jhao</value>
         </property>
         <property name="password">
-            <value>dicklove199771</value>
+            <value>lee666lee</value>
         </property>
     </bean>
 

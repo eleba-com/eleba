@@ -9,6 +9,7 @@ import com.service.CustmerService;
 import com.service.ManagerService;
 import com.service.MerchantService;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.pam.UnsupportedTokenException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -90,6 +91,8 @@ public class ShiroReam extends AuthorizingRealm {
                 throw new UnknownAccountException();
             }if(Integer.parseInt(merchant.getmLock())==1){
                 throw new DisabledAccountException();
+            }if(Integer.valueOf(merchant.getState())==0){
+                throw new UnsupportedTokenException();
             }
             ByteSource salt =ByteSource.Util.bytes(merchant.getPasswordSalt());
             //验证密码
