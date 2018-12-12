@@ -105,4 +105,16 @@ public interface MerchantMapper {
      */
     List<Merchant> managerFindAllMerchant(Merchant merchant);
 
+    /**
+     * 方法实现说明    查找未审核注册商家
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/11 14:52
+     */
+    List<Merchant> findUnreviewedMessage(Merchant merchant);
+
+
+    int updateReviewMerchantMessage(@Param("mId") Integer mId, @Param("state") String state);
+
 }

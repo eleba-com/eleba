@@ -5,7 +5,7 @@
 <html>
 
 <body>
-<%--<h2>Hello World!上传测试</h2>--%>
+<h2>Hello World!上传测试</h2>
 <%--<form action="/uploadImage" method="post" enctype="multipart/form-data">--%>
     <%--<input type="file" name="imageFile">--%>
     <%--<input type="submit">--%>

@@ -7,7 +7,7 @@ public class Managecus {
 
     private Integer uid;
 
-    private Date operate_time;
+    private String operate_time;
 
     private String operate_type;
 
@@ -27,11 +27,11 @@ public class Managecus {
         this.uid = uid;
     }
 
-    public Date getOperate_time() {
+    public String getOperate_time() {
         return operate_time;
     }
 
-    public void setOperate_time(Date operate_time) {
+    public void setOperate_time(String operate_time) {
         this.operate_time = operate_time;
     }
 

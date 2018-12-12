@@ -179,4 +179,32 @@ public class ManagerServiceImpl implements ManagerService {
     public List<Merchant> managerFindAllMerchant(Merchant merchant) {
         return merchantMapper.managerFindAllMerchant(merchant);
     }
+    /**
+     * 方法实现说明    查找未审核注册商家
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/11 14:52
+     */
+    @Override
+    public List<Merchant> findUnreviewedMessage(Merchant merchant) {
+        return merchantMapper.findUnreviewedMessage(merchant);
+    }
+
+    /**
+     * 方法实现说明  插入审核商家信息
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/11 16:53
+     */
+    @Override
+    public int insertReviewMerchantMessage(Managemer managemer) {
+        return managemerMapper.insertSelective(managemer);
+    }
+
+    @Override
+    public int updateReviewMerchantMessage(Integer mId, String state) {
+        return merchantMapper.updateReviewMerchantMessage(mId,state);
+    }
 }

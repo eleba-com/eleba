@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="com.pojo.Managecus">
     <result column="aId" jdbcType="INTEGER" property="aid" />
     <result column="uId" jdbcType="INTEGER" property="uid" />
-    <result column="operate_time" jdbcType="TIMESTAMP" property="operate_time" />
+    <result column="operate_time" jdbcType="VARCHAR" property="operate_time" />
     <result column="operate_type" jdbcType="VARCHAR" property="operate_type" />
   </resultMap>
   <insert id="insert" parameterType="com.pojo.Managecus">
     insert into manageCus (aId, uId, operate_time, 
       operate_type)
-    values (#{aid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{operate_type,jdbcType=TIMESTAMP},
+    values (#{aid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{operate_type,jdbcType=VARCHAR},
       #{operateType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.Managecus">
@@ -37,7 +37,7 @@
         #{uid,jdbcType=INTEGER},
       </if>
       <if test="operate_time != null">
-        #{operate_time,jdbcType=TIMESTAMP},
+        #{operate_time,jdbcType=VARCHAR},
       </if>
       <if test="operate_type != null">
         #{operate_type,jdbcType=VARCHAR},
