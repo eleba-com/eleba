@@ -122,4 +122,17 @@ public class CustmerTestServiceImpl implements CustmerService {
     public Customer findCustmerMessager(Integer id) {
         return customerMapper.findCustmerMessager(id);
     }
+
+    /**
+     * 寻找这个电话是否已经注册了
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/12 9:22
+     */
+    @Override
+    public Customer findTel(String tel) {
+        return customerMapper.findTel(tel);
+    }
 }

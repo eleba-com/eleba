@@ -1,5 +1,8 @@
 package com.controller;
 
+import com.dao.CustomerMapper;
+import com.pojo.Customer;
+import com.service.CustmerService;
 import com.util.sendMessage.SendMessages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -23,8 +27,10 @@ import java.util.Map;
 @RequestMapping("")
 public class SendMessageController {
 
+    @Autowired
+    CustmerService custmerService;
     /**
-     * 方法实现说明
+     * 这个方法用于获取验证码
      * @author      jhao
      * @param       tel
      * @return      java.util.Map
@@ -41,4 +47,21 @@ public class SendMessageController {
             //int tels = Integer.valueOf(tel);
             return SendMessages.sendMessage(b);
     }
+
+
+    @ResponseBody
+    @RequestMapping("loginByTel")
+    public Map loginByTel(String tel){
+        Map<String,Object> map = new HashMap<>();
+        Customer customer = custmerService.findTel(tel);
+        if(customer!=null){
+            map.put("tag",true);
+            map.put("message",customer);
+        }else {
+            map.put("tag",false);
+            map.put("message","error");
+        }
+        return  map;
+    }
+
 }

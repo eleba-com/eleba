@@ -189,4 +189,9 @@
     </if>
     </where>
   </select>
+  
+  <!--  查找用户的电话号码是否存在 -->
+  <select id="findTel" resultMap="BaseResultMap">
+    SELECT * from customer where tell=#{tel}
+  </select>
 </mapper>

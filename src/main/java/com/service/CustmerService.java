@@ -90,4 +90,15 @@ public interface CustmerService {
      * @date：       2018/11/29 21:45
      */
     public Customer findCustmerMessager(Integer id);
+
+
+    /**
+     * 寻找这个电话是否已经注册了
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/12 9:22
+     */
+    public Customer findTel(String tel);
 }

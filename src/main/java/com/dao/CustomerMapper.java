@@ -72,4 +72,14 @@ public interface CustomerMapper {
 * @date：       2018/12/10 17:05
 */
     List<Customer>managerFindAllCustmer(Customer customer);
+
+    /**
+     * 寻找这个电话是否已经注册了
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/12 9:22
+     */
+    Customer findTel(String tel);
 }
