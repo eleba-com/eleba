@@ -117,5 +117,10 @@ public class MerchantServiceImpl implements MerchantService{
         return merchantMapper.insertSelective(merchant);
     }
 
+    @Override
+    public Merchant findListMerchantByName(String shopName) {
+        return merchantMapper.findListMerchantByName(shopName);
+    }
+
 
 }

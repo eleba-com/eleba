@@ -83,4 +83,6 @@ public interface MerchantService {
     * @date：       2018/11/30 10:06
     */
    public int insertMerchant(Merchant merchant);
+
+   public Merchant findListMerchantByName(String shopName);
 }

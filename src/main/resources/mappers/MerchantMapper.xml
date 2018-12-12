@@ -283,5 +283,10 @@
     where id = #{mId}
   </update>
 
+  <!-- jiehao 12-12 返回list商家集合-->
+  <select id="findListMerchantByName" resultType="com.pojo.Merchant">
+    select  * from merchant where shopName=#{shopName}
+  </select>
+
 
 </mapper>

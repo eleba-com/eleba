@@ -4,9 +4,11 @@ import com.pojo.Merchant;
 import com.service.MerchantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -24,5 +26,13 @@ import java.util.*;
 @RequestMapping("")
 public class UserController {
 
+    @RequestMapping(value = "test",method = RequestMethod.POST)
+    @ResponseBody
+    public Map test(MultipartFile file){
+        System.out.println("test --------"+file);
+        Map<String,Object>map=new HashMap<>();
+        map.put("message","成功了");
+        return map;
+    }
 
 }

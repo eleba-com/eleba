@@ -115,6 +115,16 @@ public interface MerchantMapper {
     List<Merchant> findUnreviewedMessage(Merchant merchant);
 
 
+    /**
+    * 方法实现说明   商家审核
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/12 15:26
+    */
     int updateReviewMerchantMessage(@Param("mId") Integer mId, @Param("state") String state);
+
+
+    Merchant findListMerchantByName(String shopName);
 
 }
