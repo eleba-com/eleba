@@ -2,6 +2,8 @@ package com.pojo;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public class Merchant {
     private Integer id;
 

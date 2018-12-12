@@ -7,6 +7,7 @@ import com.util.PrimaryKeyUtil;
 import com.util.RetryLimitHashedCredentialsMatcher;
 import com.util.Upload.UoloadImage;
 import com.util.UsernamePasswordCaptchaToken;
+import com.util.config.ImageConfig;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -119,44 +120,33 @@ public class MerchantController {
     * @exception：
     * @date：       2018/11/29 10:46
     */
-
     @RequestMapping(value = "MerchantRegister",method = RequestMethod.GET)
     @ResponseBody
     public Map MerchantRegister(Merchant merchant,HttpServletRequest request){
         Map<String,Object> map=new HashMap<>();
         Merchant record=merchantService.findByMerchantName(merchant.getUsername());
-        if (record==null){
-            if (merchant.getImageFile()!=null){
-                String dir = request.getSession().getServletContext().getRealPath("")+"/upload/images/";
-                File file=new File(dir);
-                //如果文件夹不存在
-                if(!file.exists()){
-                    //创建文件夹
-                    file.mkdirs();
+        Merchant shopname=merchantService.findListMerchantByName(merchant.getShopName());
+        if (record == null){
+                if(shopname ==null){
+                    System.out.println("++++++++++++=");
+                    merchant.setPasswordSalt(PrimaryKeyUtil.getAllRandomString(4));
+                    merchant.setPassword(new SimpleHash(matcher.getHashAlgorithmName(),merchant.getPassword(),
+                            merchant.getPasswordSalt(),matcher.getHashIterations()).toString());
+                    int number=merchantService.insertMerchant(merchant);
+                    if (number>0){
+                        map.put("status","0");
+                        map.put("message","用户注册成功");
+                    }else {
+                        map.put("status","1");
+                        map.put("message","用户注册失败");
+                    }
+                }else {
+                    map.put("status","3");
+                    map.put("message","店铺名重复");
                 }
-                uploadImage=new UoloadImage();
-                String  filename= null;
-                try {
-                    filename = uploadImage.uploadImage(merchant.getImageFile(),dir);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                String sqlPath="/upload/images/"+filename;
-                merchant.setState_message_addr(sqlPath);
-            }
-           // merchant.setmLock(String.valueOf(0));
-            merchant.setPasswordSalt(PrimaryKeyUtil.getAllRandomString(4));
-            merchant.setPassword(new SimpleHash(matcher.getHashAlgorithmName(),merchant.getPassword(),
-                    merchant.getPasswordSalt(),matcher.getHashIterations()).toString());
-            int number=merchantService.insertMerchant(merchant);
-            if (number>0){
-                map.put("status","0");
-                map.put("message","用户注册成功");
-            }else {
-                map.put("status","1");
-                map.put("message","用户注册失败");
-            }
         }else{
+            System.out.println("===========================");
+            map.put("record",record);
             map.put("status","2");
             map.put("message","用户名重复");
         }
@@ -233,10 +223,12 @@ public class MerchantController {
  public Map findMerchantMessage(Merchant recond){
      Map<String,Object> map = new HashMap<>();
      Merchant merchant=null;
-     if(recond.getUsername()!=null){
-         merchant=merchantService.findByMerchantName(recond.getUsername());
+     if(recond.getShopName()!=null){
+         merchant=merchantService.findByMerchantName(recond.getShopName());
+         merchant.setState_message_addr(ImageConfig.imageUrl+merchant.getState_message_addr());
      }else if (recond.getId()!=null){
          merchant=merchantService.findMerchantMessage(recond.getId());
+         merchant.setState_message_addr(ImageConfig.imageUrl+merchant.getState_message_addr());
      }
      map.put("merchant",merchant);
      return map;

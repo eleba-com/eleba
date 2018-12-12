@@ -8,6 +8,7 @@ import com.pojo.Merchant;
 import com.service.CategoryService;
 import com.util.Page;
 import com.util.Upload.UoloadImage;
+import com.util.config.ImageConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,35 +113,33 @@ public class CategoryController {
 		//return mav;
 	}
 
-	/**
-	* 上传图片测试
-	* @author：      jiehao
-	* @param
-	* @return：
-	* @exception：
-	* @date：       2018/11/27 10:45
-	*/
-	@RequestMapping(value = "uploadImage" ,method = RequestMethod.POST)
-	@ResponseBody
-	public Map uploadImageTest(Merchant merchant, HttpServletRequest request)throws Exception{
-
-//		System.out.println("======================");
-//		System.out.println(merchant.getImageFile());
-		String dir = request.getSession().getServletContext().getRealPath("")+"/upload/images/";
-		File file=new File(dir);
-		//如果文件夹不存在
-		if(!file.exists()){
-			//创建文件夹
-			file.mkdirs();
-			System.out.println("+++++++++++++");
-		}
-		uploadImage=new UoloadImage();
-		String  filename=uploadImage.uploadImage(merchant.getImageFile(),dir);
-		Map<String,Object> map = new HashMap<String, Object>();
-		String sqlPath="/upload/images/"+filename;
-		//System.out.println(sqlPath);
-		map.put("sqlPath",sqlPath);
-		return map;
-	}
+//	/**
+//	* 上传图片测试
+//	* @author：      jiehao
+//	* @param
+//	* @return：
+//	* @exception：
+//	* @date：       2018/11/27 10:45
+//	*/
+//	@RequestMapping(value = "uploadImage" ,method = RequestMethod.POST)
+//	@ResponseBody
+//	public Map uploadImageTest(Merchant merchant, HttpServletRequest request)throws Exception{
+//		String dir = request.getSession().getServletContext().getRealPath("")+ImageConfig.imageUrl;
+//		File file=new File(dir);
+//		//如果文件夹不存在
+//		if(!file.exists()){
+//			//创建文件夹
+//			file.mkdirs();
+//			System.out.println("+++++++++++++");
+//		}
+//		uploadImage=new UoloadImage();
+//		String  filename=uploadImage.uploadImage(merchant.getImageFile(),dir);
+//		Map<String,Object> map = new HashMap<String, Object>();
+//		String sqlPath=ImageConfig.imageUrl +filename;
+//		//System.out.println(sqlPath);
+//		//map.put("sqlPath",sqlPath);
+//		map.put("fileName",filename);
+//		return map;
+//	}
 
 }
