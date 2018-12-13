@@ -1,16 +1,37 @@
 package com.pojo;
-
+/**
+* @Description:    商品实体类
+* @Author:         jiehao
+* @CreateDate:     2018/12/13 17:03
+* @UpdateUser:     jiehao
+* @UpdateDate:     2018/12/13 17:03
+* @UpdateRemark:   修改内容
+* @Version:        1.0
+*/
 public class Product {
+    /**
+     * 商品id
+     */
     private Integer id;
-
+    /**
+     * 产品名字
+     */
     private String name;
-
+    /**
+     * 产品价格
+     */
     private Long price;
-
+    /**
+     * 产品图片地址
+     */
     private String photo_addr;
-
+    /**
+     * 商家id
+     */
     private Integer mid;
-
+    /**
+     * 剩余数量
+     */
     private Integer acount;
 
     public Integer getId() {
