@@ -1,16 +1,37 @@
 package com.pojo;
-
+/**
+* @Description:    评论实体类
+* @Author:         jiehao
+* @CreateDate:     2018/12/13 17:06
+* @UpdateUser:     jiehao
+* @UpdateDate:     2018/12/13 17:06
+* @UpdateRemark:   修改内容
+* @Version:        1.0
+*/
 public class Comments {
+    /**
+     * 评论id
+     */
     private Integer id;
-
+    /**
+     * 用户id
+     */
     private Integer uid;
-
+    /**
+     * 评论时间
+     */
     private String comment_time;
-
+    /**
+     * 商家id
+     */
     private Integer mid;
-
+    /**
+     * 订单id
+     */
     private Integer oid;
-
+    /**
+     * 评论内容
+     */
     private String detail;
 
     public String getDetail() {

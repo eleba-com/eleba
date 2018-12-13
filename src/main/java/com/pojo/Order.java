@@ -1,20 +1,43 @@
 package com.pojo;
 
 import java.util.Date;
-
+/**
+* @Description:    订单实体类
+* @Author:         jiehao
+* @CreateDate:     2018/12/13 16:58
+* @UpdateUser:     jiehao
+* @UpdateDate:     2018/12/13 16:58
+* @UpdateRemark:   修改内容
+* @Version:        1.0
+*/
 public class Order {
+    /**
+     * 订单id
+     */
     private Integer id;
-
+    /**
+     * 购物车id
+     */
     private String oiId;
-
+    /**
+     * 下单时间
+     */
     private Date create_time;
-
+    /**
+     * 顾客ID
+     */
     private Integer uid;
-
+    /**
+     * 地址
+     */
     private String addr;
-
+    /**
+     * 金额
+     */
     private Long total_price;
-
+    /**
+     * 状态
+     */
     private String stated;
 
     //12-11添加mid属性

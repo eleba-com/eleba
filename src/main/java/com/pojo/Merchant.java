@@ -3,35 +3,81 @@ package com.pojo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-
+/**
+* @Description:    商家实体类
+* @Author:         jiehao
+* @CreateDate:     2018/12/13 16:53
+* @UpdateUser:     jiehao
+* @UpdateDate:     2018/12/13 16:53
+* @UpdateRemark:   修改内容
+* @Version:        1.0
+*/
 public class Merchant {
+    /**
+     * 商家id
+     */
     private Integer id;
-
+    /**
+     * 商家电话号码
+     */
     private String tell;
-
+    /**
+     * 经营类型
+     */
     private String mType;
-
+    /**
+     * 登录昵称
+     */
     private String username;
-
+    /**
+     * 密码
+     */
     private String password;
-
+    /**
+     * 店铺地址
+     */
     private String addr;
-
+    /**
+     * 头像地址
+     */
     private String head_addr;
-
+    /**
+     *  0为正常，1为封号
+     */
     private String mLock;
-
+    /**
+     * 0为未审核，1为已审核
+     */
     private String state;
-
+    /**
+     * 审核图片地址
+     */
     private String state_message_addr;
-
+    /**
+     * 盐杂质
+     */
     private String passwordSalt;
-
+    /**
+     * 店铺名
+     */
     private String shopName;
-
+    /**
+     * 销量
+     */
     private String sale;
-
+    /**
+     * 上传文件
+     */
     private MultipartFile imageFile;
+    /**
+     * 身份证名字
+     */
+    private String idName;
+
+    /**
+     * 身份证号码
+     */
+    private String idCard;
 
     private double rate;
 
@@ -152,5 +198,21 @@ public class Merchant {
     }
     public void setImageFile(MultipartFile imageFile) {
         this.imageFile = imageFile;
+    }
+
+    public String getIdName() {
+        return idName;
+    }
+
+    public void setIdName(String idName) {
+        this.idName = idName;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 }

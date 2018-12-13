@@ -15,10 +15,12 @@
     <result column="passwordSalt" jdbcType="VARCHAR" property="passwordSalt" />
     <result column="shopName" jdbcType="VARCHAR" property="shopName" />
     <result column="sale" jdbcType="VARCHAR" property="sale" />
+    <result column="idName" jdbcType="VARCHAR" property="idName"/>
+    <result column="idCard" jdbcType="VARCHAR" property="idCard"/>
   </resultMap>
   <sql id="Base_Column_List">
     id, tell, mType, userName, password, addr, head_addr, mLock, state, state_message_addr, 
-    passwordSalt,shopName,sale
+    passwordSalt,shopName,sale,idName,idCard
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -34,12 +36,13 @@
     insert into merchant (id, tell, mType, 
       userName, password, addr, 
       head_addr, mLock, state, 
-      state_message_addr, passwordSalt,shopName,sale)
+      state_message_addr, passwordSalt,shopName,sale,idName,idCard)
     values (#{id,jdbcType=INTEGER}, #{tell,jdbcType=VARCHAR}, #{mtype,jdbcType=VARCHAR}, 
       #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, 
       #{headAddr,jdbcType=VARCHAR}, #{mlock,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
       #{stateMessageAddr,jdbcType=VARCHAR}, #{passwordsalt,jdbcType=VARCHAR},
-      #{shopName,jdbcType=VARCHAR},#{sale,jdbcType=VARCHAR})
+      #{shopName,jdbcType=VARCHAR},#{sale,jdbcType=VARCHAR},#{idName,jdbcType=VARCHAR},
+      #{idCard,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pojo.Merchant">
     insert into merchant
@@ -83,6 +86,12 @@
       <if test="sale != null">
        sale,
       </if>
+      <if test="idName!=null">
+        idName,
+      </if>
+      <if test="idCard!=null">
+        idCard,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -123,6 +132,12 @@
       </if>
       <if test="sale != null">
         #{sale,jdbcType=VARCHAR},
+      </if>
+      <if test="idName!=null">
+        #{idName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard!=null">
+        #{idCard,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -165,6 +180,12 @@
       <if test="sale != null">
        sale = #{sale,jdbcType=VARCHAR},
       </if>
+      <if test="idName!=null">
+      idName = #{idName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard!=null">
+      idCard = #{idCard,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -182,6 +203,8 @@
       passwordSalt = #{passwordSalt,jdbcType=VARCHAR},
       shopName= #{shopName,jdbcType=VARCHAR},
       sale = #{sale,jdbcType=VARCHAR},
+      idName = #{idName,jdbcType=VARCHAR},
+      idCard = #{idCard,jdbcType=VARCHAR},
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -228,7 +251,7 @@
 </select>
 <!--jiehao 12-10 查看所有商家信息-->
   <select id="managerFindAllMerchant" resultType="com.pojo.Merchant">
-    select id,userName,tell,mType,mLock,state,shopName
+    select id,userName,tell,mType,mLock,state,shopName,idName,idCard
     from merchant
     <where>
       state=1
@@ -254,7 +277,7 @@
   </select>
 <!--jiehao 12-11 查找未审核商家-->
   <select id="findUnreviewedMessage" resultType="com.pojo.Merchant">
-    select id,userName,tell,mType,mLock,state,shopName
+    select id,userName,tell,mType,mLock,state,shopName,idName,idCard
     from merchant
     <where>
       state=0 and mLock=0

@@ -1,12 +1,29 @@
 package com.pojo;
-
+/**
+* @Description:    管理员实体类
+* @Author:         jiehao
+* @CreateDate:     2018/12/13 16:52
+* @UpdateUser:     jiehao
+* @UpdateDate:     2018/12/13 16:52
+* @UpdateRemark:   修改内容
+* @Version:        1.0
+*/
 public class Manager {
+    /**
+     * 管理员id
+     */
     private Integer id;
-
+    /**
+     * 登录昵称
+     */
     private String username;
-
+    /**
+     * 登录密码
+     */
     private String password;
-
+    /**
+     * 盐杂质
+     */
     private String passwordSalt;
 
     public Integer getId() {

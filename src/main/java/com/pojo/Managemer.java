@@ -1,14 +1,31 @@
 package com.pojo;
 
 import java.util.Date;
-
+/**
+* @Description:    商家管理实体类
+* @Author:         jiehao
+* @CreateDate:     2018/12/13 16:50
+* @UpdateUser:     jiehao
+* @UpdateDate:     2018/12/13 16:50
+* @UpdateRemark:   修改内容
+* @Version:        1.0
+*/
 public class Managemer {
+    /**
+     * 管理员id
+     */
     private Integer aid;
-
+    /**
+     * 商家id
+     */
     private Integer mid;
-
+    /**
+     * 操作时间
+     */
     private String operate_time;
-
+    /**
+     * 操作类型
+     */
     private String operate_type;
 
     public Integer getAid() {
