@@ -248,7 +248,7 @@
       <version>1.2.3</version>
     </dependency>
 
-<!--文件上传-->
+    <!--文件上传-->
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
@@ -267,7 +267,17 @@
       <version>1.9</version>
     </dependency>
 
-
+    <!-- 支付 功能依赖-->
+    <dependency>
+      <groupId>com.alipay.sdk</groupId>
+      <artifactId>alipay-sdk-java</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+    </dependency>
 
   </dependencies>
 

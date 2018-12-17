@@ -4,6 +4,7 @@ import com.dao.AddressMapper;
 import com.dao.CustomerMapper;
 import com.pojo.Address;
 import com.pojo.Customer;
+import com.pojo.Order;
 import com.service.CustmerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -134,5 +135,40 @@ public class CustmerTestServiceImpl implements CustmerService {
     @Override
     public Customer findTel(String tel) {
         return customerMapper.findTel(tel);
+    }
+
+    /**
+     * 方法实现说明   改地址为默认地址
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/17 16:38
+     */
+    @Override
+    public int updateCusAddrDefault(Address address) {
+        return addressMapper.updateCusAddrDefault(address);
+    }
+
+    /**
+     * 方法实现说明  改原有默认地址为普通地址
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/17 16:50
+     */
+    @Override
+    public int updateCusAddrCommon(Address address) {
+        return addressMapper.updateCusAddrCommon(address);
+    }
+    /**
+     * 方法实现说明  找原来默认地址
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/17 17:03
+     */
+    @Override
+    public Address findAddressDefault(Integer uId) {
+        return addressMapper.findAddressDefault(uId);
     }
 }

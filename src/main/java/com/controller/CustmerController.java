@@ -2,10 +2,12 @@ package com.controller;
 
 import com.pojo.Address;
 import com.pojo.Customer;
+import com.pojo.Order;
 import com.service.CustmerService;
 import com.util.PrimaryKeyUtil;
 import com.util.RetryLimitHashedCredentialsMatcher;
 import com.util.UsernamePasswordCaptchaToken;
+import com.util.config.AddressDefaultConfig;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -203,6 +205,58 @@ public class CustmerController {
      }
      return map;
  }
+ /**
+ * 方法实现说明   用户修改收货地址为默认状态(参数：id，uId)
+ * @author：      jiehao
+ * @return：
+ * @exception：
+ * @date：       2018/12/17 16:00
+ */
+ @RequestMapping(value = "updateCusAddrDefault",method = RequestMethod.GET)
+ @ResponseBody
+ public Map updateCusAddrDefault(Address address){
+     Map<String,Object>map=new HashMap<>();
+     Address record=custmerService.findAddressDefault(address.getuId());
+     if (record!=null){
+         address.setaDefault(1);
+         int num=custmerService.updateCusAddrCommon(address);
+         if (num>0){
+             address.setaDefault(AddressDefaultConfig.aDefault);
+             int number=custmerService.updateCusAddrDefault(address);
+             if (number>0){
+                 map.put("status","1");
+                 map.put("message","设置成功");
+             }
+             else {
+                 record.setaDefault(AddressDefaultConfig.aDefault);
+                 custmerService.updateCusAddrDefault(record);
+                 map.put("status","1");
+                 map.put("message","设置失败");
+             }
+         }else {
+             record.setaDefault(AddressDefaultConfig.aDefault);
+             custmerService.updateCusAddrDefault(record);
+             map.put("status","1");
+             map.put("message","设置失败");
+         }
+     }
+     else {
+         address.setaDefault(AddressDefaultConfig.aDefault);
+         int number=custmerService.updateCusAddrDefault(address);
+         if (number>0){
+             map.put("status","1");
+             map.put("message","设置成功");
+         }
+         else {
+             map.put("status","1");
+             map.put("message","设置失败");
+         }
+     }
+     return map;
+ }
+
+
+
 
  /**
  * 方法实现说明  用户修改信息

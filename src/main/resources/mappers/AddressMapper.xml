@@ -88,6 +88,30 @@
     </set>
     where id=#{id}
   </update>
+<!-- jiehao 12-17 修改地址为默认地址-->
+  <update id="updateCusAddrDefault" parameterType="com.pojo.Address">
+    update address
+    <set>
+      <if test="aDefault !=null">
+        aDefault=#{aDefault},
+      </if>
+    </set>
+    where id=#{id}
+  </update>
+  <!-- jiehao 12-17 修改地址为普通地址-->
+  <update id="updateCusAddrCommon" parameterType="com.pojo.Address">
+    update address
+    <set>
+      <if test="aDefault !=null">
+        aDefault=#{aDefault},
+      </if>
+    </set>
+    where uId=#{uId} and aDefault= 0
+  </update>
+  <!--jiehao 12-17 找原来默认地址-->
+  <select id="findAddressDefault" resultType="com.pojo.Address">
+    select * from address where uId=#{uId} and aDefault= 0
+  </select>
 
 
 </mapper>

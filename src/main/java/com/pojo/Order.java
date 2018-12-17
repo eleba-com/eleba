@@ -40,7 +40,9 @@ public class Order {
      */
     private String stated;
 
-    //12-11添加mid属性
+    /**
+     * 商家id
+     */
     private Integer mid;
 
     public Integer getMid() {

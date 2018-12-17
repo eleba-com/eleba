@@ -101,4 +101,33 @@ public interface CustmerService {
      * @date        2018/12/12 9:22
      */
     public Customer findTel(String tel);
+
+    /**
+    * 方法实现说明   改地址为默认地址
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/17 16:38
+    */
+    public int updateCusAddrDefault(Address address);
+
+    /**
+    * 方法实现说明  改原有默认地址为普通地址
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/17 16:50
+    */
+    public int updateCusAddrCommon(Address address);
+
+
+    /**
+    * 方法实现说明  找原来默认地址
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/17 17:03
+    */
+    public Address findAddressDefault(Integer uId);
+
 }
