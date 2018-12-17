@@ -37,29 +37,39 @@ public class OrderServiceImpl implements OrderService {
      * @param
      * @return
      * @exception
-     * @UpdateRemark:   V3 优化下单逻辑，补充字段
-     * @date    更新时间    2018/12/11 14点52分
+     * @UpdateRemark:   V4 需求更变
+     * @date    更新时间    18-12-17
      */
     @Override
     public boolean insert(Order order) {
         //12-7 使用util下date与pojo整合
         order.setCreate_time(new Date());
-        List<Orderitem> orderitems = orderItemService.getOrderItemId(order.getUid());
-        System.out.println("ids = "+orderitems.toString());
+        //12-17更改需求
+        List<Orderitem> orderitems = order.getOrderitems();
+        Iterator<Orderitem> iter =orderitems.iterator();
+        while(iter.hasNext()){
+            orderItemService.addOrderItem(iter.next());
+        }
+        List<Orderitem> orderitems1 = orderItemService.getOrderItemId(order.getUid());
+        System.out.println("ids = "+orderitems1.toString());
         //这里整合订单项的所有id到order表的oi_id
         StringBuffer oi_id = new StringBuffer();
-        Iterator<Orderitem> iter = orderitems.iterator();
-        while(iter.hasNext()){
+        Iterator<Orderitem> iter1 = orderitems1.iterator();
+        while(iter1.hasNext()){
 
-            oi_id.append(iter.next().getId());
+            oi_id.append(iter1.next().getId());
             oi_id.append(",");
         }
 
-        if (oi_id.equals("")){
+        if (oi_id.equals("[]")){
             System.out.println("订单项id无法获取");
         }
+
+
         System.out.println("sb.toString = " + oi_id.toString());
         order.setOiId(oi_id.toString());
+
+        //这里还没有修改
         try{
             orderMapper.inserted(order);
             //这里还要修改订单项的状态

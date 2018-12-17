@@ -9,7 +9,9 @@ import com.service.ProductService;
 import com.util.config.OrderConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
@@ -47,8 +49,8 @@ public class OrderController implements OrderConfig{
     */
 
     @ResponseBody
-    @RequestMapping("insertOrder")
-    public Map insertOrder(Order order){
+    @RequestMapping(value = "insertOrder",method ={RequestMethod.POST})
+    public Map insertOrder(@RequestBody Order order){
         Map<String,Object> map = new HashMap<>();
 
         if(orderService.insert(order)){

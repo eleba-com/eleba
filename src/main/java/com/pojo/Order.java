@@ -1,8 +1,21 @@
 package com.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
+
+    //12-17 整合订单项列表
+    private List<Orderitem> orderitems;
+
+    public List<Orderitem> getOrderitems() {
+        return orderitems;
+    }
+
+    public void setOrderitems(List<Orderitem> orderitems) {
+        this.orderitems = orderitems;
+    }
+
     private Integer id;
 
     private String oiId;
