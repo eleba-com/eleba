@@ -294,7 +294,7 @@ public class ManagerController {
                 imageUrl = imageUrl + order[x] + ",";
             }
             merchants.get(i).setState_message_addr(imageUrl);
-            System.out.println(imageUrl);
+            //System.out.println(imageUrl);
         }
         }
         map.put("merchant",merchants);
