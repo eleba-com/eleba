@@ -277,7 +277,7 @@
   </select>
 <!--jiehao 12-11 查找未审核商家-->
   <select id="findUnreviewedMessage" resultType="com.pojo.Merchant">
-    select id,userName,tell,mType,mLock,state,shopName,idName,idCard
+    select *
     from merchant
     <where>
       state=0 and mLock=0

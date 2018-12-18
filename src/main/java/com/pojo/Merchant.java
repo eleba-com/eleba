@@ -78,8 +78,18 @@ public class Merchant {
      * 身份证号码
      */
     private String idCard;
-
+    /**
+     * 评分
+     */
     private double rate;
+    /**
+     * 起送价
+     */
+    private double starting_price;
+    /**
+     * 配送费
+     */
+    private double start_fee;
 
     public double getRate() {
         return rate;
@@ -214,5 +224,21 @@ public class Merchant {
 
     public void setIdCard(String idCard) {
         this.idCard = idCard;
+    }
+
+    public double getStarting_price() {
+        return starting_price;
+    }
+
+    public void setStarting_price(double starting_price) {
+        this.starting_price = starting_price;
+    }
+
+    public double getStart_fee() {
+        return start_fee;
+    }
+
+    public void setStart_fee(double start_fee) {
+        this.start_fee = start_fee;
     }
 }

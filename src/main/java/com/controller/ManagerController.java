@@ -282,6 +282,21 @@ public class ManagerController {
         Map<String,Object>map=new HashMap<>();
         List<Merchant>merchants=new ArrayList<>();
         merchants=managerService.findUnreviewedMessage(merchant);
+        for(int i=0;i<merchants.size();i++) {
+            String addr = merchants.get(i).getState_message_addr();
+            if (addr != null) {
+            String[] address = addr.split(",");
+            String[] order = new String[address.length];
+            String imageUrl = "";
+            for (int x = 0; x < address.length; x++) {
+                order[x] = "localhost:8088/upload/images/" + address[x];
+                System.out.println(order[x]);
+                imageUrl = imageUrl + order[x] + ",";
+            }
+            merchants.get(i).setState_message_addr(imageUrl);
+            System.out.println(imageUrl);
+        }
+        }
         map.put("merchant",merchants);
         return map;
     }
@@ -319,11 +334,6 @@ public class ManagerController {
         }
         return map;
     }
-
-
-
-
-
 
 
 }
