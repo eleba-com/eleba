@@ -93,6 +93,8 @@ public class ShiroReam extends AuthorizingRealm {
                 throw new DisabledAccountException();
             }if(Integer.valueOf(merchant.getState())==0){
                 throw new UnsupportedTokenException();
+            }if(Integer.valueOf(merchant.getState())==2){
+                throw new   ExcessiveAttemptsException();
             }
             ByteSource salt =ByteSource.Util.bytes(merchant.getPasswordSalt());
             //验证密码
