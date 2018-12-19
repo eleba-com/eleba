@@ -251,7 +251,7 @@
 </select>
 <!--jiehao 12-10 查看所有商家信息-->
   <select id="managerFindAllMerchant" resultType="com.pojo.Merchant">
-    select id,userName,tell,mType,mLock,state,shopName,idName,idCard
+    select id,userName,tell,mType,mLock,state,shopName,idName,idCard,addr
     from merchant
     <where>
       state=1
