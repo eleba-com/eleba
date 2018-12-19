@@ -10,10 +10,7 @@ import com.util.Upload.UoloadImage;
 import com.util.UsernamePasswordCaptchaToken;
 import com.util.config.ImageConfig;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.DisabledAccountException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.pam.UnsupportedTokenException;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
@@ -202,6 +199,10 @@ public class MerchantController {
         }catch (UnsupportedTokenException e){
             map.put("status","4");
             map.put("message","商家还没通过审核");
+        }catch ( ExcessiveAttemptsException e){
+            map.put("status","5");
+            map.put("message","商家不予用过审核");
+
         }
         return map;
     }

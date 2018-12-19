@@ -310,9 +310,9 @@ public class ManagerController {
     */
     @RequestMapping(value = "managerReviewMerchant",method = RequestMethod.GET)
     @ResponseBody
-    public Map managerReviewMerchant(Managemer managemer){
+    public Map managerReviewMerchant(Managemer managemer,String state){
         Map<String,Object>map=new HashMap<>();
-        String state=String.valueOf(1);
+        //String state=String.valueOf(1);
         managemer.setOperate_type("审核商家");
         //设置日期格式
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -323,14 +323,14 @@ public class ManagerController {
             int number=managerService.updateReviewMerchantMessage(managemer.getMid(),state);
             if (number>0){
                 map.put("status","0");
-                map.put("message","审核商家成功");
+                map.put("message","操作成功");
             }else {
                 map.put("status","1");
-                map.put("message","审核商家失败");
+                map.put("message","操作失败");
             }
         }else {
             map.put("status","1");
-            map.put("message","审核商家失败");
+            map.put("message","操作失败");
         }
         return map;
     }
