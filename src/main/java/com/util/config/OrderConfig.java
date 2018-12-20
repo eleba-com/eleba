@@ -17,7 +17,7 @@ public interface OrderConfig {
     public static String MADE_ORDER = "0";
 
     /**
-     * 已读
+     *已付款
      */
     public static String readOrder = "1";
 

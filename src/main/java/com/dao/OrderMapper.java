@@ -57,4 +57,23 @@ public interface OrderMapper {
      * @date        2018/12/11 11:39
      */
     List<Order> getOrders(@Param("mid") Integer mid, @Param("stated") String stated);
+
+    /**
+     * 方法实现说明  根据id查找某个订单
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/20 10:00
+     */
+    Order findOrder(Integer id);
+
+
+    /**
+     * 方法实现说明  用户付款修改状态
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/20 10:14
+     */
+    int updateOrder(Order order);
 }

@@ -34,7 +34,7 @@ public class Order {
     /**
      * 金额
      */
-    private Long total_price;
+    private Double total_price;
     /**
      * 状态
      */
@@ -101,11 +101,11 @@ public class Order {
         this.addr = addr;
     }
 
-    public Long getTotal_price() {
+    public Double getTotal_price() {
         return total_price;
     }
 
-    public void setTotal_price(Long total_price) {
+    public void setTotal_price(Double total_price) {
         this.total_price = total_price;
     }
 }
