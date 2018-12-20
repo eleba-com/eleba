@@ -223,6 +223,18 @@ public class MerchantController {
     int shopId=merchantService.merchantFindId(shopName);
     //查找商家菜式
      Product product = merchantService.merchantFindProduct(shopId);
+     String addr=product.getPhoto_addr();
+     if(addr!=null){
+         String[] address = addr.split(",");
+         String[] order = new String[address.length];
+         String imageUrl = "";
+         for (int x = 0; x < address.length; x++) {
+             order[x] = "http:/localhost:8088/upload/images/" + address[x];
+             System.out.println(order[x]);
+             imageUrl = imageUrl + order[x] + ",";
+         }
+         product.setPhoto_addr(imageUrl);
+     }
      map.put("product",product);
      return map;
  }

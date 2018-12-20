@@ -6,8 +6,10 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.pojo.Order;
+import com.service.OrderService;
 import com.util.aliPay.AlipayConfig;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +39,8 @@ import static java.lang.System.out;
 public class PaymentController {
 
     private Logger log = Logger.getLogger(this.getClass());
+    @Autowired
+    private OrderService orderService;
 
     /**
      * 方法实现说明   用户付款
@@ -82,15 +86,15 @@ public class PaymentController {
 
 
   /**
-  * 方法实现说明   支付成功修改订单状态，并跳转前端页面（未完成）
+  * 方法实现说明   支付成功修改订单状态，并跳转前端页面
   * @author：      jiehao
   * @return：
   * @exception：
   * @date：       2018/12/17 9:07
   */
     @RequestMapping(value = "returnUrl")
-    @ResponseBody
-    public Map returnUrl(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException, UnsupportedEncodingException {
+    //@ResponseBody
+    public String returnUrl(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException, UnsupportedEncodingException {
         Map<String, Object> map = new HashMap<String, Object>();
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String[]> requestParams = request.getParameterMap();
@@ -120,36 +124,43 @@ public class PaymentController {
             String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
 
             log.info("订单处理：系统订单号" + out_trade_no + "支付宝交易号：" + trade_no);
-//
-//            Order order=orderService.findOrder(Integer.valueOf(out_trade_no));
-//            System.out.println(order.getPrice());
-//            System.out.println(total_amount);
-//            if(order==null){
-//                signVerified=false;
-//                map.put("signVerfied",signVerified);
-//                map.put("resaon","订单不存在");
-//            }else {
-//                if(order.getPrice()!=(Double.valueOf(total_amount))){
-//                    signVerified=false;
-//                    map.put("signVerfied",signVerified);
-//                    map.put("reason","订单金额错误");
-//                }
-//                if (order.getState().equals("已付款")){
-//                    map.put("reason","不需要重复处理订单");
-//                }
-//                else {
-//                    order.setState("已付款");
-//                    int num=orderService.updateOrder(order);
-//                    map.put("rsason","支付成功");
-//                }
-//            }
-//        }else {
-//            request.setAttribute("reason","验签失败");
+
+            Order order=orderService.findOrder(Integer.valueOf(out_trade_no));
+            if(order==null){
+                signVerified=false;
+                map.put("signVerfied",signVerified);
+                map.put("resaon","订单不存在");
+                System.out.println("订单不存在");
+                return "redirect:/pay.jsp";
+            }else {
+                if(!String.valueOf(order.getTotal_price()).equals(total_amount)){
+                    signVerified=false;
+                    map.put("signVerfied",signVerified);
+                    map.put("reason","订单金额错误");
+                    System.out.println("订单金额错误");
+                    return "redirect:/pay.jsp";
+                }
+                if (order.getStated()==String.valueOf(1)){
+                    map.put("reason","不需要重复处理订单");
+                    System.out.println("订单金额错误");
+                    return "redirect:/pay.jsp";
+                }
+                else {
+                    order.setStated("1");
+                   int num=orderService.updateOrder(order);
+                    map.put("rsason","支付成功");
+                    System.out.println("支付成功");
+                    return "redirect:/pay.jsp";
+                }
+            }
+        }else {
+            request.setAttribute("reason","验签失败");
 
        }
         map.put("signVerified", signVerified);
         map.put("resaon","跳转");
-        return map;
+        //return "redirect:/pay.jsp";
+        return "";
         }
 
         /**
@@ -193,29 +204,29 @@ public class PaymentController {
             /**
              * 订单处理代码
              */
-//
-//            Order order=orderService.findOrder(Integer.valueOf(out_trade_no));
-//            if(order==null){
-//                signVerified=false;
-//                request.setAttribute("signVerified", signVerified);
-//                request.setAttribute("reason", "商户订单号不存在");
-//            }else {
-//                if(order.getPrice()!=(Double.valueOf(total_amount))){
-//                    signVerified=false;
-//                    request.setAttribute("signVerified", signVerified);
-//                    request.setAttribute("reason","金额不符合");
-//                }
-//                if (order.getState().equals("已付款")){
-//                    request.setAttribute("reason","不需要重复处理订单");
-//                }
-//                else {
-//                    order.setState("已付款");
-//                    request.setAttribute("rsason","支付成功");
-//                }
-//            }
-//        }else {
-//            request.setAttribute("reason","验签失败");
-//        }
+
+            Order order=orderService.findOrder(Integer.valueOf(out_trade_no));
+            if(order==null){
+                signVerified=false;
+                request.setAttribute("signVerified", signVerified);
+                request.setAttribute("reason", "商户订单号不存在");
+            }else {
+                if(!String.valueOf(order.getTotal_price()).equals(total_amount)){
+                    signVerified=false;
+                    request.setAttribute("signVerified", signVerified);
+                    request.setAttribute("reason","金额不符合");
+                }
+                if (order.getStated()==String.valueOf(1)){
+                    request.setAttribute("reason","不需要重复处理订单");
+                }
+                else {
+                    order.setStated("1");
+                    request.setAttribute("rsason","支付成功");
+                }
+            }
+        }else {
+            request.setAttribute("reason","验签失败");
+        }
             request.setAttribute("signVerified", signVerified);
             response.setContentType("text/html;charset=" + AlipayConfig.charset);
             //直接将完整的表单html输出到页面
@@ -237,5 +248,5 @@ public class PaymentController {
 
         }
 
-    }
+
 }
