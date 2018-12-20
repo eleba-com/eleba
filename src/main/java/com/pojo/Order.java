@@ -6,13 +6,13 @@ import java.util.List;
 public class Order {
 
     //12-17 整合订单项列表
-    private List<Orderitem> orderitems;
+    private Orderitem[] orderitems;
 
-    public List<Orderitem> getOrderitems() {
+    public Orderitem[] getOrderitems() {
         return orderitems;
     }
 
-    public void setOrderitems(List<Orderitem> orderitems) {
+    public void setOrderitems(Orderitem[] orderitems) {
         this.orderitems = orderitems;
     }
 

@@ -45,10 +45,13 @@ public class OrderServiceImpl implements OrderService {
         //12-7 使用util下date与pojo整合
         order.setCreate_time(new Date());
         //12-17更改需求
-        List<Orderitem> orderitems = order.getOrderitems();
-        Iterator<Orderitem> iter =orderitems.iterator();
-        while(iter.hasNext()){
-            orderItemService.addOrderItem(iter.next());
+        Orderitem[] orderitems = order.getOrderitems();
+//        Iterator<Orderitem> iter =orderitems.iterator();
+//        while(iter.hasNext()){
+//            orderItemService.addOrderItem(iter.next());
+//        }
+        for (int i=0;i<orderitems.length;i++){
+            orderItemService.addOrderItem(orderitems[i]);
         }
         List<Orderitem> orderitems1 = orderItemService.getOrderItemId(order.getUid());
         System.out.println("ids = "+orderitems1.toString());

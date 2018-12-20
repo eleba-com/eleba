@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.google.gson.Gson;
 import com.pojo.Merchant;
 import com.pojo.Order;
 import com.pojo.Orderitem;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import java.util.*;
 
@@ -50,9 +52,11 @@ public class OrderController implements OrderConfig{
 
     @ResponseBody
     @RequestMapping(value = "insertOrder",method ={RequestMethod.POST})
-    public Map insertOrder(@RequestBody Order order){
+    public Map insertOrder(@RequestBody Order order,String orderitems ){
         Map<String,Object> map = new HashMap<>();
-
+        Gson gson = new Gson();
+        Orderitem[] orderitems1= gson.fromJson(orderitems, Orderitem[].class);
+        order.setOrderitems(orderitems1);
         if(orderService.insert(order)){
             map.put("message","successful");
         }else {
