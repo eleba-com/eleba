@@ -1,6 +1,8 @@
 package com.pojo;
 
 import java.util.Date;
+import java.util.List;
+
 /**
 * @Description:    订单实体类
 * @Author:         jiehao
@@ -14,6 +16,18 @@ public class Order {
     /**
      * 订单id
      */
+
+    //12-17 整合订单项列表
+    private Orderitem[] orderitems;
+
+    public Orderitem[] getOrderitems() {
+        return orderitems;
+    }
+
+    public void setOrderitems(Orderitem[] orderitems) {
+        this.orderitems = orderitems;
+    }
+
     private Integer id;
     /**
      * 购物车id

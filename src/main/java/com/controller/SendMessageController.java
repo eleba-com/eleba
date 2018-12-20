@@ -49,6 +49,14 @@ public class SendMessageController {
     }
 
 
+    /**
+     * 方法实现说明
+     * @author      jhao
+     * @param       
+     * @return      
+     * @exception   
+     * @date        2018/12/17 10:31
+     */
     @ResponseBody
     @RequestMapping("loginByTel")
     public Map loginByTel(String tel){
