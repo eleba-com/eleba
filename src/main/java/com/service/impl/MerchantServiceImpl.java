@@ -128,6 +128,13 @@ public class MerchantServiceImpl implements MerchantService{
         return merchantMapper.findListMerchantByName(shopName);
     }
 
+    /**
+     * 方法实现说明  更新商家信息
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/21 9:47
+     */
     @Override
     public int updateMerchantMessage(Merchant merchant) {
         return merchantMapper.updateByPrimaryKeySelective(merchant);
