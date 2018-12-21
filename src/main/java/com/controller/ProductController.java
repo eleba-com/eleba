@@ -7,10 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
 * @Description:    商家产品控制类
@@ -57,15 +54,23 @@ public class ProductController {
      * @return
      * @exception
      * @date        2018/11/29 9:48
+     * @Update 2018-12-21 V2 补充图片地址处理
      */
     @RequestMapping("listAllProduct")
     @ResponseBody
     public Map listAllProduct(Product product){
         Map<String,Object> map = new HashMap<>();
-        List<Product> list = new ArrayList<>();
+        List<Product> list = null;
         System.out.println("product是 "+ product.toString()+" mid = "+product.getMid());
         list = productService.listAllProduct(product);
         if(list!=null){
+            Iterator<Product> iterator =list.iterator();
+            Product p=null;
+            while (iterator.hasNext()){
+                p = iterator.next();
+                System.out.println("进来了， "+p.toString());
+                p.setPhoto_addr("http:/localhost:8081/upload/images/"+p.getPhoto_addr());
+            }
             map.put("商家产品",list);
         }else{
             map.put("message","no record");

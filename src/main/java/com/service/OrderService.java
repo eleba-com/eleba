@@ -3,6 +3,7 @@ package com.service;
 import com.pojo.Order;
 import org.aspectj.weaver.ast.Or;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,4 +67,14 @@ public interface OrderService {
      * @date        2018/12/11 11:39
      */
     public List<Order> getOrders(Integer mid,String stated);
+
+    /**
+     * 获取订单id
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/20 10:27
+     */
+    public Order getOrderId(Date create_time);
 }

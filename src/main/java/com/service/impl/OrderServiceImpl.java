@@ -43,16 +43,21 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean insert(Order order) {
         //12-7 使用util下date与pojo整合
-        order.setCreate_time(new Date());
+
         //12-17更改需求
-        Orderitem[] orderitems = order.getOrderitems();
+        Orderitem[] orderitems = null;
+
+        orderitems = order.getOrderitems();
 //        Iterator<Orderitem> iter =orderitems.iterator();
 //        while(iter.hasNext()){
 //            orderItemService.addOrderItem(iter.next());
 //        }
-        for (int i=0;i<orderitems.length;i++){
-            orderItemService.addOrderItem(orderitems[i]);
+        if(orderitems!=null){
+            for (int i=0;i<orderitems.length;i++){
+                orderItemService.addOrderItem(orderitems[i]);
+            }
         }
+
         List<Orderitem> orderitems1 = orderItemService.getOrderItemId(order.getUid());
         System.out.println("ids = "+orderitems1.toString());
         //这里整合订单项的所有id到order表的oi_id
@@ -166,5 +171,18 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getOrders(Integer mid, String stated) {
         return orderMapper.getOrders(Integer.valueOf(mid),stated);
+    }
+
+    /**
+     * 获取订单id
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/20 10:28
+     */
+    @Override
+    public Order getOrderId(Date create_time) {
+        return orderMapper.getOrderId(create_time);
     }
 }

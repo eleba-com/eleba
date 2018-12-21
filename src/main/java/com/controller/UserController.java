@@ -35,4 +35,14 @@ public class UserController {
         return map;
     }
 
+    //test get order id
+    @RequestMapping(value = "test1",method = RequestMethod.GET)
+    @ResponseBody
+    public Map test1(){
+        System.out.println("test --------");
+        Map<String,Object>map=new HashMap<>();
+        map.put("message","成功了");
+        return map;
+    }
+
 }

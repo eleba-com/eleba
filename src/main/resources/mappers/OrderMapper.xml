@@ -105,6 +105,10 @@
     <!--where id = #{id,jdbcType=INTEGER}-->
   <!--</update>-->
 
+  <!-- jhao 获取订单id -->
+  <select id="getOrderId">
+    select * from orderr where create_time=#{create_time}
+  </select>
   <!-- jhao 添加订单-->
   <insert id="inserted" parameterType="com.pojo.Order">
     INSERT INTO orderr(oi_id, create_time, uId, addr, total_price, mid)
