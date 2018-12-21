@@ -289,7 +289,7 @@ public class ManagerController {
             String[] order = new String[address.length];
             String imageUrl = "";
             for (int x = 0; x < address.length; x++) {
-                order[x] = "http:/localhost:8081/upload/images/" + address[x];
+                order[x] = "http://localhost:8081/upload/images/" + address[x];
                 System.out.println(order[x]);
                 imageUrl = imageUrl + order[x] + ",";
             }
