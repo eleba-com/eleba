@@ -84,5 +84,22 @@ public interface MerchantService {
     */
    public int insertMerchant(Merchant merchant);
 
+   /**
+   * 方法实现说明  查找店铺名是否重复
+   * @author：      jiehao
+   * @return：
+   * @exception：
+   * @date：       2018/12/21 9:40
+   */
    public Merchant findListMerchantByName(String shopName);
+
+   /**
+   * 方法实现说明  更新商家信息
+   * @author：      jiehao
+   * @return：
+   * @exception：
+   * @date：       2018/12/21 9:47
+   */
+
+   public int updateMerchantMessage(Merchant merchant);
 }
