@@ -185,4 +185,28 @@ public class OrderServiceImpl implements OrderService {
     public Order getOrderId(Date create_time) {
         return orderMapper.getOrderId(create_time);
     }
+
+    /**
+     * 方法实现说明  根据id查找某个订单
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/20 10:00
+     */
+    @Override
+    public Order findOrder(Integer id) {
+        return orderMapper.findOrder(id);
+    }
+
+    /**
+     * 方法实现说明  用户付款修改状态
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/20 10:14
+     */
+    @Override
+    public int updateOrder(Order order) {
+        return orderMapper.updateOrder(order);
+    }
 }
