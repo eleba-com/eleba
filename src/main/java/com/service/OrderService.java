@@ -87,6 +87,25 @@ public interface OrderService {
     */
     public int updateOrder(Order order);
 
+
+    /**
+    * 方法实现说明  根据id查找某个订单
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/20 10:00
+    */
+    public Order findOrder(Integer id);
+
+    /**
+    * 方法实现说明  用户付款修改状态
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/20 10:14
+    */
+    public int updateOrder(Order order);
+
     /**
      * 获取订单id
      * @author      jhao
