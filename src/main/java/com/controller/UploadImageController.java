@@ -39,7 +39,7 @@ public class UploadImageController {
     @RequestMapping(value = "uploadImage" ,method = RequestMethod.POST)
     @ResponseBody
     public Map uploadImageTest(Merchant merchant, HttpServletRequest request)throws Exception{
-        String dir = request.getSession().getServletContext().getRealPath("")+ImageConfig.imageUrl;
+        String dir = request.getSession().getServletContext().getRealPath("")+"/upload/images/";
         File file=new File(dir);
         //如果文件夹不存在
         if(!file.exists()){
