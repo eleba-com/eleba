@@ -14,5 +14,7 @@ public interface ImageConfig {
     /**
      * 图片文件名
      */
-    public static String imageUrl="/upload/images/";
+    public static String imageUrl="http:/localhost:8081/upload/images/";
+
+    //public static String
 }

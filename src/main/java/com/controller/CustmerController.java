@@ -8,6 +8,7 @@ import com.util.PrimaryKeyUtil;
 import com.util.RetryLimitHashedCredentialsMatcher;
 import com.util.UsernamePasswordCaptchaToken;
 import com.util.config.AddressDefaultConfig;
+import com.util.config.ImageConfig;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -299,8 +300,14 @@ public class CustmerController {
      Customer customer=null;
      if(record.getUsername()!=null){
          customer=custmerService.findbyUserName(record.getUsername());
+         if(customer.getHeadAddr()!=null){
+             customer.setHeadAddr(ImageConfig.imageUrl+customer.getHeadAddr());
+         }
      }else if(record.getId()!=null){
          customer=custmerService.findCustmerMessager(record.getId());
+         if(customer.getHeadAddr()!=null){
+             customer.setHeadAddr(ImageConfig.imageUrl+customer.getHeadAddr());
+         }
      }
      map.put("customer",customer);
      return map;

@@ -123,8 +123,13 @@ public interface MerchantMapper {
     * @date：       2018/12/12 15:26
     */
     int updateReviewMerchantMessage(@Param("mId") Integer mId, @Param("state") String state);
-
-
+    /**
+     * 方法实现说明  查找店铺名是否重复
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/21 9:40
+     */
     Merchant findListMerchantByName(String shopName);
 
 }
