@@ -184,6 +184,7 @@ public class MerchantController {
             Merchant record = merchantService.findByMerchantName(merchant.getUsername());
             session.setAttribute("id",record.getId());
             session.setAttribute("userName",record.getUsername());
+            map.put("record",record);
             map.put("status","0");
             map.put("message","登录成功");
 
@@ -282,10 +283,10 @@ public class MerchantController {
      Map<String,Object>map=new HashMap<>();
      int num=merchantService.updateMerchantMessage(merchant);
      if (num>0){
-         map.put("status",0);
+         map.put("status","0");
          map.put("message","修改成功");
      }else {
-         map.put("status",0);
+         map.put("status","1");
          map.put("message","修改失败");
      }
 
