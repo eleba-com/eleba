@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -180,8 +181,9 @@ public class CustmerController {
  @ResponseBody
  public Map findCustmerAddr(Address address){
      Map<String,Object> map=new HashMap<>();
-     Address addr=custmerService.findCustmerAddr(address.getuId());
-     map.put("address",addr);
+     //Address addr=custmerService.findCustmerAddr(address.getuId());
+     List<Address> addrs=custmerService.findCustmerAddr(address.getuId());
+     map.put("address",addrs);
      return map;
  }
 
@@ -225,7 +227,7 @@ public class CustmerController {
              address.setaDefault(AddressDefaultConfig.aDefault);
              int number=custmerService.updateCusAddrDefault(address);
              if (number>0){
-                 map.put("status","1");
+                 map.put("status","0");
                  map.put("message","设置成功");
              }
              else {
@@ -245,7 +247,7 @@ public class CustmerController {
          address.setaDefault(AddressDefaultConfig.aDefault);
          int number=custmerService.updateCusAddrDefault(address);
          if (number>0){
-             map.put("status","1");
+             map.put("status","0");
              map.put("message","设置成功");
          }
          else {

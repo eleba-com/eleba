@@ -5,6 +5,8 @@ import com.pojo.Address;
 import com.pojo.Customer;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
 * @Description:    用户service接口
 * @Author:         jiehao
@@ -61,7 +63,7 @@ public interface CustmerService {
     * @exception：
     * @date：       2018/11/29 20:16
     */
-    public Address findCustmerAddr(Integer uId);
+    public List<Address> findCustmerAddr(Integer uId);
 
     /**
     * 方法实现说明  用户修改地址

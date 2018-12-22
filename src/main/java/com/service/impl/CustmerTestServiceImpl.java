@@ -9,6 +9,8 @@ import com.service.CustmerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
 * @Description:    用户service接口实现类
@@ -60,7 +62,7 @@ public class CustmerTestServiceImpl implements CustmerService {
      */
     @Override
     public int addCustmerAddr(Address address) {
-        return addressMapper.insert(address);
+        return addressMapper.insertSelective(address);
     }
 
     /**
@@ -84,7 +86,7 @@ public class CustmerTestServiceImpl implements CustmerService {
     * @date：       2018/11/29 20:16
     */
     @Override
-    public Address findCustmerAddr(Integer uId) {
+    public List<Address> findCustmerAddr(Integer uId) {
         return addressMapper.findCustmerAddr(uId);
     }
 
