@@ -8,7 +8,7 @@
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="addr" jdbcType="VARCHAR" property="addr" />
-    <result column="head_addr" jdbcType="VARCHAR" property="head_Addr" />
+    <result column="head_addr" jdbcType="VARCHAR" property="head_addr" />
     <result column="mLock" jdbcType="VARCHAR" property="mLock" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="state_message_addr" jdbcType="VARCHAR" property="state_message_addr" />
