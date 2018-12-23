@@ -116,10 +116,28 @@ public class MerchantServiceImpl implements MerchantService{
     public int insertMerchant(Merchant merchant) {
         return merchantMapper.insertSelective(merchant);
     }
-
+    /**
+     * 方法实现说明  查找店铺名是否重复-
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/21 9:40
+     */
     @Override
     public Merchant findListMerchantByName(String shopName) {
         return merchantMapper.findListMerchantByName(shopName);
+    }
+
+    /**
+     * 方法实现说明  更新商家信息
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/21 9:47
+     */
+    @Override
+    public int updateMerchantMessage(Merchant merchant) {
+        return merchantMapper.updateByPrimaryKeySelective(merchant);
     }
 
 

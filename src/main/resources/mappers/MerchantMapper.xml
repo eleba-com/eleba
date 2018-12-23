@@ -8,7 +8,7 @@
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="addr" jdbcType="VARCHAR" property="addr" />
-    <result column="head_addr" jdbcType="VARCHAR" property="head_Addr" />
+    <result column="head_addr" jdbcType="VARCHAR" property="head_addr" />
     <result column="mLock" jdbcType="VARCHAR" property="mLock" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="state_message_addr" jdbcType="VARCHAR" property="state_message_addr" />
@@ -306,7 +306,7 @@
     where id = #{mId}
   </update>
 
-  <!-- jiehao 12-12 返回list商家集合-->
+  <!-- jiehao 12-12 查找店铺名是否重复-->
   <select id="findListMerchantByName" resultType="com.pojo.Merchant">
     select  * from merchant where shopName=#{shopName}
   </select>

@@ -184,6 +184,7 @@ public class MerchantController {
             Merchant record = merchantService.findByMerchantName(merchant.getUsername());
             session.setAttribute("id",record.getId());
             session.setAttribute("userName",record.getUsername());
+            map.put("record",record);
             map.put("status","0");
             map.put("message","登录成功");
 
@@ -208,7 +209,7 @@ public class MerchantController {
     }
 
  /**
- * 方法实现说明    通过商家用户名查找商家所有菜名
+ * 方法实现说明    通过商家用户名查找商家所有菜名(有错误，弃用)
  * @author：      jiehao
  * @return：
  * @exception：
@@ -252,12 +253,43 @@ public class MerchantController {
      Merchant merchant=null;
      if(recond.getShopName()!=null){
          merchant=merchantService.findByMerchantName(recond.getShopName());
-         merchant.setState_message_addr(ImageConfig.imageUrl+merchant.getState_message_addr());
+         if(merchant.getState_message_addr()!=null){
+             merchant.setState_message_addr(ImageConfig.imageUrl+merchant.getState_message_addr());
+         }if (merchant.getHead_addr()!=null){
+             merchant.setHead_addr(ImageConfig.imageUrl+merchant.getHead_addr());
+         }
      }else if (recond.getId()!=null){
          merchant=merchantService.findMerchantMessage(recond.getId());
-         merchant.setState_message_addr(ImageConfig.imageUrl+merchant.getState_message_addr());
+         if(merchant.getState_message_addr()!=null){
+             merchant.setState_message_addr(ImageConfig.imageUrl+merchant.getState_message_addr());
+         }if (merchant.getHead_addr()!=null){
+             merchant.setHead_addr(ImageConfig.imageUrl+merchant.getHead_addr());
+         }
      }
      map.put("merchant",merchant);
+     return map;
+ }
+
+ /**
+ * 方法实现说明  商家更新信息
+ * @author：      jiehao
+ * @return：
+ * @exception：
+ * @date：       2018/12/21 9:37
+ */
+ @RequestMapping(value = "updateMerchantMessage",method = RequestMethod.GET)
+ @ResponseBody
+ public Map updateMerchantMessage(Merchant merchant){
+     Map<String,Object>map=new HashMap<>();
+     int num=merchantService.updateMerchantMessage(merchant);
+     if (num>0){
+         map.put("status","0");
+         map.put("message","修改成功");
+     }else {
+         map.put("status","1");
+         map.put("message","修改失败");
+     }
+
      return map;
  }
 

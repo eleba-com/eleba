@@ -2,6 +2,8 @@ package com.dao;
 
 import com.pojo.Address;
 
+import java.util.List;
+
 public interface AddressMapper {
 
     int insert(Address record);
@@ -25,7 +27,7 @@ public interface AddressMapper {
 * @exception：
 * @date：       2018/11/29 20:17
 */
-    Address findCustmerAddr(Integer uId);
+List<Address> findCustmerAddr(Integer uId);
 
     /**
     * 方法实现说明  用户修改地址

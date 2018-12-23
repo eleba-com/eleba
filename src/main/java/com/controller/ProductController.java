@@ -70,7 +70,7 @@ public class ProductController {
             while (iterator.hasNext()){
                 p = iterator.next();
                 System.out.println("进来了， "+p.toString());
-                p.setPhoto_addr("http:/localhost:8081/upload/images/"+p.getPhoto_addr());
+                p.setPhoto_addr("http://localhost:8081/upload/images/"+p.getPhoto_addr());
             }
             map.put("商家产品",list);
         }else{

@@ -8,6 +8,7 @@ import com.util.PrimaryKeyUtil;
 import com.util.RetryLimitHashedCredentialsMatcher;
 import com.util.UsernamePasswordCaptchaToken;
 import com.util.config.AddressDefaultConfig;
+import com.util.config.ImageConfig;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -179,8 +181,9 @@ public class CustmerController {
  @ResponseBody
  public Map findCustmerAddr(Address address){
      Map<String,Object> map=new HashMap<>();
-     Address addr=custmerService.findCustmerAddr(address.getuId());
-     map.put("address",addr);
+     //Address addr=custmerService.findCustmerAddr(address.getuId());
+     List<Address> addrs=custmerService.findCustmerAddr(address.getuId());
+     map.put("address",addrs);
      return map;
  }
 
@@ -224,7 +227,7 @@ public class CustmerController {
              address.setaDefault(AddressDefaultConfig.aDefault);
              int number=custmerService.updateCusAddrDefault(address);
              if (number>0){
-                 map.put("status","1");
+                 map.put("status","0");
                  map.put("message","设置成功");
              }
              else {
@@ -244,7 +247,7 @@ public class CustmerController {
          address.setaDefault(AddressDefaultConfig.aDefault);
          int number=custmerService.updateCusAddrDefault(address);
          if (number>0){
-             map.put("status","1");
+             map.put("status","0");
              map.put("message","设置成功");
          }
          else {
@@ -299,8 +302,14 @@ public class CustmerController {
      Customer customer=null;
      if(record.getUsername()!=null){
          customer=custmerService.findbyUserName(record.getUsername());
+         if(customer.getHeadAddr()!=null){
+             customer.setHeadAddr(ImageConfig.imageUrl+customer.getHeadAddr());
+         }
      }else if(record.getId()!=null){
          customer=custmerService.findCustmerMessager(record.getId());
+         if(customer.getHeadAddr()!=null){
+             customer.setHeadAddr(ImageConfig.imageUrl+customer.getHeadAddr());
+         }
      }
      map.put("customer",customer);
      return map;
