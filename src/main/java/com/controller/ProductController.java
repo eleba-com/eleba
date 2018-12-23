@@ -40,6 +40,7 @@ public class ProductController {
         Map<String,Object> map = new HashMap<>();
         if (productService.addProduct(product)){
             map.put("message","添加成功");
+            //这里还要加一个product的id
         }else{
             map.put("message","添加失败");
         }
