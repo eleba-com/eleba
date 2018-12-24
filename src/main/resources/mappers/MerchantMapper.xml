@@ -318,4 +318,9 @@
     where id = #{id}
   </update>
 
+  <!-- jiehao 12-24 通过店铺查找商家-->
+  <select id="findMerchantByTel">
+    select * from merchant where tell=#{tel};
+  </select>
+
 </mapper>

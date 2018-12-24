@@ -173,4 +173,15 @@ public class CustmerTestServiceImpl implements CustmerService {
     public Address findAddressDefault(Integer uId) {
         return addressMapper.findAddressDefault(uId);
     }
+    /**
+     * 方法实现说明  通过电话号码查找用户
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/24 17:41
+     */
+    @Override
+    public Customer findCustmerBytel(String tel) {
+        return customerMapper.findTel(tel);
+    }
 }
