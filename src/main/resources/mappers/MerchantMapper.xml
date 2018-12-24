@@ -311,5 +311,11 @@
     select  * from merchant where shopName=#{shopName}
   </select>
 
+  <!-- jiehao 12-24 商铺营业，打烊-->
+  <update id="merchantOpenOrShoring">
+   update merchant
+    set state = #{state}
+    where id = #{id}
+  </update>
 
 </mapper>

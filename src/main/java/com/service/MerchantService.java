@@ -100,6 +100,8 @@ public interface MerchantService {
    * @exception：
    * @date：       2018/12/21 9:47
    */
-
    public int updateMerchantMessage(Merchant merchant);
+
+
+   public int merchantOpenOrShoring(Merchant merchant);
 }
