@@ -85,4 +85,6 @@ public interface OrderService {
     * @date：       2018/12/20 10:14
     */
     public int updateOrder(Order order);
+
+    public int updateOrderAddr(Order order);
 }

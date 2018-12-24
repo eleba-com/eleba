@@ -178,4 +178,9 @@ public class OrderServiceImpl implements OrderService {
     public int updateOrder(Order order) {
         return orderMapper.updateOrder(order);
     }
+
+    @Override
+    public int updateOrderAddr(Order order) {
+        return orderMapper.updateOrderAddr(order);
+    }
 }

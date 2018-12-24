@@ -76,4 +76,7 @@ public interface OrderMapper {
      * @date：       2018/12/20 10:14
      */
     int updateOrder(Order order);
+
+
+    int updateOrderAddr(Order order);
 }
