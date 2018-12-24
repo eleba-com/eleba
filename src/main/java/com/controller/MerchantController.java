@@ -294,5 +294,44 @@ public class MerchantController {
  }
 
 
+ /**
+ * 方法实现说明   商铺营业,打烊
+ * @author：      jiehao
+ * @return：
+ * @exception：
+ * @date：       2018/12/24 8:36
+ */
+ @RequestMapping(value = "merchantOpenOrShoring",method = RequestMethod.GET)
+ @ResponseBody
+ public Map merchantOpenOrShoring(Merchant merchant){
+     Map<String,Object>map=new HashMap<>();
+     System.out.println(merchant.getState());
+     //商铺打烊
+     if (merchant.getState().equals("3")){
+         merchant.setState("1");
+         System.out.println(merchant.getId());
+         int num=merchantService.merchantOpenOrShoring(merchant);
+         if (num>0){
+             map.put("status","0");
+             map.put("message","商铺已打烊");
+         }else {
+             map.put("status","1");
+             map.put("message","打烊失败");
+         }
+     }
+     //商铺营业
+     else if (merchant.getState().equals("1")){
+         merchant.setState("3");
+         int num=merchantService.merchantOpenOrShoring(merchant);
+         if (num>0){
+             map.put("status","0");
+             map.put("message","商铺开始营业");
+         }else {
+             map.put("status","1");
+             map.put("message","营业失败");
+         }
+     }
+     return map;
+ }
 
 }

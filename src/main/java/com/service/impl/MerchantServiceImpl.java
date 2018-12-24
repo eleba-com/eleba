@@ -140,5 +140,10 @@ public class MerchantServiceImpl implements MerchantService{
         return merchantMapper.updateByPrimaryKeySelective(merchant);
     }
 
+    @Override
+    public int merchantOpenOrShoring(Merchant merchant) {
+        return merchantMapper.merchantOpenOrShoring(merchant);
+    }
+
 
 }
