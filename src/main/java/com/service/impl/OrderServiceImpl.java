@@ -193,6 +193,11 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.changeOrderState(order);
     }
 
+    @Override
+    public List<Order> check3Order(int uid) {
+        return orderMapper.check3Order(uid);
+    }
+
     /**
      * 方法实现说明  根据id查找某个订单
      * @author：      jiehao

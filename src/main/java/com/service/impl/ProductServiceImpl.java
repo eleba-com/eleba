@@ -106,4 +106,9 @@ public class ProductServiceImpl implements ProductService{
     public String getAddress(int pid) {
         return productMapper.getAddress(Integer.valueOf(pid));
     }
+
+    @Override
+    public Product getProductName(int pid) {
+        return productMapper.getProductName(pid);
+    }
 }

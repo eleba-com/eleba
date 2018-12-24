@@ -118,4 +118,10 @@
     SELECT photo_addr FROM product
     WHERE id=#{pid}
   </select>
+
+  <!-- jhao 根据产品id找出这个商品的图片地址-->
+  <select id="getProductName" resultType="com.pojo.Product">
+    SELECT * FROM product
+    WHERE id=#{pid}
+  </select>
 </mapper>

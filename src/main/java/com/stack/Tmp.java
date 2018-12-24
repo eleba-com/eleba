@@ -2,7 +2,7 @@ package com.stack;
 
 import com.pojo.Order;
 
-import java.util.Stack;
+import java.util.*;
 
 /**
 * @Description:    类作用描述
@@ -16,11 +16,14 @@ import java.util.Stack;
 public class Tmp {
 
     public static Stack<Order> stack;
+    public static List<Order> orders;
+    public static Map<Integer,Object> map;
     private static Tmp tmp;
 
     private  Tmp(){
-
+        orders = new ArrayList<>();
         stack = new Stack<>();
+        map = new HashMap<>();
     }
 
     public static Tmp getTmp(){

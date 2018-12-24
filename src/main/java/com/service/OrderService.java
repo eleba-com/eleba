@@ -107,4 +107,14 @@ public interface OrderService {
      * @date        2018/12/24 11:05
      */
     public int changeOrderState(Order order);
+
+    /**
+     *  顾客查看自己最新的三个订单
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/7 10:50
+     */
+    public List<Order> check3Order(int uid);
 }

@@ -9,6 +9,10 @@ package com.pojo;
 * @Version:        1.0
 */
 public class Orderitem {
+
+    private String productName;
+
+
     /**
      * 购物车id
      */
@@ -102,5 +106,13 @@ public class Orderitem {
 
     public void setNumbers(Integer numbers) {
         this.numbers = numbers;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 }

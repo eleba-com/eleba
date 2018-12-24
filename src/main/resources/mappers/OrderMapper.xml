@@ -153,4 +153,10 @@
   <update id="changeOrderState" parameterType="com.pojo.Order">
     update orderr set stated=#{stated} where id=#{id}
   </update>
+
+  <!-- jhao 查看最新的三条的订单-->
+  <select id="check3Order" resultMap="BaseResultMap">
+    select * from orderr WHERE uid=#{uid}
+    ORDER BY create_time DESC LIMIT 3
+  </select>
 </mapper>

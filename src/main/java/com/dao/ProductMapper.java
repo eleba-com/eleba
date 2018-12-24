@@ -57,4 +57,14 @@ public interface ProductMapper {
      * @date        2018/12/10 15:36
      */
     String getAddress(Integer pid);
+
+    /**
+     * getProductName
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/24 19:27
+     */
+    Product getProductName(int pid);
 }

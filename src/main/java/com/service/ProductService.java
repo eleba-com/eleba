@@ -65,4 +65,15 @@ public interface ProductService {
      * @date        2018/12/10 15:19
      */
     public String getAddress(int pid);
+
+
+    /**
+     * getProductName
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/24 19:27
+     */
+    public Product getProductName(int pid);
 }

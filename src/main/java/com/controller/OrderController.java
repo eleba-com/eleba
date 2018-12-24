@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.pojo.Merchant;
 import com.pojo.Order;
 import com.pojo.Orderitem;
+import com.pojo.Product;
 import com.service.OrderItemService;
 import com.service.OrderService;
 import com.service.ProductService;
@@ -71,6 +72,8 @@ public class OrderController implements OrderConfig{
             if(integer!=null){
                 map.put("message","successful");
                 map.put("id",integer);
+
+                tmp.map.put(integer,order);
             }else{
                 map.put("message","successful but no id");
             }
@@ -174,23 +177,30 @@ public class OrderController implements OrderConfig{
     @RequestMapping("return3LastOrder")
     public Map return3LastOrder(Order order){
         Map<String,Object> map = new HashMap<>();
-        try{Order[] orders = new Order[5];
-            for(int i=0;i<3;i++){
-                if(Tmp.getTmp().stack.isEmpty()){
-                    break;
+        try{
+            List<Order> list = orderService.check3Order(order.getUid());
+            Iterator<Order> iterator = list.iterator();
+            List<Orderitem> orderitemList = new ArrayList<>();
+            int j =0;
+            while(iterator.hasNext()){
+
+                Order orderr = iterator.next();
+                String[] strs = orderr.getOiId().split(",");
+                for(int i=0;i<strs.length;i++){
+                    Orderitem orderitem = orderItemService.checkDetails(Integer.parseInt(strs[i]));
+                    orderitem.setProductName(productService.getProductName(orderitem.getPid()).getName());
+                    orderitemList.add(orderitem);
                 }
-                orders[i] = Tmp.getTmp().stack.pop();
+                map.put("orderitems"+String.valueOf(j++),orderitemList);
+
             }
-            map.put("message",orders);
-
-        }catch(Exception e){
+            System.out.println("list = " + list.toString());
+            map.put("message","success");
+            map.put("lists",list);
+        }catch (Exception e){
             e.printStackTrace();
-            map.put("message","没有订单");
+            map.put("mistake","error");
         }
-
-
-
-
         return map;
     }
 
@@ -238,10 +248,17 @@ public class OrderController implements OrderConfig{
                 List<Orderitem> list = new ArrayList<>();
                 String[] strs = iterator.next().getOiId().split(",");
                 for(int i = 0;i<strs.length;i++){
-                    Orderitem orderitem = orderItemService.checkDetails(Integer.valueOf(strs[i]));
+                    if(strs[i]==""){
+                        break;
+                    };
+                    System.out.println("格式 = "+Integer.parseInt(strs[i]));
+                    Orderitem orderitem = orderItemService.checkDetails(Integer.parseInt(strs[i]));
+
+                    Product product  = productService.getProductName(orderitem.getPid());
+                    orderitem.setProductName(product.getName());
                     list.add(orderitem);
                 }
-                map.put(String.valueOf(j),list);
+                map.put(String.valueOf(j++),list);
             }
             map.put("message",lists);
         }else {
@@ -282,4 +299,7 @@ public class OrderController implements OrderConfig{
 
         return map;
     }
+
+
+
 }
