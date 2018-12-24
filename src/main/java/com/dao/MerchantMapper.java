@@ -132,4 +132,7 @@ public interface MerchantMapper {
      */
     Merchant findListMerchantByName(String shopName);
 
+
+    int merchantOpenOrShoring(Merchant merchant);
+
 }

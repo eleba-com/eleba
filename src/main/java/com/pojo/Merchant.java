@@ -46,7 +46,7 @@ public class Merchant {
      */
     private String mLock;
     /**
-     * 0为未审核，1为已审核，2为不予通过审核
+     * 0为未审核，1为已审核（打烊），2为不予通过审核，3为营业
      */
     private String state;
     /**
