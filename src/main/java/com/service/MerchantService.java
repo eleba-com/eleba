@@ -102,6 +102,20 @@ public interface MerchantService {
    */
    public int updateMerchantMessage(Merchant merchant);
 
-
+    /**
+     * 方法实现说明   商铺营业,打烊
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/24 8:36
+     */
    public int merchantOpenOrShoring(Merchant merchant);
+   /**
+   * 方法实现说明  通过电话号码查找商家
+   * @author：      jiehao
+   * @return：
+   * @exception：
+   * @date：       2018/12/24 17:40
+   */
+   public Merchant findMerchantByTel(String tel);
 }
