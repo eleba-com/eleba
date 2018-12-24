@@ -107,8 +107,6 @@
         <!--<property name="cacheManager" ref="shiroCacheManager" />-->
     </bean>
 
-
-
     <bean id="ShiroReam" class="com.util.ShiroReam">
         <property name="credentialsMatcher" ref="credentialsMatcher"></property>
     </bean>
