@@ -221,15 +221,21 @@ public class PaymentController {
             Order order=orderService.findOrder(Integer.valueOf(out_trade_no));
             if(order==null){
                 signVerified=false;
+                order.setStated("7");
+                orderService.updateOrder(order);
                 request.setAttribute("signVerified", signVerified);
                 request.setAttribute("reason", "商户订单号不存在");
             }else {
                 if(!order.getTotal_price().equals(Float.valueOf(total_amount))){
                     signVerified=false;
+                    order.setStated("7");
+                    orderService.updateOrder(order);
                     request.setAttribute("signVerified", signVerified);
                     request.setAttribute("reason","金额不符合");
                 }
                 if (order.getStated()==String.valueOf(1)){
+                    order.setStated("7");
+                    orderService.updateOrder(order);
                     request.setAttribute("reason","不需要重复处理订单");
                 }
                 else {
