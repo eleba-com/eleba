@@ -160,6 +160,7 @@ public class OrderServiceImpl implements OrderService {
             e.printStackTrace();
             return false;
         }
+
     }
 
     /**
@@ -217,5 +218,8 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.updateOrder(order);
     }
 
-
+    @Override
+    public int updateOrderAddr(Order order) {
+        return orderMapper.updateOrderAddr(order);
+    }
 }

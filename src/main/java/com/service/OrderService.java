@@ -107,4 +107,6 @@ public interface OrderService {
      * @date        2018/12/24 11:05
      */
     public int changeOrderState(Order order);
+
+    public int updateOrderAddr(Order order);
 }

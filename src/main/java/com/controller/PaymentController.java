@@ -68,12 +68,16 @@ public class PaymentController {
         //订单名称，必填
         String subject = orderName;
         //商品描述，可空
-        // String body = order.getDescription();
+         //String body = order.getAddr();
+
+        String addr=order.getAddr();
+         System.out.println(addr);
+         orderService.updateOrderAddr(order);
 
         alipayRequest.setBizContent("{\"out_trade_no\":\"" + out_trade_no + "\","
                 + "\"total_amount\":\"" + total_amount + "\","
                 + "\"subject\":\"" + subject + "\","
-                // + "\"body\":\""+ body +"\","
+                // + "\"body\":\""+body+"\","
                 + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
         //请求
         String result = alipayClient.pageExecute(alipayRequest).getBody();
@@ -124,8 +128,10 @@ public class PaymentController {
             String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
 
             log.info("订单处理：系统订单号" + out_trade_no + "支付宝交易号：" + trade_no);
-
+            System.out.println(Float.valueOf(total_amount));
             Order order=orderService.findOrder(Integer.valueOf(out_trade_no));
+            System.out.println(order.getTotal_price());
+
             if(order==null){
                 signVerified=false;
                 map.put("signVerfied",signVerified);
@@ -133,7 +139,7 @@ public class PaymentController {
                 System.out.println("订单不存在");
                 return "redirect:/pay.jsp";
             }else {
-                if(!String.valueOf(order.getTotal_price()).equals(total_amount)){
+                if(!order.getTotal_price().equals(Float.valueOf(total_amount))){
                     signVerified=false;
                     map.put("signVerfied",signVerified);
                     map.put("reason","订单金额错误");
@@ -142,11 +148,12 @@ public class PaymentController {
                 }
                 if (order.getStated()==String.valueOf(1)){
                     map.put("reason","不需要重复处理订单");
-                    System.out.println("订单金额错误");
+                    System.out.println("不需要重复处理订单");
                     return "redirect:/pay.jsp";
                 }
                 else {
                     order.setStated("1");
+                   // order.setAddr(addr);
                    int num=orderService.updateOrder(order);
                     map.put("rsason","支付成功");
                     System.out.println("支付成功");

@@ -99,4 +99,7 @@ public interface OrderMapper {
      */
     int changeOrderState(Order order);
 
+
+
+    int updateOrderAddr(Order order);
 }
