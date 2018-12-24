@@ -38,7 +38,7 @@ public class CustmerTestServiceImpl implements CustmerService {
     */
     @Override
     public int insert(Customer customer) {
-        return customerMapper.insert(customer);
+        return customerMapper.insertSelective(customer);
     }
 
     /**
