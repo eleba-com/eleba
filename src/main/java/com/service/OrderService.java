@@ -85,6 +85,12 @@ public interface OrderService {
     * @date：       2018/12/20 10:14
     */
     public int updateOrder(Order order);
-
+    /**
+     * 方法实现说明   插入订单地址
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/24 16:00
+     */
     public int updateOrderAddr(Order order);
 }
