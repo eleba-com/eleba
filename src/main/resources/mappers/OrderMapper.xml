@@ -108,12 +108,12 @@
   <!-- jhao 获取订单id -->
   <select id="getOrderId" resultType="java.lang.Integer">
 
-SELECT
-	AUTO_INCREMENT
-FROM
-	INFORMATION_SCHEMA. TABLES
-WHERE
-	TABLE_NAME = 'orderr'
+    SELECT
+    AUTO_INCREMENT
+    FROM
+    INFORMATION_SCHEMA. TABLES
+    WHERE
+    TABLE_NAME = 'orderr'
 
   </select>
   <!-- jhao 添加订单-->
@@ -147,5 +147,10 @@ WHERE
    <!-- jiehao 11-20 修改订单为已付款状态-->
   <update id="updateOrder">
     update orderr set stated =#{stated} where id=#{id}
+  </update>
+
+  <!-- jhao商家确认订单之后的修改数据库状态 -->
+  <update id="changeOrderState" parameterType="com.pojo.Order">
+    update orderr set stated=#{stated} where id=#{id}
   </update>
 </mapper>

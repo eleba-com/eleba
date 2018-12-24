@@ -88,4 +88,15 @@ public interface OrderMapper {
      */
     Integer getOrderId();
 
+
+    /**
+     * 改订单状态
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/24 11:04
+     */
+    int changeOrderState(Order order);
+
 }

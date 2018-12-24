@@ -188,6 +188,11 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.getOrderId()-1;
     }
 
+    @Override
+    public int changeOrderState(Order order) {
+        return orderMapper.changeOrderState(order);
+    }
+
     /**
      * 方法实现说明  根据id查找某个订单
      * @author：      jiehao

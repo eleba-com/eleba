@@ -96,4 +96,15 @@ public interface OrderService {
      * @date        2018/12/20 10:27
      */
     public Integer getOrderId();
+
+
+    /**
+     * changeOrderState
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/24 11:05
+     */
+    public int changeOrderState(Order order);
 }

@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.alipay.api.domain.OrderItem;
 import com.google.gson.Gson;
 import com.pojo.Merchant;
 import com.pojo.Order;
@@ -7,6 +8,7 @@ import com.pojo.Orderitem;
 import com.service.OrderItemService;
 import com.service.OrderService;
 import com.service.ProductService;
+import com.stack.Tmp;
 import com.util.config.OrderConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,6 +61,9 @@ public class OrderController implements OrderConfig{
         order.setOrderitems(orderitems1);
         Date date = new Date();
         order.setCreate_time(date);
+        //
+        Tmp tmp = Tmp.getTmp();
+        tmp.stack.push(order);
         System.out.println("date1 = " + date.toString());
         if(orderService.insert(order)){
             System.out.println("date2 = " + date.toString());
@@ -66,8 +71,10 @@ public class OrderController implements OrderConfig{
             if(integer!=null){
                 map.put("message","successful");
                 map.put("id",integer);
+            }else{
+                map.put("message","successful but no id");
             }
-            map.put("message","successful but no id");
+
 
         }else {
             map.put("message","error");
@@ -108,13 +115,20 @@ public class OrderController implements OrderConfig{
      * @date        2018/12/7 10:46
      * @Update  V2 查看的是最新三条已经完成的订单
      *
+     *
      */
     @ResponseBody
     @RequestMapping("checkOrder")
     public Map checkOrder(Order order){
 
         Map<String,Object> map = new HashMap<>();
-       List<Order> orderList = orderService.checkOrder(order.getUid());
+        List<Order> orderList = null;
+        try{
+            orderList = orderService.checkOrder(order.getUid());
+        }catch (Exception e){
+            map.put("message","error");
+        }
+
         if (orderList!=null){
             //在这里将所有的orderItem查出来一并返回给前端
             //这边是可以整合到OrderItemService中的！
@@ -149,6 +163,28 @@ public class OrderController implements OrderConfig{
 
 
     /**
+     * 返回最新的三个订单，包括已完成以及未完成的
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/24 13:09
+     */
+    @ResponseBody
+    @RequestMapping("return3LastOrder")
+    public Map return3LastOrder(Order order){
+        Map<String,Object> map = new HashMap<>();
+        Order[] orders = new Order[5];
+        for(int i=0;i<3;i++){
+            orders[i] = Tmp.getTmp().stack.pop();
+        }
+        map.put("message",orders);
+
+        return map;
+    }
+
+
+    /**
      * 商家接单
      * @author      jhao
      * @param
@@ -171,16 +207,67 @@ public class OrderController implements OrderConfig{
     }
 
 
+    /**
+     * 商家获取订单
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/24 10:27
+     */
     @RequestMapping("getOrders")
     @ResponseBody
     public Map getOrders(Merchant merchant){
         Map<String,Object> map = new HashMap<>();
         List<Order> lists = orderService.getOrders(merchant.getId(),MADE_ORDER);
         if(lists!=null){
+            Iterator<Order> iterator = lists.iterator();
+            int j = 0;
+            while(iterator.hasNext()){
+                List<Orderitem> list = new ArrayList<>();
+                String[] strs = iterator.next().getOiId().split(",");
+                for(int i = 0;i<strs.length;i++){
+                    Orderitem orderitem = orderItemService.checkDetails(Integer.valueOf(strs[i]));
+                    list.add(orderitem);
+                }
+                map.put(String.valueOf(j),list);
+            }
             map.put("message",lists);
         }else {
             map.put("message","无法获取订单");
         }
+
+        return map;
+    }
+
+
+    /**
+     * 确认订单
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/24 11:07
+     */
+    @RequestMapping("changeOrderState")
+    @ResponseBody
+    public Map changeOrdered(int id){
+
+        Map<String,Object> map = new HashMap<>();
+        Order order = new Order();
+        order.setId(id);
+        order.setStated("5");
+        try{
+            orderService.changeOrderState(order);
+            map.put("message","已接单");
+        }
+       catch (Exception e){
+           map.put("message","接单失败");
+           e.printStackTrace();
+       }
+
+
+
 
         return map;
     }
