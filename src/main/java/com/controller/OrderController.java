@@ -174,11 +174,22 @@ public class OrderController implements OrderConfig{
     @RequestMapping("return3LastOrder")
     public Map return3LastOrder(Order order){
         Map<String,Object> map = new HashMap<>();
-        Order[] orders = new Order[5];
-        for(int i=0;i<3;i++){
-            orders[i] = Tmp.getTmp().stack.pop();
+        try{Order[] orders = new Order[5];
+            for(int i=0;i<3;i++){
+                if(Tmp.getTmp().stack.isEmpty()){
+                    break;
+                }
+                orders[i] = Tmp.getTmp().stack.pop();
+            }
+            map.put("message",orders);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            map.put("message","没有订单");
         }
-        map.put("message",orders);
+
+
+
 
         return map;
     }
