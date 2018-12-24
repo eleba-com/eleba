@@ -58,12 +58,14 @@ public class CustmerController {
     */
     @RequestMapping(value = "register",method = RequestMethod.GET)
     @ResponseBody
-    public Map registerCustmer(Customer customer){
+    public Map registerCustmer(Customer customer) {
         //Customer record=new Customer();
         System.out.println("进入了方法");
-        Map<String,Object> map = new HashMap<String, Object>();
-        Customer user=custmerService.findbyUserName(customer.getUsername());
-        if(user==null) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        Customer user = custmerService.findbyUserName(customer.getUsername());
+        Customer record = custmerService.findCustmerBytel(customer.getTell());
+        if (user == null) {
+            if (record == null) {
             customer.setPasswordsalt(PrimaryKeyUtil.getAllRandomString(4));
             System.out.println(customer.getPasswordsalt());
             //二次加密;
@@ -73,13 +75,18 @@ public class CustmerController {
             if (custmerService.insert(customer) == 1) {
                 //注册成功
                 map.put("status", "0");
-                map.put("message","注册成功");
+                map.put("message", "注册成功");
             } else {
                 //注册失败
                 map.put("status", "1");
-                map.put("message","注册失败");
+                map.put("message", "注册失败");
             }
         }
+        else {
+                map.put("status","3");
+                map.put("message","电话号码重复");
+            }
+    }
         else {
             //用户名重复
             map.put("status","2");

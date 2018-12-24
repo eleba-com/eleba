@@ -16,21 +16,24 @@
     <!--
   <param-value>classpapplicationContext-spring.xml.xml</param-value>
   -->
-    <param-value>classpath*:/applicationContext-*.xml</param-value>
+    <param-value>
+      classpath*:/applicationContext-*.xml
+    </param-value>
+
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  <!--
-    <filter>
-      <filter-name>ShiroFilter</filter-name>
-      <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-      <filter-name>ShiroFilter</filter-name>
-      <url-pattern>/*</url-pattern>
-    </filter-mapping>
-  -->
+
+  <!--<filter>-->
+  <!--<filter-name>ShiroFilter</filter-name>-->
+  <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+  <!--<filter-name>ShiroFilter</filter-name>-->
+  <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+
   <!-- spring mvc核心：分发servlet -->
   <servlet>
     <servlet-name>mvc-dispatcher</servlet-name>

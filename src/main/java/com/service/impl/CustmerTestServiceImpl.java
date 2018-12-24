@@ -38,7 +38,7 @@ public class CustmerTestServiceImpl implements CustmerService {
     */
     @Override
     public int insert(Customer customer) {
-        return customerMapper.insert(customer);
+        return customerMapper.insertSelective(customer);
     }
 
     /**
@@ -172,5 +172,16 @@ public class CustmerTestServiceImpl implements CustmerService {
     @Override
     public Address findAddressDefault(Integer uId) {
         return addressMapper.findAddressDefault(uId);
+    }
+    /**
+     * 方法实现说明  通过电话号码查找用户
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/24 17:41
+     */
+    @Override
+    public Customer findCustmerBytel(String tel) {
+        return customerMapper.findTel(tel);
     }
 }

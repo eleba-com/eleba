@@ -139,10 +139,27 @@ public class MerchantServiceImpl implements MerchantService{
     public int updateMerchantMessage(Merchant merchant) {
         return merchantMapper.updateByPrimaryKeySelective(merchant);
     }
-
+    /**
+     * 方法实现说明   商铺营业,打烊
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/24 8:36
+     */
     @Override
     public int merchantOpenOrShoring(Merchant merchant) {
         return merchantMapper.merchantOpenOrShoring(merchant);
+    }
+    /**
+     * 方法实现说明  通过电话号码查找商家
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/24 17:40
+     */
+    @Override
+    public Merchant findMerchantByTel(String tel) {
+        return merchantMapper.findMerchantByTel(tel);
     }
 
 

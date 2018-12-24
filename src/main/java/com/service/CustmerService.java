@@ -132,4 +132,13 @@ public interface CustmerService {
     */
     public Address findAddressDefault(Integer uId);
 
+    /**
+    * 方法实现说明  通过电话号码查找用户
+    * @author：      jiehao
+    * @return：
+    * @exception：
+    * @date：       2018/12/24 17:41
+    */
+    public Customer findCustmerBytel(String tel);
+
 }

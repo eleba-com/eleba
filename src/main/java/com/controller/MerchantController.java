@@ -137,26 +137,31 @@ public class MerchantController {
         Map<String,Object> map=new HashMap<>();
         Merchant record=merchantService.findByMerchantName(merchant.getUsername());
         Merchant shopname=merchantService.findListMerchantByName(merchant.getShopName());
+        Merchant user=merchantService.findMerchantByTel(merchant.getTell());
         if (record == null){
-                if(shopname ==null){
-                    System.out.println("++++++++++++=");
+                if(shopname ==null) {
+                    if (user == null) {
                     merchant.setPasswordSalt(PrimaryKeyUtil.getAllRandomString(4));
-                    merchant.setPassword(new SimpleHash(matcher.getHashAlgorithmName(),merchant.getPassword(),
-                            merchant.getPasswordSalt(),matcher.getHashIterations()).toString());
-                    int number=merchantService.insertMerchant(merchant);
-                    if (number>0){
-                        map.put("status","0");
-                        map.put("message","用户注册成功");
-                    }else {
-                        map.put("status","1");
-                        map.put("message","用户注册失败");
+                    merchant.setPassword(new SimpleHash(matcher.getHashAlgorithmName(), merchant.getPassword(),
+                            merchant.getPasswordSalt(), matcher.getHashIterations()).toString());
+                    int number = merchantService.insertMerchant(merchant);
+                    if (number > 0) {
+                        map.put("status", "0");
+                        map.put("message", "用户注册成功");
+                    } else {
+                        map.put("status", "1");
+                        map.put("message", "用户注册失败");
+                    }
+                }
+                else {
+                        map.put("status","4");
+                        map.put("message","电话号码重复");
                     }
                 }else {
                     map.put("status","3");
                     map.put("message","店铺名重复");
                 }
         }else{
-            System.out.println("===========================");
             map.put("record",record);
             map.put("status","2");
             map.put("message","用户名重复");

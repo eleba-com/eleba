@@ -59,7 +59,7 @@ public class ManagerServiceImpl implements ManagerService {
     */
     @Override
     public int addManager(Manager manager) {
-        return managerMapper.insert(manager);
+        return managerMapper.insertSelective(manager);
     }
     /**
     * 方法实现说明   记录管理员管理用户的操作

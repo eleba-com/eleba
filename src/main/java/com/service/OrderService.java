@@ -117,4 +117,13 @@ public interface OrderService {
      * @date        2018/12/7 10:50
      */
     public List<Order> check3Order(int uid);
+
+    /**
+     * 方法实现说明   插入订单地址
+     * @author：      jiehao
+     * @return：
+     * @exception：
+     * @date：       2018/12/24 16:00
+     */
+    public int updateOrderAddr(Order order);
 }
