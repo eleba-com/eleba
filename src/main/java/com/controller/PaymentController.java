@@ -134,22 +134,28 @@ public class PaymentController {
 
             if(order==null){
                 signVerified=false;
-                map.put("signVerfied",signVerified);
-                map.put("resaon","订单不存在");
-                System.out.println("订单不存在");
-                return "redirect:/pay.jsp";
+                order.setStated("7");
+                orderService.updateOrder(order);
+//                map.put("signVerfied",signVerified);
+//                map.put("resaon","订单不存在");
+//                System.out.println("订单不存在");
+                return "redirect:/error.jsp";
             }else {
                 if(!order.getTotal_price().equals(Float.valueOf(total_amount))){
                     signVerified=false;
-                    map.put("signVerfied",signVerified);
-                    map.put("reason","订单金额错误");
-                    System.out.println("订单金额错误");
-                    return "redirect:/pay.jsp";
+                    order.setStated("7");
+                    orderService.updateOrder(order);
+//                    map.put("signVerfied",signVerified);
+//                    map.put("reason","订单金额错误");
+//                    System.out.println("订单金额错误");
+                    return "redirect:/error.jsp";
                 }
                 if (order.getStated()==String.valueOf(1)){
-                    map.put("reason","不需要重复处理订单");
-                    System.out.println("不需要重复处理订单");
-                    return "redirect:/pay.jsp";
+                    order.setStated("7");
+//                    orderService.updateOrder(order);
+//                    map.put("reason","不需要重复处理订单");
+//                    System.out.println("不需要重复处理订单");
+                    return "redirect:/error.jsp";
                 }
                 else {
                     order.setStated("1");
@@ -218,7 +224,7 @@ public class PaymentController {
                 request.setAttribute("signVerified", signVerified);
                 request.setAttribute("reason", "商户订单号不存在");
             }else {
-                if(!String.valueOf(order.getTotal_price()).equals(total_amount)){
+                if(!order.getTotal_price().equals(Float.valueOf(total_amount))){
                     signVerified=false;
                     request.setAttribute("signVerified", signVerified);
                     request.setAttribute("reason","金额不符合");
