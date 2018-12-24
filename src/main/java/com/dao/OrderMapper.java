@@ -86,6 +86,6 @@ public interface OrderMapper {
      * @exception
      * @date        2018/12/20 10:27
      */
-    Order getOrderId(Date create_time);
+    Integer getOrderId();
 
 }

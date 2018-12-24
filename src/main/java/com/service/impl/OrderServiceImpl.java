@@ -52,8 +52,11 @@ public class OrderServiceImpl implements OrderService {
 //        while(iter.hasNext()){
 //            orderItemService.addOrderItem(iter.next());
 //        }
+        //这里还没有将uid填补进去
+
         if(orderitems!=null){
             for (int i=0;i<orderitems.length;i++){
+                orderitems[i].setUid(order.getUid());
                 orderItemService.addOrderItem(orderitems[i]);
             }
         }
@@ -181,8 +184,8 @@ public class OrderServiceImpl implements OrderService {
      * @date        2018/12/20 10:28
      */
     @Override
-    public Order getOrderId(Date create_time) {
-        return orderMapper.getOrderId(create_time);
+    public Integer getOrderId() {
+        return orderMapper.getOrderId()-1;
     }
 
     /**

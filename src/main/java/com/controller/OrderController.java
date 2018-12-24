@@ -51,19 +51,21 @@ public class OrderController implements OrderConfig{
     */
 
     @ResponseBody
-    @RequestMapping(value = "insertOrder",method ={RequestMethod.POST})
-    public Map insertOrder(Order order,String orderitems ){
+    @RequestMapping(value = "insertOrder",method =RequestMethod.POST)
+    public Map insertOrder(Order order,String items ){
         Map<String,Object> map = new HashMap<>();
         Gson gson = new Gson();
-        Orderitem[] orderitems1= gson.fromJson(orderitems, Orderitem[].class);
+        Orderitem[] orderitems1= gson.fromJson(items, Orderitem[].class);
         order.setOrderitems(orderitems1);
         Date date = new Date();
         order.setCreate_time(date);
+        System.out.println("date1 = " + date.toString());
         if(orderService.insert(order)){
-            Order order1 = orderService.getOrderId(date);
-            if(order1!=null){
+            System.out.println("date2 = " + date.toString());
+            Integer integer = orderService.getOrderId();
+            if(integer!=null){
                 map.put("message","successful");
-                map.put("id",order1.getId());
+                map.put("id",integer);
             }
             map.put("message","successful but no id");
 

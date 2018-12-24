@@ -95,5 +95,5 @@ public interface OrderService {
      * @exception
      * @date        2018/12/20 10:27
      */
-    public Order getOrderId(Date create_time);
+    public Integer getOrderId();
 }

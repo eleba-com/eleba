@@ -106,8 +106,15 @@
   <!--</update>-->
 
   <!-- jhao 获取订单id -->
-  <select id="getOrderId">
-    select * from orderr where create_time=#{create_time}
+  <select id="getOrderId" resultType="java.lang.Integer">
+
+SELECT
+	AUTO_INCREMENT
+FROM
+	INFORMATION_SCHEMA. TABLES
+WHERE
+	TABLE_NAME = 'orderr'
+
   </select>
   <!-- jhao 添加订单-->
   <insert id="inserted" parameterType="com.pojo.Order">
