@@ -45,4 +45,9 @@ public interface OrderConfig {
      * 已完成退单
      */
     public static String refunded = "6";
+
+    /**
+     * 付款失败
+     */
+    public static String payFailed="7";
 }
