@@ -211,7 +211,7 @@
   <!-- jhao 11-24 根据类型返回商家 -->
   <select id="listMerchantByType" parameterType="String" resultType="com.pojo.Merchant">
     SELECT * FROM merchant
-      WHERE mType=#{mType} and state=1 and mLock=0
+      WHERE mType=#{mType} and state in (1,3) and mLock=0
   </select>
 
   <!-- jhao 11-26 返回所有商家的类型 -->
@@ -319,7 +319,7 @@
   </update>
 
   <!-- jiehao 12-24 通过店铺查找商家-->
-  <select id="findMerchantByTel">
+  <select id="findMerchantByTel" resultType="com.pojo.Merchant">
     select * from merchant where tell=#{tel};
   </select>
 
