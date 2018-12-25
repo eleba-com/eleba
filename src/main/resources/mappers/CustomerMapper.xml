@@ -54,8 +54,8 @@
       <if test="addrId != null">
         addr_id,
       </if>
-      <if test="headAddr != null">
-        head_addr,
+      <if test=" headAddr != null">
+        headAddr,
       </if>
       <if test="vip != null">
         vip,
@@ -83,7 +83,7 @@
       <if test="addrId != null">
         #{addrId,jdbcType=INTEGER},
       </if>
-      <if test="headAddr != null">
+      <if test=" headAddr != null">
         #{headAddr,jdbcType=VARCHAR},
       </if>
       <if test="vip != null">
@@ -97,6 +97,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Customer">
     update customer
     <set>
@@ -112,7 +113,7 @@
       <if test="addrId != null">
         addr_id = #{addrId,jdbcType=INTEGER},
       </if>
-      <if test="headAddr != null">
+      <if test="headAddr!= null">
         head_addr = #{headAddr,jdbcType=VARCHAR},
       </if>
       <if test="vip != null">
@@ -127,6 +128,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.pojo.Customer">
     update customer
     set tell = #{tell,jdbcType=VARCHAR},
