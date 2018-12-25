@@ -139,7 +139,7 @@ public class PaymentController {
 //                map.put("signVerfied",signVerified);
 //                map.put("resaon","订单不存在");
 //                System.out.println("订单不存在");
-                return "redirect:/error.jsp";
+                return "error";
             }else {
                 if(!order.getTotal_price().equals(Float.valueOf(total_amount))){
                     signVerified=false;
@@ -155,7 +155,7 @@ public class PaymentController {
 //                    orderService.updateOrder(order);
 //                    map.put("reason","不需要重复处理订单");
 //                    System.out.println("不需要重复处理订单");
-                    return "redirect:/error.jsp";
+                    return "error";
                 }
                 else {
                     order.setStated("1");
@@ -163,7 +163,7 @@ public class PaymentController {
                    int num=orderService.updateOrder(order);
                     map.put("rsason","支付成功");
                     System.out.println("支付成功");
-                    return "redirect:/pay.jsp";
+                    return "pay";
                 }
             }
         }else {
