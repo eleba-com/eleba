@@ -253,11 +253,12 @@ public class OrderController implements OrderConfig{
                 int numbers;
                 String names;
 
+                StringBuffer pnameAndNumbers = new StringBuffer();
                 for(int i = 0;i<strs.length;i++){
                     if(strs[i]==""){
                         break;
                     };
-                    StringBuffer pnameAndNumbers = new StringBuffer();
+
                     System.out.println("格式 = "+Integer.parseInt(strs[i]));
                     Orderitem orderitem = orderItemService.checkDetails(Integer.parseInt(strs[i]));
 
@@ -266,11 +267,14 @@ public class OrderController implements OrderConfig{
                     names = product.getName();
                     numbers = orderitem.getNumbers();
                     pnameAndNumbers.append(names);
+                    pnameAndNumbers.append(",");
                     pnameAndNumbers.append(numbers);
+                    pnameAndNumbers.append(";");
                     list.add(orderitem);
-                    order.setpNameAndNumner(pnameAndNumbers.toString());
+
                 }
                // map1.put("orderitems"+String.valueOf(j++),list);
+                 order.setpNameAndNumner(pnameAndNumbers.toString());
             }
             //map.put("orderitems",map1);
             map.put("message",lists);
