@@ -32,7 +32,7 @@ public class Customer {
     /**
      * 头像地址
      */
-    private String head_addr;
+    private String headAddr;
     /**
      * vip地址
      */
@@ -87,11 +87,11 @@ public class Customer {
     }
 
     public String getHeadAddr() {
-        return head_addr;
+        return headAddr;
     }
 
     public void setHeadAddr(String headAddr) {
-        this.head_addr = headAddr;
+        this.headAddr = headAddr;
     }
 
     public Integer getVip() {
