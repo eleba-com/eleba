@@ -240,26 +240,39 @@ public class OrderController implements OrderConfig{
     @ResponseBody
     public Map getOrders(Merchant merchant){
         Map<String,Object> map = new HashMap<>();
+        Map<String,Object> map1 = new HashMap<>();
         List<Order> lists = orderService.getOrders(merchant.getId(),MADE_ORDER);
         if(lists!=null){
             Iterator<Order> iterator = lists.iterator();
             int j = 0;
             while(iterator.hasNext()){
                 List<Orderitem> list = new ArrayList<>();
-                String[] strs = iterator.next().getOiId().split(",");
+                Order order = iterator.next();
+                String[] strs = order.getOiId().split(",");
+                //
+                int numbers;
+                String names;
+
                 for(int i = 0;i<strs.length;i++){
                     if(strs[i]==""){
                         break;
                     };
+                    StringBuffer pnameAndNumbers = new StringBuffer();
                     System.out.println("格式 = "+Integer.parseInt(strs[i]));
                     Orderitem orderitem = orderItemService.checkDetails(Integer.parseInt(strs[i]));
 
                     Product product  = productService.getProductName(orderitem.getPid());
                     orderitem.setProductName(product.getName());
+                    names = product.getName();
+                    numbers = orderitem.getNumbers();
+                    pnameAndNumbers.append(names);
+                    pnameAndNumbers.append(numbers);
                     list.add(orderitem);
+                    order.setpNameAndNumner(pnameAndNumbers.toString());
                 }
-                map.put(String.valueOf(j++),list);
+               // map1.put("orderitems"+String.valueOf(j++),list);
             }
+            //map.put("orderitems",map1);
             map.put("message",lists);
         }else {
             map.put("message","无法获取订单");

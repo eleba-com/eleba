@@ -13,6 +13,17 @@ import java.util.List;
 * @Version:        1.0
 */
 public class Order {
+
+    private String pNameAndNumner;
+
+    public String getpNameAndNumner() {
+        return pNameAndNumner;
+    }
+
+    public void setpNameAndNumner(String pNameAndNumner) {
+        this.pNameAndNumner = pNameAndNumner;
+    }
+
     /**
      * 订单id
      */
