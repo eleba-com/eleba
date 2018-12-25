@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.pojo.Orderitem;
+import com.pojo.Product;
 
 import java.util.List;
 
@@ -59,4 +60,15 @@ public interface OrderitemMapper {
      * @date        2018/12/10 11:49
      */
     Orderitem checkDetails(int id);
+
+
+    /**
+     * getProductName
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/25 16:27
+     */
+    Product getProductName(int id);
 }

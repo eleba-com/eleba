@@ -2,6 +2,7 @@ package com.service;
 
 import com.pojo.Order;
 import com.pojo.Orderitem;
+import com.pojo.Product;
 
 import java.util.List;
 
@@ -89,6 +90,16 @@ public interface OrderItemService {
      */
     public Orderitem checkDetails(int id);
 
+
+    /**
+     * getProductName
+     * @author      jhao
+     * @param
+     * @return
+     * @exception
+     * @date        2018/12/25 16:27
+     */
+    Product getProductName(int id);
 
 
 }

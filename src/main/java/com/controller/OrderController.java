@@ -110,13 +110,13 @@ public class OrderController implements OrderConfig{
     }
 
     /**
-     * 查看订单
+     * 用户查看订单
      * @author      jhao
      * @param   order
      * @return
      * @exception
      * @date        2018/12/7 10:46
-     * @Update  V2 查看的是最新三条已经完成的订单
+     * @Update  V3 查看的是所有的订单
      *
      *
      */
@@ -136,10 +136,11 @@ public class OrderController implements OrderConfig{
             //在这里将所有的orderItem查出来一并返回给前端
             //这边是可以整合到OrderItemService中的！
             Iterator<Order> iter = orderList.iterator();
-
+            StringBuffer sb = new StringBuffer();
             List<Map> orderitems = new ArrayList<>();
             while(iter.hasNext()){
-                String s = iter.next().getOiId();
+                Order order1 = iter.next();
+                String s = order1.getOiId();
                 String[] strs = s.split(",");
                 Map<Integer,Object> mapOrderItem = new HashMap<>();
                 for(int i=0;i<strs.length;i++){
@@ -147,16 +148,22 @@ public class OrderController implements OrderConfig{
                     Orderitem orderitem = orderItemService.checkDetails(Integer.parseInt(strs[i]));
 
                     //去数据库找图
-                    String addr = productService.getAddress(orderitem.getPid());
-                    System.out.println("addr = "+ addr);
-                    orderitem.setPhoto_addr(addr);
-                    mapOrderItem.put(i,orderitem);
+                    Product product = productService.getProductName(orderitem.getPid());
+                    //String addr = productService.getAddress();
+                    //System.out.println("addr = "+ addr);
+                    sb.append(product.getName());
+                    sb.append(",");
+                    sb.append(orderitem.getNumbers());
+                    sb.append(";");
+                    orderitem.setPhoto_addr(product.getPhoto_addr());
+                    //mapOrderItem.put(i,orderitem);
                 }
-                orderitems.add(mapOrderItem);
+                order1.setpNameAndNumner(sb.toString());
+                //orderitems.add(mapOrderItem);
             }
             System.out.println("到这里了啊");
             map.put("orders",orderList);
-            map.put("orderItemList",orderitems);
+            //map.put("orderItemList",orderitems);
         }else {
             map.put("message","error");
         }
@@ -186,12 +193,20 @@ public class OrderController implements OrderConfig{
 
                 Order orderr = iterator.next();
                 String[] strs = orderr.getOiId().split(",");
+                //12-25- 16:30
+                StringBuffer sb = new StringBuffer();
                 for(int i=0;i<strs.length;i++){
                     Orderitem orderitem = orderItemService.checkDetails(Integer.parseInt(strs[i]));
-                    orderitem.setProductName(productService.getProductName(orderitem.getPid()).getName());
-                    orderitemList.add(orderitem);
+                    String productName = productService.getProductName(orderitem.getPid()).getName();
+//                    orderitem.setProductName(productName);
+//                    orderitemList.add(orderitem);
+                    sb.append(productName);
+                    sb.append(",");
+                    sb.append(orderitem.getNumbers());
+                    sb.append(";");
                 }
-                map.put("orderitems"+String.valueOf(j++),orderitemList);
+                orderr.setpNameAndNumner(sb.toString());
+                //map.put("orderitems"+String.valueOf(j++),orderitemList);
 
             }
             System.out.println("list = " + list.toString());
@@ -269,7 +284,7 @@ public class OrderController implements OrderConfig{
                     pnameAndNumbers.append(names);
                     pnameAndNumbers.append(",");
                     pnameAndNumbers.append(numbers);
-                    pnameAndNumbers.append(";");
+                    pnameAndNumbers.append("份;");
                     list.add(orderitem);
 
                 }

@@ -3,6 +3,7 @@ package com.service.impl;
 import com.dao.OrderitemMapper;
 import com.pojo.Order;
 import com.pojo.Orderitem;
+import com.pojo.Product;
 import com.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -139,5 +140,10 @@ public class OrderItemServiceImpl implements OrderItemService{
     @Override
     public Orderitem checkDetails(int id) {
         return orderitemMapper.checkDetails(id);
+    }
+
+    @Override
+    public Product getProductName(int id) {
+        return orderitemMapper.getProductName(id);
     }
 }

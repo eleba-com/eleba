@@ -108,4 +108,10 @@
     select * from orderItem
     WHERE id=#{id}
   </select>
+
+  <!-- 根据oiid 获取产品名字 -->
+  <select id="getProductName">
+    SELECT * FROM product WHERE id = (
+           SELECT pid FROM orderItem WHERE id=#{id} )
+  </select>
 </mapper>
