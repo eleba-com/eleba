@@ -169,6 +169,7 @@ public class OrderController implements OrderConfig{
                 try{
                     if(merchant.getHead_addr()!=null){
                         order1.setHead_addr(merchant.getHead_addr());
+                        order1.setMerchantName(merchant.getShopName());
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -227,6 +228,7 @@ public class OrderController implements OrderConfig{
                 try{
                     if(merchant.getHead_addr()!=null){
                         orderr.setHead_addr(merchant.getHead_addr());
+                        orderr.setMerchantName(merchant.getShopName());
                     }
                 }catch (Exception e){
                     e.printStackTrace();

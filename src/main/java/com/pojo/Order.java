@@ -14,6 +14,15 @@ import java.util.List;
 */
 public class Order {
 
+    private String merchantName;
+
+    public String getMerchantName() {
+        return merchantName;
+    }
+
+    public void setMerchantName(String merchantName) {
+        this.merchantName = merchantName;
+    }
 
     private String head_addr;
 
