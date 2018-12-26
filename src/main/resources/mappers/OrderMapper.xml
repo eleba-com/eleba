@@ -141,10 +141,17 @@
     update orderr set stated="2" where id=#{id}
   </update>
 
+  <!-- 通用接口 jhao商家获取某些状态的订单-->
+  <select id="getOrders1" resultMap="BaseResultMap">
+    SELECT * FROM orderr
+    WHERE mid=#{mid} and stated=#{stated}
+  </select>
+
   <!-- jhao商家获取某些状态的订单-->
   <select id="getOrders" resultMap="BaseResultMap">
     SELECT * FROM orderr
-    WHERE mid=#{mid} and stated=#{stated}
+    WHERE mid=#{mid} and stated IN (1,2,3,4,5,6)
+    ORDER BY stated ASC
   </select>
   <!-- jiehao 12-20 通过id获取订单信息-->
   <select id="findOrder" resultType="com.pojo.Order">

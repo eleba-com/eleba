@@ -57,8 +57,8 @@ public interface OrderMapper {
      * @exception
      * @date        2018/12/11 11:39
      */
-    List<Order> getOrders(@Param("mid") Integer mid, @Param("stated") String stated);
-
+    //List<Order> getOrders(@Param("mid") Integer mid, @Param("stated") String stated);
+    List<Order> getOrders(@Param("mid") Integer mid);
     /**
      * 方法实现说明  根据id查找某个订单
      * @author：      jiehao

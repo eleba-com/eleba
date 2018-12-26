@@ -14,6 +14,17 @@ import java.util.List;
 */
 public class Order {
 
+
+    private String head_addr;
+
+    public String getHead_addr() {
+        return head_addr;
+    }
+
+    public void setHead_addr(String head_addr) {
+        this.head_addr = head_addr;
+    }
+
     private String pNameAndNumner;
 
     public String getpNameAndNumner() {

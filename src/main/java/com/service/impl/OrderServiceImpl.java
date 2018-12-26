@@ -173,7 +173,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public List<Order> getOrders(Integer mid, String stated) {
-        return orderMapper.getOrders(Integer.valueOf(mid),stated);
+        return orderMapper.getOrders(Integer.valueOf(mid));
     }
 
     /**

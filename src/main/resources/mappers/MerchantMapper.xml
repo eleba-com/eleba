@@ -323,4 +323,6 @@
     select * from merchant where tell=#{tel};
   </select>
 
+
+
 </mapper>

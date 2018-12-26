@@ -6,6 +6,7 @@ import com.pojo.Merchant;
 import com.pojo.Order;
 import com.pojo.Orderitem;
 import com.pojo.Product;
+import com.service.MerchantService;
 import com.service.OrderItemService;
 import com.service.OrderService;
 import com.service.ProductService;
@@ -42,6 +43,9 @@ public class OrderController implements OrderConfig{
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    MerchantService merchantService;
 
     /**
     * @Description:    下单
@@ -136,11 +140,12 @@ public class OrderController implements OrderConfig{
             //在这里将所有的orderItem查出来一并返回给前端
             //这边是可以整合到OrderItemService中的！
             Iterator<Order> iter = orderList.iterator();
-            StringBuffer sb = new StringBuffer();
+
             List<Map> orderitems = new ArrayList<>();
             while(iter.hasNext()){
                 Order order1 = iter.next();
                 String s = order1.getOiId();
+                StringBuffer sb = new StringBuffer();
                 String[] strs = s.split(",");
                 Map<Integer,Object> mapOrderItem = new HashMap<>();
                 for(int i=0;i<strs.length;i++){
@@ -156,9 +161,20 @@ public class OrderController implements OrderConfig{
                     sb.append(orderitem.getNumbers());
                     sb.append(";");
                     orderitem.setPhoto_addr(product.getPhoto_addr());
+
                     //mapOrderItem.put(i,orderitem);
                 }
                 order1.setpNameAndNumner(sb.toString());
+                Merchant merchant = merchantService.findMerchantMessage(order1.getMid());
+                try{
+                    if(merchant.getHead_addr()!=null){
+                        order1.setHead_addr(merchant.getHead_addr());
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
                 //orderitems.add(mapOrderItem);
             }
             System.out.println("到这里了啊");
@@ -175,7 +191,7 @@ public class OrderController implements OrderConfig{
     /**
      * 返回最新的三个订单，包括已完成以及未完成的
      * @author      jhao
-     * @param
+     * @param       //uid
      * @return
      * @exception
      * @date        2018/12/24 13:09
@@ -207,6 +223,14 @@ public class OrderController implements OrderConfig{
                 }
                 orderr.setpNameAndNumner(sb.toString());
                 //map.put("orderitems"+String.valueOf(j++),orderitemList);
+                Merchant merchant = merchantService.findMerchantMessage(orderr.getMid());
+                try{
+                    if(merchant.getHead_addr()!=null){
+                        orderr.setHead_addr(merchant.getHead_addr());
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
             }
             System.out.println("list = " + list.toString());
@@ -267,13 +291,11 @@ public class OrderController implements OrderConfig{
                 //
                 int numbers;
                 String names;
-
                 StringBuffer pnameAndNumbers = new StringBuffer();
                 for(int i = 0;i<strs.length;i++){
                     if(strs[i]==""){
                         break;
                     };
-
                     System.out.println("格式 = "+Integer.parseInt(strs[i]));
                     Orderitem orderitem = orderItemService.checkDetails(Integer.parseInt(strs[i]));
 
@@ -325,10 +347,6 @@ public class OrderController implements OrderConfig{
            map.put("message","接单失败");
            e.printStackTrace();
        }
-
-
-
-
         return map;
     }
 
